@@ -61,8 +61,8 @@ pygame.display.set_caption("Warbands")
 
 # costanti per la griglia esagonale
 HEX_RADIUS = 50  # Raggio dell'esagono
-ROW_COUNT = 10  #random.randrange(6,9)   # Numero di righe
-COL_COUNT = 25  #random.randrange(8,10)   # Numero di colonne
+ROW_COUNT = random.randrange(6,9)   # Numero di righe
+COL_COUNT = random.randrange(8,10)   # Numero di colonne
 
 # Calcola le dimensioni totali della griglia esagonale
 grid_width = 1.5 * HEX_RADIUS * COL_COUNT
