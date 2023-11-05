@@ -1,0 +1,473 @@
+import pygame
+import Main
+import unitt
+import equipment
+class Button:
+    def __init__(self,x,y,width,height,type,description,relatedObject):
+
+        self.x=x
+        self.y=y
+        self.width=width
+        self.height=height
+        self.use=None
+        self.rect=pygame.Rect((x,y,width,height))
+        self.img=None
+        self.type=type
+        self.description=description
+        self.counter=0
+
+        self.relatedObject=relatedObject
+        self.fakeboy=None
+
+    def getRectt(self):
+
+        new_rect=pygame.Rect(self.x,self.y,self.width,self.height)
+        self.rect=new_rect
+
+
+    def draw(self,screen):
+        a=self.x
+        b=self.y
+        self.rect=pygame.Rect(self.x,self.y,self.width,self.height)
+        match self.type:
+
+            #main menu buttons
+            case 'mainmenu':
+                pygame.draw.rect(screen,(117,113,97),self.rect,border_radius=10)
+                pygame.draw.rect(screen,(68,36,52),self.rect,3,border_radius=10)
+
+
+                match self.description:
+                    case "play":
+                        self.img=Main.font1.render('Play', True, (29,12,28))
+                        self.img=pygame.transform.scale(self.img, (self.width-20, self.width-64))
+                        screen.blit(self.img,(a+11,b+20))
+                    case "options":
+                        self.img=Main.font1.render('Options', True, (29,12,28))
+                        self.img=pygame.transform.scale(self.img, (self.width-20, self.width-64))
+                        screen.blit(self.img,(a+11,b+20))
+                    case "quit":
+                        self.img=Main.font1.render('Exit', True, (29,12,28))
+                        self.img=pygame.transform.scale(self.img, (self.width-20, self.width-64))
+                        screen.blit(self.img,(a+11,b+20))
+
+                self.mouseCollisionDraw(Main.menu_buttons_layer)
+
+            case 'options':
+                pygame.draw.rect(screen,(117,113,97),self.rect,border_radius=10)
+                pygame.draw.rect(screen,(68,36,52),self.rect,3,border_radius=10)
+                match self.description:
+                    case "1920x1080":
+                        self.img=Main.font1.render('1920x1080', True, (29,12,28))
+                        self.img=pygame.transform.scale(self.img, (self.width-16, self.height-16))
+                        screen.blit(self.img,(a+8,b+8))
+                    case "1280x720":
+                        self.img=Main.font1.render('1280x720', True, (29,12,28))
+                        self.img=pygame.transform.scale(self.img, (self.width-16, self.height-16))
+                        screen.blit(self.img,(a+8,b+8))
+                    #case "800x600":
+                        #self.img=Main.font1.render('800x600', True, (29,12,28))
+                        #self.img=pygame.transform.scale(self.img, (self.width-16, self.height-16))
+                        #screen.blit(self.img,(a+8,b+8))
+
+                self.mouseCollisionDraw(Main.menu_buttons_layer)
+
+
+            #skirmish prepare menu
+            case 'skirmish':
+                pygame.draw.rect(screen,(117,113,97),self.rect,border_radius=10)
+                pygame.draw.rect(screen,(68,36,52),self.rect,3,border_radius=10)
+                match self.description:
+                    case "10":
+                        self.img=Main.font1.render('10', True, (29,12,28))
+                        self.img=pygame.transform.scale(self.img, (self.width-16, self.height-16))
+                        screen.blit(self.img,(a+8,b+8))
+                    case "15":
+                        self.img=Main.font1.render('15', True, (29,12,28))
+                        self.img=pygame.transform.scale(self.img, (self.width-16, self.height-16))
+                        screen.blit(self.img,(a+8,b+8))
+                    case "20":
+                        self.img=Main.font1.render('20', True, (29,12,28))
+                        self.img=pygame.transform.scale(self.img, (self.width-16, self.height-16))
+                        screen.blit(self.img,(a+8,b+8))
+                    case "25":
+                        self.img=Main.font1.render('25', True, (29,12,28))
+                        self.img=pygame.transform.scale(self.img, (self.width-16, self.height-16))
+                        screen.blit(self.img,(a+8,b+8))
+                    case "60":
+                        self.img=Main.font1.render('60', True, (29,12,28))
+                        self.img=pygame.transform.scale(self.img, (self.width-16, self.height-16))
+                        screen.blit(self.img,(a+8,b+8))
+                self.mouseCollisionDraw(Main.menu_buttons_layer)
+
+            #units inventory menu buttons
+            case 'unitsInventoryMenu':
+
+                pygame.draw.rect(screen,(117,113,97),self.rect,border_radius=10)
+                pygame.draw.rect(screen,(68,36,52),self.rect,3,border_radius=10)
+
+                if self.description=='next':
+                        self.img=Main.font1.render('Next', True, (29,12,28))
+                        self.img=pygame.transform.scale(self.img, (self.width-20, self.height-4))
+                        screen.blit(self.img,(a+11,b+4))
+
+                elif self.description=='add':
+                        self.img=Main.font1.render('Add', True, (29,12,28))
+                        self.img=pygame.transform.scale(self.img, (self.width-16, self.height-6))
+                        screen.blit(self.img,(a+8,b+4))
+
+                        text=Main.font1.render(f'{self.counter}', True, (29,12,28))
+                        text=pygame.transform.scale(text, (16, 16))
+                        screen.blit(text, (self.x+100,self.y))
+
+                elif self.description=='buy':
+                        self.img=Main.font1.render('Buy', True, (29,12,28))
+                        self.img=pygame.transform.scale(self.img, (self.width-16, self.height-16))
+                        screen.blit(self.img,(a+8,b+8))
+
+                for unit in Main.units_type_INVENTORY:
+                    if unit.nome==self.description:
+                        self.img=[unit.img[0],unit.img[1],unit.img[2],unit.img[3]]
+                        for i in self.img:
+                            if i!=None:
+                                screen.blit(i,(a+self.width/2-i.get_width()/2,b+self.height/2-i.get_height()/2))
+
+                self.mouseCollisionDraw(Main.menu_buttons_layer)
+
+            case 'unitsInventoryMenu_buy':
+
+
+                if self.description=='close':
+                    pygame.draw.rect(screen,(117,113,97),self.rect,border_radius=10)
+                    pygame.draw.rect(screen,(68,36,52),self.rect,3,border_radius=10)
+                    self.img=Main.font1.render('Close', True, (29,12,28))
+                    self.img=pygame.transform.scale(self.img, (self.width-16, self.height-16))
+                    screen.blit(self.img,(a+8,b+8))
+
+                else:
+                    increment=20
+                    for equipgroups in equipment.all.values():
+                        for equip in equipgroups.keys():
+                            if equip==self.description:
+
+                                #pygame.draw.rect(screen,(117,113,97),self.rect,border_radius=10)
+                                pygame.draw.rect(screen,(68,36,52),self.rect,3,border_radius=10)
+
+                                text1=Main.font1.render(equip, True, (29,12,28))
+
+                                text1=pygame.transform.scale(text1, (self.rect.width - 20, self.rect.height- 20))
+
+                                screen.blit(text1,(self.x+10,self.y+10))
+                                if equipgroups[equip][6]!=None:
+
+                                    self.img =pygame.transform.scale(equipgroups[equip][6],(128,128))
+                                    screen.blit(self.img,(a+self.width/2-self.img.get_width()/2+130,b+self.height/2-self.img.get_height()/2))
+                                increment+=text1.get_height()
+
+
+                self.mouseCollisionDraw(Main.overlay_menu_buttons_layer)
+
+
+
+            #unit placing interface buttons
+            case 'upi':
+
+
+                pygame.draw.rect(screen,(117,113,97),self.rect,border_radius=10)
+                pygame.draw.rect(screen,(68,36,52),self.rect,3,border_radius=10)
+
+                if self.relatedObject!=None:
+                    self.img=[self.relatedObject.img[0],self.relatedObject.img[1],self.relatedObject.img[2],self.relatedObject.img[3]]
+                    for i in self.img:
+                        if i!=None:
+                            screen.blit(i,(a+self.width/2-i.get_width()/2,b+self.height/2-i.get_height()/2))
+
+                elif self.description =='start' and self.relatedObject==None:
+                    self.img=Main.font1.render('Start', True, (29,12,28))
+                    self.img=pygame.transform.scale(self.img, (self.width-10, self.height-10))
+                    screen.blit(self.img,(a+5 ,b+5))
+
+                self.mouseCollisionDraw(Main.menu_buttons_layer)
+
+            #end turn button
+            case 'endTurn':
+                pygame.draw.rect(screen,(117,113,97),self.rect,border_radius=10)
+                pygame.draw.rect(screen,(68,36,52),self.rect,3,border_radius=10)
+
+                self.img=Main.font1.render('End Turn', True, (29,12,28))
+                self.img=pygame.transform.scale(self.img, (self.width-10, self.height-10))
+                screen.blit(self.img,(a+5 ,b+5))
+
+                self.mouseCollisionDraw(Main.menu_buttons_layer)
+
+
+
+    #input sul pulsante
+    def input(self):
+            if self.checkMousecollision()==self:
+
+                for event in pygame.event.get():
+                    if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+
+                        match self.type:
+
+                            case 'mainmenu':  #pulsanti nel main menu
+
+                                match self.description:
+
+                                    case "play":
+                                        Main.room.roomNumber=3
+                                    case "options":
+                                        Main.room.roomNumber=4
+                                    case "quit":
+                                        Main.running=False
+
+                            case 'options':
+                                match self.description:
+                                    case "1920x1080":
+
+                                        Main.screen=pygame.display.set_mode((1920,1080),pygame.FULLSCREEN)
+
+
+                                    case "1280x720":
+                                        Main.screen=pygame.display.set_mode((1280,720),pygame.FULLSCREEN)
+                                        """ Main.resizable_layer_x+=1280-Main.controller.screenSize[0]+320
+                                        Main.resizable_layer_y+=720-Main.controller.screenSize[1]+180
+                                        Main.controller.screenSize=(1280,720)
+                                        Main.controller.AdaptObjectsToScreenSize() """
+
+
+
+                                    #case "800x600":
+                                        #Main.screen=pygame.display.set_mode((800,600),pygame.RESIZABLE)
+
+
+                            case 'skirmish':
+                                for player in Main.players:
+                                    match self.description:
+                                        case "10":
+                                            player.points=10
+                                        case "15":
+                                            player.points=15
+                                        case "20":
+                                            player.points=20
+                                        case "25":
+                                            player.points=25
+                                        case "60":
+                                            player.points=60
+
+                                Main.room.roomNumber=1
+
+                            case 'unitsInventoryMenu':  #pulsanti nel selezionatore unita
+
+                                        if self.description=='next':
+
+                                            if self.description=='next':
+                                                Main.room.roomNumber=2
+
+                                        elif self.description=='add':
+
+                                            if Main.players[0].points>0:
+                                                a=self.relatedObject.relatedObject
+
+                                                new_unit=unitt.Unit(a.ai,a.id,a.nome,a.race) #creo una nuova unita uguale alla unita dell'inventario nel Main
+                                                for i in new_unit.img:
+                                                    for j in a.img:
+                                                        for d in range(3):
+                                                            if new_unit.img[d]==i and a.img[d]==j:
+                                                                i=j
+                                                Main.players[0].units_inventory.append(new_unit) #e poi la assegno all' inventario del giocatore
+                                                Main.players[0].points-=5
+
+                                                self.counter+=1
+
+                                            increment=0
+                                            all_races=[]
+                                            orcs=[]
+                                            goblins=[]
+                                            humans=[]
+                                            all_races.append(orcs)
+                                            all_races.append(goblins)
+                                            all_races.append(humans)
+
+                                            for unit in Main.players[0].units_inventory:
+                                                if unit.race=='orc':
+                                                    all_races[0].append(unit)
+                                                elif unit.race=='goblin':
+                                                    all_races[1].append(unit)
+                                                elif unit.race=='human':
+                                                    all_races[2].append(unit)
+
+                                            incrementy=0
+                                            for race in all_races:
+                                                incrementx=170
+                                                for unit in race:
+                                                    unit.x=self.x+incrementx
+                                                    unit.y=Main.screen.get_height()/3+incrementy+3
+                                                    unit.getCenter(unit.x,unit.y)
+                                                    incrementx+=unit.img[1].get_height()
+                                                incrementy+=unit.img[1].get_height()+25
+
+
+
+                                        elif self.description=='buy':
+                                            Main.shop_overlay_active=True
+
+                                            #creo un pulsante per ogni equipaggiamento
+                                            increment=20
+                                            for equipgroups in equipment.all.values():
+                                                for equip in equipgroups.keys():
+                                                    if self.relatedObject.race in equip:
+
+                                                        equip_button=Button(
+
+                                                            Main.shop_overlay_rect.x+20,
+                                                            Main.shop_overlay_rect.y+increment+20,
+                                                            Main.shop_overlay_rect.width/6,
+                                                            Main.shop_overlay_rect.height/12,
+                                                            'unitsInventoryMenu_buy',
+                                                            f'{equip}',
+                                                            self)
+
+                                                        Main.shop_overlay_buttons.append(equip_button)
+                                                        increment+=60
+
+                                            close_Shop_Button=Button(
+                                                Main.shop_overlay_rect.x+Main.shop_overlay_rect.width-80,
+                                                Main.shop_overlay_rect.y+Main.shop_overlay_rect.height-60,
+                                                64,
+                                                32,
+                                                'unitsInventoryMenu_buy',
+                                                'close',
+                                                None
+                                            )
+                                            Main.shop_overlay_buttons.append(close_Shop_Button)
+
+
+
+
+                            case 'unitsInventoryMenu_buy':  #pulsanti nel selezionatore 'buy' unita
+                                if self.description=='close':
+                                    Main.overlay_menu_box_layer.fill((0, 0, 0, 0))
+                                    Main.shop_overlay_active=False
+                                    Main.screen.blit(Main.overlay_menu_box_layer,(0,0))
+                                    Main.shop_overlay_buttons=[]
+
+
+
+                                #assegno all' unità il pezzo di equipaggiamento richiesto e rimuovo i punti dal giocatore
+                                #inoltre avvio l'applyfyEquipmentModifiers sull'unità in questione
+                                else:
+                                    unit=self.relatedObject.relatedObject
+
+                                    for part in unit.inventory.keys():
+                                        for groups in equipment.all.values():
+
+                                            for equip in groups.keys():
+
+                                                if self.description==equip:
+
+                                                    for a in equipment.all.keys():
+                                                        if a==part:
+
+
+                                                            if equip in equipment.all[a].keys() and equipment.all[a][equip][5]<=Main.players[0].points:
+
+                                                                Main.players[0].points-=equipment.all[a][equip][5]
+                                                                unit.inventory[part]=self.description
+                                                                unit.applyEquipmentModifiers()
+
+
+                            case 'upi': #pulsanti nel selezionatore unita
+
+                                        if self.description=='start':
+                                            Main.controller.controlGameFases()
+                                        else:
+
+                                            mouse_pos = pygame.mouse.get_pos()
+                                            self.fakeboy=UnitFake(mouse_pos[0],mouse_pos[1],self.img,self)
+
+
+                            case 'endTurn': #pulsante di fine turno
+
+                                Main.controller.turnEnd()
+
+
+
+    def mouseCollisionDraw(self,screen):
+         if self.checkMousecollision()==self:
+            pygame.draw.rect(screen,(16, 26, 38),self.rect,3,border_radius=10)
+
+    def checkMousecollision(self):
+        mouse_pos = pygame.mouse.get_pos()
+        if (
+            self.rect.collidepoint(mouse_pos[0], mouse_pos[1])
+
+        ):
+
+            return self
+        else:
+            return None
+
+    def moveFakeBoy(self):
+        if self.fakeboy!=None:
+            self.fakeboy.move()
+
+
+
+class UnitFake:
+    def __init__(self,x,y,img,parentButton):
+        self.x=x
+        self.y=y
+        self.img=img
+        self.parentButton=parentButton
+
+    def move(self):
+        self.x=pygame.mouse.get_pos()[0]
+        self.y=pygame.mouse.get_pos()[1]
+        self.draw()
+        self.place()
+
+    def draw(self):
+        for i in self.img:
+            if i !=None:
+                Main.menu_buttons_layer.blit(i,(self.x,self.y))
+
+    def place(self):
+        for cell in Main.hex_cells:
+            if cell.checkHexMousecollision()==cell and cell.col in range(0,3) and cell.occupied==False:
+                for event in pygame.event.get():
+                    if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                        a=self.parentButton.relatedObject
+                        new_unit=unitt.Unit(a.ai,a.id,a.nome,a.race) #creo una nuova unita uguale alla unita dell'inventario del player
+                        #copio l'equipaggiamento dell'unita dell'inventario
+                        for piece in a.inventory.keys():
+                             for part in new_unit.inventory.keys():
+                                  if piece==part:
+
+                                    new_unit.inventory[part]=a.inventory[piece]
+
+
+
+                        print(new_unit.inventory)
+
+                        new_unit.applyEquipmentModifiers()
+                        for i in new_unit.img:
+                            for j in a.img:
+                                for d in range(3):
+                                    if new_unit.img[d]==i and a.img[d]==j:
+                                        i=j
+
+
+                        Main.players[0].units.append(new_unit) #e poi la assegno alle unita giocanti del player
+                        new_unit.x=cell.center[0]
+                        new_unit.y=cell.center[1]
+                        new_unit.getCenter(new_unit.x,new_unit.y)
+                        new_unit.getParentCell()
+                        new_unit.createMask()
+                        new_unit.id=Main.players[0].units.index(new_unit)
+                        #new_unit.img=pygame.transform.scale(new_unit.img, (new_unit.img.get_width()*2, new_unit.img.get_height()*2))
+                        self.parentButton.fakeboy=None
+                        self.parentButton.relatedObject=None
+                        cell.occupied=True
+
