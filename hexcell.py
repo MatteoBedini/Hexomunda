@@ -84,17 +84,18 @@ class HexCell:
 
     # funzione distanza dal selezionato 1
     def dtsf(self):  # dtsf=DISTANCE TO SELECTED FUNCTION
-        for x in range(30):
-            #int(math.sqrt(ROW_COUNT**2 + COL_COUNT**2))
-          # range pitagora tra numero di righe e numero di colonne ma posso anche dare una  cifra indicativa
+        for x in range(Main.maximum(Main.ROW_COUNT, Main.COL_COUNT)):
+            if self.dts <= x + 1:
+                break
             for cell in Main.hex_cells:
                 if (
                     cell.dts == x
                     and Main.dist(self.center[0], cell.center[0], self.center[1], cell.center[1])<= 100
-                    and self.dts >= x + 1
+                    and self.dts >=x + 1
                 ):
-                    """print(cell.dts)"""
                     self.dts = x + 1
+                    break
+        
 
     
 

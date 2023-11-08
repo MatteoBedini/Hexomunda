@@ -61,8 +61,8 @@ pygame.display.set_caption("Warbands")
 
 # costanti per la griglia esagonale
 HEX_RADIUS = 50  # Raggio dell'esagono
-ROW_COUNT = random.randrange(6,9)   # Numero di righe
-COL_COUNT = random.randrange(8,10)   # Numero di colonne
+ROW_COUNT = 8#random.randrange(6,9)   # Numero di righe
+COL_COUNT = 22#random.randrange(8,10)   # Numero di colonne
 
 # Calcola le dimensioni totali della griglia esagonale
 grid_width = 1.5 * HEX_RADIUS * COL_COUNT
@@ -79,6 +79,13 @@ speed=10
 # funzione calcola distanza tra due punti
 def dist(x1, x2, y1, y2):
     return math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)
+
+#massim fra 2 numeri
+def maximum(a, b):
+    if a >= b:
+        return a
+    else:
+        return b
 
 
 # classe cursor MOUSE
