@@ -102,8 +102,8 @@ class Control:
     #draw del suddetto overlay
     def drawObjectOverlay(self,screen):
         if self.overlayedUnit!=None:
-            x=-20
-            y=660
+            x=10
+            y=Main.screen.get_height()-self.overlayedUnit_overlay.get_height()
             inventory=pygame.image.load("media/ObjectInfo_inventory.png")
             
             screen.blit(self.overlayedUnit_overlay,(x,y))
