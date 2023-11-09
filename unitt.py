@@ -298,9 +298,12 @@ class Unit:
     def recalculateDts(self):
         for cell in Main.hex_cells:
             cell.dtsf()
-        for cell in Main.hex_cells:
-            if cell.dts == 999:
-                self.recalculateDts()
+        if all(cell.dts != 999 for cell in Main.hex_cells):
+            return
+        else:
+            self.recalculateDts()
+        
+                
 
     # seleziono e deseleziono
     def select(self):

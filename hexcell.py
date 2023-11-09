@@ -95,6 +95,34 @@ class HexCell:
                 ):
                     self.dts = x + 1
                     break
+
+    def dtsf(self):  # dtsf=DISTANCE TO SELECTED FUNCTION
+        for x in range(Main.maximum(Main.ROW_COUNT, Main.COL_COUNT)):
+            if self.dts <= x + 1:
+                break
+            list_of_measured_cells = []
+            for cell in Main.hex_cells:
+                
+                if (
+                    cell.dts == x
+                    
+                ):
+                    list_of_measured_cells.append(cell)
+                    """ self.dts = x + 1
+                    break """
+            if len(list_of_measured_cells)==0:
+                return
+            else:
+                for cell in list_of_measured_cells:
+                    if(
+                        Main.dist(self.center[0], cell.center[0], self.center[1], cell.center[1])<= 100
+                        and self.dts >=x + 1
+                    ):
+                        self.dts = x + 1
+                        break
+                
+            
+                
         
 
     
@@ -123,29 +151,6 @@ class HexCell:
                         pygame.draw.polygon(screen, (255, 0, 0, 125), self.vertices, 9)
 
 
-""" def dtsf2(pcell):
-        dtscounter=1 
-        pointer_cell=None
-        pointer_cell_confinants=[]
-        for cella in Main.hex_cells:
-            while cella.dts == 999:
-            
-                if pcell == cella:
-                    pass
-
-                if Main.dist(pcell.center[0], cella.center[0], pcell.center[1], cella.center[1]) <= 100:
-                    pointer_cell=cella
-                    cella.dts =  1
-                    dtscounter+=1
-                    print(f'hey {pointer_cell}')
-                    
-
-                elif pointer_cell!=None and Main.dist(pointer_cell.center[0], cella.center[0], pointer_cell.center[1], cella.center[1]) <= 100 and cella.dts == 999 :
-                    cella.dts =  1+pointer_cell.dts
-                    pointer_cell_confinants.append(cella)
-                    for hex in pointer_cell_confinants:
-                        if hex != None and hex.dts != 999:
-                            cella = pointer_cell """
 
 
             
