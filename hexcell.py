@@ -29,8 +29,8 @@ class HexCell:
             angle_rad = math.radians(
                 angle_deg
             )  # trasformo i gradi angolari in radianti per farci il seno/coseno sotto
-            x = self.center[0] + self.radius * math.cos(angle_rad)
-            y = self.center[1] + self.radius * math.sin(angle_rad)
+            x = self.center[0] + self.radius * math.cos(angle_rad)-Main.resizable_layer_x
+            y = self.center[1] + self.radius * math.sin(angle_rad)-Main.resizable_layer_y
             self.vertices.append([x, y])
 
     # disegno l'esagono
@@ -39,7 +39,6 @@ class HexCell:
         pygame.draw.polygon(screen, (34, 32, 52), self.vertices, 2) """
         #randomcell=random.randint(0,1)
         screen.blit(self.img, (self.center[0]-self.img.get_width()/2-Main.resizable_layer_x, math.ceil(self.center[1]-self.img.get_height()/2-Main.resizable_layer_y)))
-
         if Main.controller.actingUnit == None and Main.controller.actingPlayer==0:
             self.illuminateCell(Main.cell_layer2)
             self.illuminateCellAtk(Main.cell_layer2)
@@ -83,18 +82,6 @@ class HexCell:
             return None
 
     # funzione distanza dal selezionato 1
-    def dtsf(self):  # dtsf=DISTANCE TO SELECTED FUNCTION
-        for x in range(Main.maximum(Main.ROW_COUNT, Main.COL_COUNT)):
-            if self.dts <= x + 1:
-                break
-            for cell in Main.hex_cells:
-                if (
-                    cell.dts == x
-                    and Main.dist(self.center[0], cell.center[0], self.center[1], cell.center[1])<= 100
-                    and self.dts >=x + 1
-                ):
-                    self.dts = x + 1
-                    break
 
     def dtsf(self):  # dtsf=DISTANCE TO SELECTED FUNCTION
         for x in range(Main.maximum(Main.ROW_COUNT, Main.COL_COUNT)):

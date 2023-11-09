@@ -261,7 +261,8 @@ class Control:
                     for cell in Main.hex_cells:
                         cell.center[0]+=pygame.mouse.get_pos()[0]-starting_mouse_x
                         cell.center[1]+=pygame.mouse.get_pos()[1]-starting_mouse_y
-                        
+                        cell.vertices=[]
+                        cell.vertices_create()
                         cell.create_rect_mask()
                     
                     for inan in Main.inanimated_in_game:

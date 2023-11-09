@@ -297,7 +297,7 @@ class Unit:
 
     def recalculateDts(self):
         for cell in Main.hex_cells:
-            cell.dtsf()
+            cell.dtsf() # dtsf=DISTANCE TO SELECTED FUNCTION
         if all(cell.dts != 999 for cell in Main.hex_cells):
             return
         else:

@@ -31,6 +31,7 @@ font1 = pygame.font.Font('data/fonts/Press_Start_2P/PressStart2P-Regular.ttf', 3
 width = 1980
 height = 1080
 layers=[]
+
 screen = pygame.display.set_mode((width, height),pygame.FULLSCREEN)  # z-index=0 #sopra non ci va niente,solo lo sfondo
 cell_layer = pygame.Surface((width, height), pygame.SRCALPHA)  # z-index=1
 cell_layer2=pygame.Surface((width, height), pygame.SRCALPHA)  # z-index=2
@@ -449,7 +450,7 @@ while running:
     screen.blit(overlay_menu_buttons_layer,(0,0))
     screen.blit(overlays_layer,(0,0))
 
-    pygame.display.update()
+    pygame.display.flip()
 
     clock.tick(FPS)
 
