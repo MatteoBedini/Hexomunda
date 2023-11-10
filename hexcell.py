@@ -95,8 +95,6 @@ class HexCell:
                     
                 ):
                     list_of_measured_cells.append(cell)
-                    """ self.dts = x + 1
-                    break """
             if len(list_of_measured_cells)==0:
                 return
             else:
@@ -122,7 +120,7 @@ class HexCell:
             and self.occupied==False
             # and hexagon.controller.selectedd.movepts>0
         ):
-            pygame.draw.polygon(screen, (255, 255, 0, 90), self.vertices)
+            pygame.draw.polygon(screen, (255, 255, 0, 40), self.vertices)
 
     #illumino la cella se in atkrange
     def illuminateCellAtk(self, screen):

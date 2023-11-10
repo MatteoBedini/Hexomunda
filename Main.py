@@ -17,10 +17,6 @@ pygame.init()
 
 clock = pygame.time.Clock()
 
-white = (255, 255, 255)
-green = (0, 255, 0)
-blue = (0, 0, 128)
-
 
 # costanti varie
 font = pygame.font.Font('freesansbold.ttf', 32)
@@ -33,9 +29,9 @@ height = 1080
 layers=[]
 
 screen = pygame.display.set_mode((width, height),pygame.FULLSCREEN)  # z-index=0 #sopra non ci va niente,solo lo sfondo
-cell_layer = pygame.Surface((width, height), pygame.SRCALPHA)  # z-index=1
-cell_layer2=pygame.Surface((width, height), pygame.SRCALPHA)  # z-index=2
-unit_layer = pygame.Surface((width, height), pygame.SRCALPHA)  # z-index=3
+cell_layer = pygame.Surface((width*2, height*2), pygame.SRCALPHA)  # z-index=1
+cell_layer2=pygame.Surface((width*2, height*2), pygame.SRCALPHA)  # z-index=2
+unit_layer = pygame.Surface((width*2, height*2), pygame.SRCALPHA)  # z-index=3
 overlays_layer = pygame.Surface((width, height), pygame.SRCALPHA)  # z-index=4
 menu_box_layer = pygame.Surface((width, height), pygame.SRCALPHA)  #z-index=5
 menu_buttons_layer = pygame.Surface((width, height), pygame.SRCALPHA)  #z-index=6
@@ -62,14 +58,14 @@ pygame.display.set_caption("Warbands")
 
 # costanti per la griglia esagonale
 HEX_RADIUS = 50  # Raggio dell'esagono
-ROW_COUNT = 8#random.randrange(6,9)   # Numero di righe
-COL_COUNT = 22#random.randrange(8,10)   # Numero di colonne
+ROW_COUNT = random.randrange(7,11)   # Numero di righe
+COL_COUNT = random.randrange(15,25)   # Numero di colonne
 
 # Calcola le dimensioni totali della griglia esagonale
 grid_width = 1.5 * HEX_RADIUS * COL_COUNT
 grid_height = (math.sqrt(3) * HEX_RADIUS) * ROW_COUNT
-grid_x = (width - grid_width) / 2  # Calcola la posizione X per centrare la griglia
-grid_y = (height - grid_height) / 2  # Calcola la posizione Y per centrare la griglia
+grid_x = width/4 #(width - grid_width) / 2  # Calcola la posizione X per centrare la griglia
+grid_y = height/ 4  # Calcola la posizione Y per centrare la griglia
 
 #variabili varie
 speed=10
@@ -81,7 +77,7 @@ speed=10
 def dist(x1, x2, y1, y2):
     return math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)
 
-#massim fra 2 numeri
+#massimo fra 2 numeri
 def maximum(a, b):
     if a >= b:
         return a
