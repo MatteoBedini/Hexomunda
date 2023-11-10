@@ -15,6 +15,9 @@ from inanimate import Inanimated
 # Inizializza Pygame
 pygame.init()
 
+
+
+
 clock = pygame.time.Clock()
 
 
@@ -40,16 +43,21 @@ overlay_menu_buttons_layer = pygame.Surface((width, height), pygame.SRCALPHA)  #
 
 
 
+
+
 resizable_layer_x=0
 resizable_layer_y=0
 
 layers.append(cell_layer)
+layers.append(cell_layer2)
 layers.append(unit_layer)
 layers.append(menu_box_layer)
 layers.append(menu_buttons_layer)
 layers.append(overlay_menu_box_layer)
 layers.append(overlay_menu_buttons_layer)
 layers.append(overlays_layer)
+
+
 
 
 FPS=120
@@ -210,9 +218,10 @@ for player in players:
 room=Room()
 
 #oggetti inanimati:
-inanimate_objects_images=[pygame.image.load('./media/tree1.png')]
+inanimate_objects_images=[pygame.image.load('./media/tree1.png'),pygame.image.load('./media/tree2.png')]
 inanimate_objects_inventory=[]
 inanimate_objects_inventory.append(Inanimated('tree1'))
+
 inanimated_in_game=[]
 
 # Ciclo di gioco
@@ -222,13 +231,15 @@ while running:
     DELTA=1/pygame.time.get_ticks()
     screen.fill((16, 26, 38))
     cell_layer.fill((0, 0, 0, 0))  # pulisco gli schermi, i layers li faccio trasparenti
-    cell_layer2.fill((0, 0, 0, 0))  # pulisco gli schermi, i layers li faccio trasparenti
-    unit_layer.fill((0, 0, 0, 0))  # pulisco gli schermi, i layers li faccio trasparenti
-    menu_box_layer.fill((0, 0, 0, 0))  # pulisco gli schermi, i layers li faccio trasparenti
-    menu_buttons_layer.fill((0, 0, 0, 0))  # pulisco gli schermi, i layers li faccio trasparenti
-    overlay_menu_box_layer.fill((0, 0, 0, 0))  # pulisco gli schermi, i layers li faccio trasparenti
-    overlay_menu_buttons_layer.fill((0, 0, 0, 0))  # pulisco gli schermi, i layers li faccio trasparenti
-    overlays_layer.fill((0, 0, 0, 0))  # pulisco gli schermi, i layers li faccio trasparenti
+    cell_layer2.fill((0, 0, 0, 0))  
+    unit_layer.fill((0, 0, 0, 0))  
+    menu_box_layer.fill((0, 0, 0, 0))  
+    menu_buttons_layer.fill((0, 0, 0, 0))  
+    overlay_menu_box_layer.fill((0, 0, 0, 0))  
+    overlay_menu_buttons_layer.fill((0, 0, 0, 0))  
+    overlays_layer.fill((0, 0, 0, 0))  
+    
+
 
     match room.roomNumber:
 
@@ -433,6 +444,8 @@ while running:
                                         unit.move()
 
 
+    
+    
     cursor.move(pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1])
 
     #ridisegno gli schermi
@@ -445,6 +458,7 @@ while running:
     screen.blit(overlay_menu_box_layer,(0,0))
     screen.blit(overlay_menu_buttons_layer,(0,0))
     screen.blit(overlays_layer,(0,0))
+     
 
     pygame.display.flip()
 

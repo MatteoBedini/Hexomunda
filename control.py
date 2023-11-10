@@ -12,6 +12,7 @@ import random
 import Main 
 import pygame
 from inanimate import Inanimated
+import math
 import menu
 import button
 # classe controllore del gioco
@@ -209,7 +210,7 @@ class Control:
                 while random_count <= random.randint(1,3):
                     #creo l oggetto inanimato
                     new_inanimated=Inanimated(inanimatedd.nome)
-                    new_inanimated.img=Main.inanimate_objects_images[0]
+                    new_inanimated.img=Main.inanimate_objects_images[random.randrange(0,len(Main.inanimate_objects_images))]
                     Main.inanimated_in_game.append(new_inanimated)
 
                     #scelgo la cella per l oggetto inanimato
