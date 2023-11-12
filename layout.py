@@ -15,8 +15,8 @@ class Layout:
     def __init__(self):
         self.img = pygame.image.load('./media/layout_try.png')
         self.img1=pygame.image.load('./media/layout_try1.png')
-        self.img2=pygame.image.load('./media/layout_try_corner_up.png')
-        self.img3=pygame.image.load('./media/layout_try_corner_down.png')
+        self.img_corner1=pygame.image.load('./media/layout_try_corner_up.png')
+        self.img_corner2=pygame.image.load('./media/layout_try_corner_down.png')
 
         self.rect=pygame.Rect(0,0,Main.screen.get_width(),Main.screen.get_height())
         
@@ -45,7 +45,7 @@ class Layout:
             counter_w+=img_width
 
         #corners
-        screen.blit(self.img2,(0,0))
-        screen.blit(self.img2,(self.rect.width-img_width,0))
-        screen.blit(self.img3,(0,self.rect.height-img_height))
-        screen.blit(self.img3,(self.rect.width-img_width,self.rect.height-img_height))
+        screen.blit(self.img_corner1,(0,0))
+        screen.blit(self.img_corner1,(self.rect.width-img_width,0))
+        screen.blit(self.img_corner2,(0,self.rect.height-img_height))
+        screen.blit(self.img_corner2,(self.rect.width-img_width,self.rect.height-img_height))
