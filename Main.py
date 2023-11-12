@@ -9,6 +9,7 @@ from playerr import Player
 from control import Control
 from button import Button
 from inanimate import Inanimated
+from layout import Layout
 
 
 
@@ -40,6 +41,7 @@ menu_box_layer = pygame.Surface((width, height), pygame.SRCALPHA)  #z-index=5
 menu_buttons_layer = pygame.Surface((width, height), pygame.SRCALPHA)  #z-index=6
 overlay_menu_box_layer = pygame.Surface((width, height), pygame.SRCALPHA)  #z-index=7
 overlay_menu_buttons_layer = pygame.Surface((width, height), pygame.SRCALPHA)  #z-index=8
+layout_layer = pygame.Surface((width, height), pygame.SRCALPHA)  #z-index=9
 
 
 
@@ -56,7 +58,7 @@ layers.append(menu_buttons_layer)
 layers.append(overlay_menu_box_layer)
 layers.append(overlay_menu_buttons_layer)
 layers.append(overlays_layer)
-
+layers.append(layout_layer)
 
 
 
@@ -72,8 +74,8 @@ COL_COUNT = random.randrange(15,25)   # Numero di colonne
 # Calcola le dimensioni totali della griglia esagonale
 grid_width = 1.5 * HEX_RADIUS * COL_COUNT
 grid_height = (math.sqrt(3) * HEX_RADIUS) * ROW_COUNT
-grid_x = width/4 #(width - grid_width) / 2  # Calcola la posizione X per centrare la griglia
-grid_y = height/ 4  # Calcola la posizione Y per centrare la griglia
+grid_x = width/5 #(width - grid_width) / 2  # Calcola la posizione X per centrare la griglia
+grid_y = height/5  # Calcola la posizione Y per centrare la griglia
 
 #variabili varie
 speed=10
@@ -224,6 +226,9 @@ inanimate_objects_inventory.append(Inanimated('tree1'))
 
 inanimated_in_game=[]
 
+#layout
+layout=Layout()
+
 # Ciclo di gioco
 # ----------------------------------------------------------------------------------------------------------------------------------------------------
 running = True
@@ -238,8 +243,9 @@ while running:
     overlay_menu_box_layer.fill((0, 0, 0, 0))  
     overlay_menu_buttons_layer.fill((0, 0, 0, 0))  
     overlays_layer.fill((0, 0, 0, 0))  
-    
+    layout_layer.fill((0, 0, 0, 0))
 
+    layout.draw(layout_layer)
 
     match room.roomNumber:
 
@@ -458,6 +464,7 @@ while running:
     screen.blit(overlay_menu_box_layer,(0,0))
     screen.blit(overlay_menu_buttons_layer,(0,0))
     screen.blit(overlays_layer,(0,0))
+    screen.blit(layout_layer,(0,0))
      
 
     pygame.display.flip()
