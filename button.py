@@ -19,22 +19,62 @@ class Button:
         self.relatedObject=relatedObject
         self.fakeboy=None
 
+        # self.img=[middle,up,down,left,right,up_dx,down_dx,up_sx,down_sx]
+        self.img_bg=[pygame.image.load('./media/layouts_and_menus/layout_try_middle.png'),
+                  pygame.image.load('./media/layouts_and_menus/layout_try_up.png'),
+                  pygame.image.load('./media/layouts_and_menus/layout_try_down.png'),
+                  pygame.image.load('./media/layouts_and_menus/layout_try_left.png'),
+                  pygame.image.load('./media/layouts_and_menus/layout_try_right.png'),
+                  pygame.image.load('./media/layouts_and_menus/layout_try_up_dx.png'),
+                  pygame.image.load('./media/layouts_and_menus/layout_try_down_dx.png'),
+                  pygame.image.load('./media/layouts_and_menus/layout_try_up_sx.png'),
+                  pygame.image.load('./media/layouts_and_menus/layout_try_down_sx.png')] 
+        
+        
+
+        
+
     def getRectt(self):
 
         new_rect=pygame.Rect(self.x,self.y,self.width,self.height)
         self.rect=new_rect
 
 
+    def calculateImgDraw(self,screen):
+        img_height = self.img_bg[0].get_height()
+        img_width = self.img_bg[0].get_width()
+        repetitions_height=self.rect.height//img_height
+        repetitions_width=self.rect.width//img_width
+        
+        #left, middle and right
+        for i in range(repetitions_height):
+            screen.blit(self.img_bg[3],(self.x,(i*img_height)+self.y))
+            screen.blit(self.img_bg[4],(self.x+self.rect.width-img_width,(i*img_height)+self.y))
+            for j in range(1,repetitions_width,-1):
+                screen.blit(self.img_bg[0],(self.x+(j*img_width),self.y+(i*img_height)))
+
+        #up and down
+        for i in range(repetitions_width):
+            screen.blit(self.img_bg[1],(self.x+(i*img_width),self.y))
+            screen.blit(self.img_bg[2],(self.x+(i*img_width),self.y+self.rect.height-img_height))
+
+        #corners
+        screen.blit(self.img_bg[7],(self.x,self.y))
+        screen.blit(self.img_bg[5],(self.x+self.rect.width-img_width,self.y))
+        screen.blit(self.img_bg[8],(self.x,self.y+self.rect.height-img_height))
+        screen.blit(self.img_bg[6],(self.x+self.rect.width-img_width,self.y+self.rect.height-img_height))
+
     def draw(self,screen):
-        a=self.x
+        a=self.x 
         b=self.y
         self.rect=pygame.Rect(self.x,self.y,self.width,self.height)
+        self.calculateImgDraw(screen)
+
         match self.type:
 
             #main menu buttons
             case 'mainmenu':
-                pygame.draw.rect(screen,(117,113,97),self.rect,border_radius=10)
-                pygame.draw.rect(screen,(68,36,52),self.rect,3,border_radius=10)
+                
 
 
                 match self.description:
@@ -54,8 +94,7 @@ class Button:
                 self.mouseCollisionDraw(Main.menu_buttons_layer)
 
             case 'options':
-                pygame.draw.rect(screen,(117,113,97),self.rect,border_radius=10)
-                pygame.draw.rect(screen,(68,36,52),self.rect,3,border_radius=10)
+                
                 match self.description:
                     case "1920x1080":
                         self.img=Main.font1.render('1920x1080', True, (29,12,28))
@@ -75,8 +114,7 @@ class Button:
 
             #skirmish prepare menu
             case 'skirmish':
-                pygame.draw.rect(screen,(117,113,97),self.rect,border_radius=10)
-                pygame.draw.rect(screen,(68,36,52),self.rect,3,border_radius=10)
+                
                 match self.description:
                     case "10":
                         self.img=Main.font1.render('10', True, (29,12,28))
@@ -103,8 +141,7 @@ class Button:
             #units inventory menu buttons
             case 'unitsInventoryMenu':
 
-                pygame.draw.rect(screen,(117,113,97),self.rect,border_radius=10)
-                pygame.draw.rect(screen,(68,36,52),self.rect,3,border_radius=10)
+                
 
                 if self.description=='next':
                         self.img=Main.font1.render('Next', True, (29,12,28))
@@ -138,8 +175,7 @@ class Button:
 
 
                 if self.description=='close':
-                    pygame.draw.rect(screen,(117,113,97),self.rect,border_radius=10)
-                    pygame.draw.rect(screen,(68,36,52),self.rect,3,border_radius=10)
+                    
                     self.img=Main.font1.render('Close', True, (29,12,28))
                     self.img=pygame.transform.scale(self.img, (self.width-16, self.height-16))
                     screen.blit(self.img,(a+8,b+8))
@@ -173,8 +209,7 @@ class Button:
             case 'upi':
 
 
-                pygame.draw.rect(screen,(117,113,97),self.rect,border_radius=10)
-                pygame.draw.rect(screen,(68,36,52),self.rect,3,border_radius=10)
+                
 
                 if self.relatedObject!=None:
                     self.img=[self.relatedObject.img[0],self.relatedObject.img[1],self.relatedObject.img[2],self.relatedObject.img[3]]
@@ -191,8 +226,7 @@ class Button:
 
             #end turn button
             case 'endTurn':
-                pygame.draw.rect(screen,(117,113,97),self.rect,border_radius=10)
-                pygame.draw.rect(screen,(68,36,52),self.rect,3,border_radius=10)
+                 
 
                 self.img=Main.font1.render('End Turn', True, (29,12,28))
                 self.img=pygame.transform.scale(self.img, (self.width-10, self.height-10))
@@ -396,7 +430,7 @@ class Button:
 
     def mouseCollisionDraw(self,screen):
          if self.checkMousecollision()==self:
-            pygame.draw.rect(screen,(16, 26, 38),self.rect,3,border_radius=10)
+            pygame.draw.rect(screen,(133, 76, 48),self.rect,3)
 
     def checkMousecollision(self):
         mouse_pos = pygame.mouse.get_pos()

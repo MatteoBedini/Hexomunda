@@ -28,7 +28,7 @@ font1 = pygame.font.Font('data/fonts/Press_Start_2P/PressStart2P-Regular.ttf', 3
 
 
 # Dimensioni della finestra
-width = 1980
+width = 1920
 height = 1080
 layers=[]
 
