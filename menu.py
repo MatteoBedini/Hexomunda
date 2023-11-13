@@ -76,9 +76,12 @@ class Menu:
             case 'skirmish':                                        #skirmish menu
 
                 
-                text=Main.font1.render('choose the points for players to buy units and equipment', True, (29,12,28))
+                text=Main.font1.render('choose the points for players to buy units and equipment', True, (210,125,44))
+                text_shadow=Main.font1.render('choose the points for players to buy units and equipment', True, (68,36,52))
+                text_shadow=pygame.transform.scale(text_shadow, (self.width-20, 16))
                 text=pygame.transform.scale(text, (self.width-20, 16))
-                screen.blit(text, (self.x+10,self.y+7))
+                screen.blit(text_shadow,(self.x+10,self.y+9))
+                screen.blit(text, (self.x+10,self.y+8))
                 self.addButtons()
                 for button in self.buttons:
                     button.draw(Main.menu_buttons_layer)
@@ -86,14 +89,23 @@ class Menu:
             case 'unitsInventoryMenu':                              #units inventory menu
 
                 
-                text=Main.font1.render('choose the units to use in game', True, (29,12,28))
+                text=Main.font1.render('choose the units to use in game', True, (210,125,44))
+                text_shadow=Main.font1.render('choose the units to use in game', True, (68,36,52))
+                text_shadow=pygame.transform.scale(text_shadow, (self.width/2, 16))
                 text=pygame.transform.scale(text, (self.width/2, 16))
+                screen.blit(text_shadow,(self.x+10,self.y+8))
                 screen.blit(text, (self.x+10,self.y+7))
-                text=Main.font1.render('points remaining: ' + str(Main.players[0].points), True, (29,12,28))
+                text=Main.font1.render('points remaining: ' + str(Main.players[0].points), True, (210,125,44))
+                text_shadow=Main.font1.render('points remaining: ' + str(Main.players[0].points), True, (68,36,52))
+                text_shadow=pygame.transform.scale(text_shadow, (160, 16))
                 text=pygame.transform.scale(text, (160, 16))
+                screen.blit(text_shadow,(self.x+10,self.y+20+17))
                 screen.blit(text, (self.x+10,self.y+20+16))
-                text=Main.font1.render('click on buy to shop gear', True, (29,12,28))
+                text=Main.font1.render('click on buy to shop gear', True, (210,125,44))
+                text_shadow=Main.font1.render('click on buy to shop gear', True, (68,36,52))
+                text_shadow=pygame.transform.scale(text_shadow, (200, 16))
                 text=pygame.transform.scale(text, (200, 16))
+                screen.blit(text_shadow,(self.x+self.width-220,self.y+20+17))
                 screen.blit(text, (self.x+self.width-220,self.y+20+16))
                 self.addButtons()
                 for button in self.buttons:
@@ -104,8 +116,11 @@ class Menu:
             case 'upi':                                             #unit placing interface
                 
                 
-                text=Main.font1.render('position your units on the grid by clicking on it', True, (29,12,28))
+                text=Main.font1.render('position your units on the grid by clicking on it', True, (210,125,44))
+                text_shadow=Main.font1.render('position your units on the grid by clicking on it', True, (68,36,52))
+                text_shadow=pygame.transform.scale(text_shadow, (640, 16))
                 text=pygame.transform.scale(text, (640, 16))
+                screen.blit(text_shadow,(self.x+10,self.y+8))
                 screen.blit(text, (self.x+10,self.y+7))
                 self.addButtons()
                 for button in self.buttons:
@@ -120,11 +135,11 @@ class Menu:
             match self.type:  
                 case 'mainmenu':  #mainmenu
 
-                    self.buttons.append(button.Button(self.x+self.width/2-60,self.y+50,120,90,'mainmenu','play',None))    #play
+                    self.buttons.append(button.Button(self.x+self.width/2-60,self.y+80,120,80,'mainmenu','play',self))    #play
 
-                    self.buttons.append(button.Button(self.x+self.width/2-60,self.y+150,120,90,'mainmenu','options',None)) #options
+                    """ self.buttons.append(button.Button(self.x+self.width/2-60,self.y+self.height/2-45,120,80,'mainmenu','options',self)) #options """
 
-                    self.buttons.append(button.Button(self.x+self.width/2-60,self.y+250,120,90,'mainmenu','quit',None))    #quit
+                    self.buttons.append(button.Button(self.x+self.width/2-60,self.y+self.height-80-80,120,80,'mainmenu','quit',self))    #quit
 
                 case 'options':  #options menu
                     self.buttons.append(button.Button(self.x+self.width/2-60,self.y+50,120,90,'options','1920x1080',None))   
@@ -134,12 +149,17 @@ class Menu:
 
 
                 case 'skirmish':  #skirmish menu
-
-                    self.buttons.append(button.Button(self.x+self.width/2-60,self.y+50,40,40,'skirmish','10',None))    #10 punti
-                    self.buttons.append(button.Button(self.x+self.width/2-60,self.y+100,40,40,'skirmish','15',None))    #15 punti
-                    self.buttons.append(button.Button(self.x+self.width/2-60,self.y+150,40,40,'skirmish','20',None))    #20 punti
-                    self.buttons.append(button.Button(self.x+self.width/2-60,self.y+200,40,40,'skirmish','25',None))    #25 punti
-                    self.buttons.append(button.Button(self.x+self.width/2-60,self.y+250,40,40,'skirmish','60',None))    #30 punti
+                    distance_between_buttons=(self.height/100)*15
+                    self.buttons.append(button.Button(self.x+60,self.y+distance_between_buttons,40,40,'skirmish','10',None))    #10 punti
+                    distance_between_buttons+=(self.height/100)*15
+                    self.buttons.append(button.Button(self.x+60,self.y+distance_between_buttons,40,40,'skirmish','15',None))    #15 punti
+                    distance_between_buttons+=(self.height/100)*15
+                    self.buttons.append(button.Button(self.x+60,self.y+distance_between_buttons,40,40,'skirmish','20',None))    #20 punti
+                    distance_between_buttons+=(self.height/100)*15
+                    self.buttons.append(button.Button(self.x+60,self.y+distance_between_buttons,40,40,'skirmish','25',None))    #25 punti
+                    distance_between_buttons+=(self.height/100)*15
+                    self.buttons.append(button.Button(self.x+60,self.y+distance_between_buttons,40,40,'skirmish','60',None))    #30 punti
+                    
                     
 
                     

@@ -12,6 +12,7 @@ class Button:
         self.use=None
         self.rect=pygame.Rect((x,y,width,height))
         self.img=None
+        self.img_shadow=None
         self.type=type
         self.description=description
         self.counter=0
@@ -79,17 +80,23 @@ class Button:
 
                 match self.description:
                     case "play":
-                        self.img=Main.font1.render('Play', True, (29,12,28))
+                        self.img=Main.font1.render('Play', True, (210,125,44))
+                        self.img_shadow=Main.font1.render('Play', True, (68,36,52))
                         self.img=pygame.transform.scale(self.img, (self.width-20, self.width-64))
-                        screen.blit(self.img,(a+11,b+20))
+                        self.img_shadow=pygame.transform.scale(self.img_shadow, (self.width-20, self.width-64))
+                        screen.blit(self.img_shadow,(a+self.width/2-self.img.get_width()/2,b+self.height/2-self.img.get_height()/2+3))
+                        screen.blit(self.img,(a+self.width/2-self.img.get_width()/2,b+self.height/2-self.img.get_height()/2))
                     case "options":
-                        self.img=Main.font1.render('Options', True, (29,12,28))
+                        self.img=Main.font1.render('Options', True, (210,125,44))
                         self.img=pygame.transform.scale(self.img, (self.width-20, self.width-64))
-                        screen.blit(self.img,(a+11,b+20))
+                        screen.blit(self.img,(a+self.width/2-self.img.get_width()/2,b+self.height/2-self.img.get_height()/2))
                     case "quit":
-                        self.img=Main.font1.render('Exit', True, (29,12,28))
+                        self.img=Main.font1.render('Exit', True, (210,125,44))
+                        self.img_shadow=Main.font1.render('Exit', True, (68,36,52))
                         self.img=pygame.transform.scale(self.img, (self.width-20, self.width-64))
-                        screen.blit(self.img,(a+11,b+20))
+                        self.img_shadow=pygame.transform.scale(self.img_shadow, (self.width-20, self.width-64))
+                        screen.blit(self.img_shadow,(a+self.width/2-self.img.get_width()/2,b+self.height/2-self.img.get_height()/2+3))
+                        screen.blit(self.img,(a+self.width/2-self.img.get_width()/2,b+self.height/2-self.img.get_height()/2))
 
                 self.mouseCollisionDraw(Main.menu_buttons_layer)
 
@@ -97,15 +104,15 @@ class Button:
                 
                 match self.description:
                     case "1920x1080":
-                        self.img=Main.font1.render('1920x1080', True, (29,12,28))
+                        self.img=Main.font1.render('1920x1080', True, (210,125,44))
                         self.img=pygame.transform.scale(self.img, (self.width-16, self.height-16))
                         screen.blit(self.img,(a+8,b+8))
                     case "1280x720":
-                        self.img=Main.font1.render('1280x720', True, (29,12,28))
+                        self.img=Main.font1.render('1280x720', True, (210,125,44))
                         self.img=pygame.transform.scale(self.img, (self.width-16, self.height-16))
                         screen.blit(self.img,(a+8,b+8))
                     #case "800x600":
-                        #self.img=Main.font1.render('800x600', True, (29,12,28))
+                        #self.img=Main.font1.render('800x600', True, (210,125,44))
                         #self.img=pygame.transform.scale(self.img, (self.width-16, self.height-16))
                         #screen.blit(self.img,(a+8,b+8))
 
@@ -117,24 +124,39 @@ class Button:
                 
                 match self.description:
                     case "10":
-                        self.img=Main.font1.render('10', True, (29,12,28))
+                        self.img=Main.font1.render('10', True, (210,125,44))
+                        self.img_shadow=Main.font1.render('10', True, (68,36,52))
+                        self.img_shadow=pygame.transform.scale(self.img_shadow, (self.width-16, self.height-16))
                         self.img=pygame.transform.scale(self.img, (self.width-16, self.height-16))
+                        screen.blit(self.img_shadow,(a+8,b+9))
                         screen.blit(self.img,(a+8,b+8))
                     case "15":
-                        self.img=Main.font1.render('15', True, (29,12,28))
+                        self.img=Main.font1.render('15', True, (210,125,44))
+                        self.img_shadow=Main.font1.render('15', True, (68,36,52))
+                        self.img_shadow=pygame.transform.scale(self.img_shadow, (self.width-16, self.height-16))
                         self.img=pygame.transform.scale(self.img, (self.width-16, self.height-16))
+                        screen.blit(self.img_shadow,(a+8,b+9))
                         screen.blit(self.img,(a+8,b+8))
                     case "20":
-                        self.img=Main.font1.render('20', True, (29,12,28))
+                        self.img=Main.font1.render('20', True, (210,125,44))
+                        self.img_shadow=Main.font1.render('20', True, (68,36,52))
                         self.img=pygame.transform.scale(self.img, (self.width-16, self.height-16))
+                        self.img_shadow=pygame.transform.scale(self.img_shadow, (self.width-16, self.height-16))
+                        screen.blit(self.img_shadow,(a+8,b+9))
                         screen.blit(self.img,(a+8,b+8))
                     case "25":
-                        self.img=Main.font1.render('25', True, (29,12,28))
+                        self.img=Main.font1.render('25', True, (210,125,44))
+                        self.img_shadow=Main.font1.render('25', True, (68,36,52))
                         self.img=pygame.transform.scale(self.img, (self.width-16, self.height-16))
+                        self.img_shadow=pygame.transform.scale(self.img_shadow, (self.width-16, self.height-16))
+                        screen.blit(self.img_shadow,(a+8,b+9))
                         screen.blit(self.img,(a+8,b+8))
                     case "60":
-                        self.img=Main.font1.render('60', True, (29,12,28))
+                        self.img=Main.font1.render('60', True, (210,125,44))
+                        self.img_shadow=Main.font1.render('60', True, (68,36,52))
+                        self.img_shadow=pygame.transform.scale(self.img_shadow, (self.width-16, self.height-16))
                         self.img=pygame.transform.scale(self.img, (self.width-16, self.height-16))
+                        screen.blit(self.img_shadow,(a+8,b+9))
                         screen.blit(self.img,(a+8,b+8))
                 self.mouseCollisionDraw(Main.menu_buttons_layer)
 
@@ -144,22 +166,34 @@ class Button:
                 
 
                 if self.description=='next':
-                        self.img=Main.font1.render('Next', True, (29,12,28))
+                        self.img=Main.font1.render('Next', True, (210,125,44))
+                        self.img_shadow=Main.font1.render('Next', True, (68,36,52))
+                        self.img_shadow=pygame.transform.scale(self.img_shadow, (self.width-20, self.height-4))
                         self.img=pygame.transform.scale(self.img, (self.width-20, self.height-4))
+                        screen.blit(self.img_shadow,(a+11,b+5))
                         screen.blit(self.img,(a+11,b+4))
 
                 elif self.description=='add':
-                        self.img=Main.font1.render('Add', True, (29,12,28))
+                        self.img=Main.font1.render('Add', True, (210,125,44))
+                        self.img_shadow=Main.font1.render('Add', True, (68,36,52))
+                        self.img_shadow=pygame.transform.scale(self.img_shadow, (self.width-16, self.height-6))
                         self.img=pygame.transform.scale(self.img, (self.width-16, self.height-6))
+                        screen.blit(self.img_shadow,(a+8,b+5))
                         screen.blit(self.img,(a+8,b+4))
 
-                        text=Main.font1.render(f'{self.counter}', True, (29,12,28))
+                        text=Main.font1.render(f'{self.counter}', True, (210,125,44))
+                        text_shadow=Main.font1.render(f'{self.counter}', True, (68,36,52))
+                        text_shadow=pygame.transform.scale(text_shadow, (16, 16))
                         text=pygame.transform.scale(text, (16, 16))
+                        screen.blit(text_shadow, (self.x+100,self.y+1))
                         screen.blit(text, (self.x+100,self.y))
 
                 elif self.description=='buy':
-                        self.img=Main.font1.render('Buy', True, (29,12,28))
+                        self.img=Main.font1.render('Buy', True, (210,125,44))
+                        self.img_shadow=Main.font1.render('Buy', True, (68,36,52))
+                        self.img_shadow=pygame.transform.scale(self.img_shadow, (self.width-16, self.height-16))
                         self.img=pygame.transform.scale(self.img, (self.width-16, self.height-16))
+                        screen.blit(self.img_shadow,(a+8,b+9))
                         screen.blit(self.img,(a+8,b+8))
 
                 for unit in Main.units_type_INVENTORY:
@@ -176,8 +210,11 @@ class Button:
 
                 if self.description=='close':
                     
-                    self.img=Main.font1.render('Close', True, (29,12,28))
+                    self.img=Main.font1.render('Close', True, (210,125,44))
+                    self.img_shadow=Main.font1.render('Close', True, (68,36,52))
+                    self.img_shadow=pygame.transform.scale(self.img_shadow, (self.width-16, self.height-16))
                     self.img=pygame.transform.scale(self.img, (self.width-16, self.height-16))
+                    screen.blit(self.img_shadow,(a+8,b+9))
                     screen.blit(self.img,(a+8,b+8))
 
                 else:
@@ -189,7 +226,7 @@ class Button:
                                 #pygame.draw.rect(screen,(117,113,97),self.rect,border_radius=10)
                                 pygame.draw.rect(screen,(68,36,52),self.rect,3,border_radius=10)
 
-                                text1=Main.font1.render(equip, True, (29,12,28))
+                                text1=Main.font1.render(equip, True, (210,125,44))
 
                                 text1=pygame.transform.scale(text1, (self.rect.width - 20, self.rect.height- 20))
 
@@ -218,8 +255,11 @@ class Button:
                             screen.blit(i,(a+self.width/2-i.get_width()/2,b+self.height/2-i.get_height()/2))
 
                 elif self.description =='start' and self.relatedObject==None:
-                    self.img=Main.font1.render('Start', True, (29,12,28))
+                    self.img=Main.font1.render('Start', True, (210,125,44))
+                    self.img_shadow=Main.font1.render('Start', True, (68,36,52))
+                    self.img_shadow=pygame.transform.scale(self.img_shadow, (self.width-10, self.height-10))
                     self.img=pygame.transform.scale(self.img, (self.width-10, self.height-10))
+                    screen.blit(self.img_shadow,(a+5 ,b+6))
                     screen.blit(self.img,(a+5 ,b+5))
 
                 self.mouseCollisionDraw(Main.menu_buttons_layer)
@@ -228,8 +268,11 @@ class Button:
             case 'endTurn':
                  
 
-                self.img=Main.font1.render('End Turn', True, (29,12,28))
+                self.img=Main.font1.render('End Turn', True, (210,125,44))
+                self.img_shadow=Main.font1.render('End Turn', True, (68,36,52))
                 self.img=pygame.transform.scale(self.img, (self.width-10, self.height-10))
+                self.img_shadow=pygame.transform.scale(self.img_shadow, (self.width-10, self.height-10))
+                screen.blit(self.img_shadow,(a+5 ,b+6))
                 screen.blit(self.img,(a+5 ,b+5))
 
                 self.mouseCollisionDraw(Main.menu_buttons_layer)
@@ -430,7 +473,11 @@ class Button:
 
     def mouseCollisionDraw(self,screen):
          if self.checkMousecollision()==self:
-            pygame.draw.rect(screen,(133, 76, 48),self.rect,3)
+            pygame.draw.line(screen, (68,36,52), (self.x, self.y), (self.x, self.y + self.height-1), 2)  # Lato sinistro 
+            pygame.draw.line(screen, (210,125,44), (self.x + self.width-2, self.y), (self.x + self.width-2, self.y + self.height-1), 2)  # Lato destro
+            pygame.draw.line(screen, (210,125,44), (self.x, self.y + self.height-2), (self.x + self.width-1, self.y + self.height-2), 2)  # Lato inferiore
+            pygame.draw.line(screen, (68,36,52), (self.x, self.y), (self.x + self.width-1, self.y), 2)  # Lato superiore
+            
 
     def checkMousecollision(self):
         mouse_pos = pygame.mouse.get_pos()
