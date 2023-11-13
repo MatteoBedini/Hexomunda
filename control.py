@@ -240,7 +240,7 @@ class Control:
             starting_mouse_y = pygame.mouse.get_pos()[1]
             for event in pygame.event.get():
 
-                if event.type == pygame.MOUSEMOTION and Main.controller.gameFase==1:
+                if event.type == pygame.MOUSEMOTION:
                     
                     Main.resizable_layer_x+=pygame.mouse.get_pos()[0]-starting_mouse_x
                     Main.resizable_layer_y+=pygame.mouse.get_pos()[1]-starting_mouse_y
