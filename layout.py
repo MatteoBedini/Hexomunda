@@ -25,7 +25,7 @@ class Layout:
         
 
     def draw (self, screen):
-        #pygame.draw.rect(screen, (0, 0, 0,0.5), self.rect,20)
+        
         self.calculateImgDraw(Main.layout_layer)
 
     def calculateImgDraw(self,screen):
@@ -67,3 +67,19 @@ class Layout:
         screen.blit(self.img_corner3,(self.rect.width-img_width,0))
         screen.blit(self.img_corner2,(0,self.rect.height-img_height))
         screen.blit(self.img_corner4,(self.rect.width-img_width,self.rect.height-img_height))
+
+        if Main.room.roomNumber is not 2:
+            title_rect=pygame.Rect(Main.screen.get_width()/2-Main.screen.get_width()/100*10,20,Main.screen.get_width()/100*20,Main.screen.get_height()/100*5)
+            pygame.draw.rect(screen, (133,76,48), title_rect)
+            pygame.draw.line(screen, (68,36,52), (title_rect.x,title_rect.y+title_rect.height), (title_rect.x+title_rect.width,title_rect.y+title_rect.height), 2)
+            pygame.draw.line(screen, (210,125,44), (title_rect.x,title_rect.y), (title_rect.x+title_rect.width,title_rect.y), 2)
+            pygame.draw.line(screen, (210,125,44), (title_rect.x,title_rect.y), (title_rect.x,title_rect.y+title_rect.height), 2)
+            pygame.draw.line(screen, (68,36,52), (title_rect.x+title_rect.width,title_rect.y), (title_rect.x+title_rect.width,title_rect.y+title_rect.height), 2)
+
+        
+            title_text=Main.font1.render('Hexomunda', True, (210,125,44))
+            title_text_shadow=Main.font1.render('Hexomunda', True, (68,36,52))
+            title_text=pygame.transform.scale(title_text, (title_rect.width/100*90, title_rect.height/100*80))
+            title_text_shadow=pygame.transform.scale(title_text_shadow, (title_rect.width/100*90, title_rect.height/100*80))
+            screen.blit(title_text_shadow,(title_rect.x+title_rect.width/2-title_text_shadow.get_width()/2+2,title_rect.y+title_rect.height/2-title_text_shadow.get_height()/2+4))
+            screen.blit(title_text,(title_rect.x+title_rect.width/2-title_text.get_width()/2+2,title_rect.y+title_rect.height/2-title_text.get_height()/2+2))
