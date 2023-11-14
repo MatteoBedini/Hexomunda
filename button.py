@@ -26,10 +26,10 @@ class Button:
                   pygame.image.load('./media/layouts_and_menus/layout_try_down.png'),
                   pygame.image.load('./media/layouts_and_menus/layout_try_left.png'),
                   pygame.image.load('./media/layouts_and_menus/layout_try_right.png'),
-                  pygame.image.load('./media/layouts_and_menus/layout_try_up_dx.png'),
-                  pygame.image.load('./media/layouts_and_menus/layout_try_down_dx.png'),
-                  pygame.image.load('./media/layouts_and_menus/layout_try_up_sx.png'),
-                  pygame.image.load('./media/layouts_and_menus/layout_try_down_sx.png')] 
+                  pygame.image.load('./media/layouts_and_menus/layout_try_up_dx_empty.png'),
+                  pygame.image.load('./media/layouts_and_menus/layout_try_down_dx_empty.png'),
+                  pygame.image.load('./media/layouts_and_menus/layout_try_up_sx_empty.png'),
+                  pygame.image.load('./media/layouts_and_menus/layout_try_down_sx_empty.png')] 
         
         
 
@@ -363,9 +363,11 @@ class Button:
                                             orcs=[]
                                             goblins=[]
                                             humans=[]
+                                            dwarves=[]
                                             all_races.append(orcs)
                                             all_races.append(goblins)
                                             all_races.append(humans)
+                                            all_races.append(dwarves)
 
                                             for unit in Main.players[0].units_inventory:
                                                 if unit.race=='orc':
@@ -374,6 +376,8 @@ class Button:
                                                     all_races[1].append(unit)
                                                 elif unit.race=='human':
                                                     all_races[2].append(unit)
+                                                elif unit.race=='dwarf':
+                                                    all_races[3].append(unit)
 
                                             incrementy=0
                                             for race in all_races:

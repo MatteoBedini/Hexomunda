@@ -180,6 +180,15 @@ units_type_INVENTORY.append(
         'human'
     )
 )
+units_type_INVENTORY.append(
+    Unit(
+
+        False,
+        1,
+        'dwarf',
+        'dwarf'
+    )
+)
 
 
 
@@ -452,7 +461,7 @@ while running:
 
     
     
-    cursor.move(pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1])
+    """ cursor.move(pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1]) """
 
     #ridisegno gli schermi
     screen.blit(cell_layer,(resizable_layer_x,resizable_layer_y))

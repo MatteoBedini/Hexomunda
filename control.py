@@ -103,47 +103,68 @@ class Control:
     #draw del suddetto overlay
     def drawObjectOverlay(self,screen):
         if self.overlayedUnit!=None:
-            x=10
-            y=Main.screen.get_height()-self.overlayedUnit_overlay.get_height()
             inventory=pygame.image.load("media/ObjectInfo_inventory.png")
+            x=20
+            y=Main.screen.get_height()-self.overlayedUnit_overlay.get_height()-20
+            
             
             screen.blit(self.overlayedUnit_overlay,(x,y))
             for i in self.overlayedUnit.img:
                 if i!=None:
+                    equipment_image=i
+                    equipment_image=pygame.transform.scale(equipment_image,(i.get_width()*2,i.get_height()*2))
+                    screen.blit(equipment_image,(x+self.overlayedUnit_overlay.get_width()/100*50-equipment_image.get_width()/2,y+self.overlayedUnit_overlay.get_height()/100*50-equipment_image.get_height()/2))
                     
-                    screen.blit(i,(x+100,y+95))
-                    
-            screen.blit(inventory,(x+390,y+40))
+            screen.blit(inventory,(20,Main.screen.get_height()-inventory.get_height()-20-self.overlayedUnit_overlay.get_height()))
+            inventory_x=20
+            inventory_y=Main.screen.get_height()-inventory.get_height()-20-self.overlayedUnit_overlay.get_height()
 
-            
+            #head
             if self.overlayedUnit.img[2]!=None:
-                screen.blit(self.overlayedUnit.img[2], (x+390+80, y+70))
+                p=self.overlayedUnit.img[2]
+                p=pygame.transform.scale(p,(p.get_width()*2,p.get_height()*2))
+                screen.blit(p, (inventory_x+inventory.get_width()/100*50-p.get_width()/2,inventory_y+inventory.get_height()/100*20-p.get_height()/2))
 
-            
+            #weapon
             if self.overlayedUnit.img[0]!=None:
-                screen.blit(self.overlayedUnit.img[0], (x+390+80, y+130))
+                p=self.overlayedUnit.img[0]
+                p=pygame.transform.scale(p,(p.get_width()*2,p.get_height()*2))
+                screen.blit(p, (inventory_x+inventory.get_width()/100*80-p.get_width()/2, inventory_y+inventory.get_height()/100*50-p.get_height()/2))
 
-            
+            #shield
             if self.overlayedUnit.img[3]!=None:
-                screen.blit(self.overlayedUnit.img[3], (x+390+140 , y+130))
+                p=self.overlayedUnit.img[3]
+                p=pygame.transform.scale(p,(p.get_width()*2,p.get_height()*2))
+                screen.blit(p, (inventory_x+inventory.get_width()/100*20-p.get_width()/2, inventory_y+inventory.get_height()/100*50-p.get_height()/2))
 
-            
+            #body
             if self.overlayedUnit.img[1]!=None:
-                screen.blit(self.overlayedUnit.img[1], (x+390+10, y+130))
+                p=self.overlayedUnit.img[1]
+                p=pygame.transform.scale(p,(p.get_width()*2,p.get_height()*2))
+                screen.blit(p, (inventory_x+inventory.get_width()/100*50-p.get_width()/2, inventory_y+inventory.get_height()/100*50-p.get_height()/2))
 
-            hp=Main.font.render('Hp:', True, (29,12,28))
+            hp=Main.font.render('Hp:', True, (210,125,44))
+            hp_shadow=Main.font.render('Hp:', True, (68,36,52))
+            hp_shadow=pygame.transform.scale(hp_shadow, (hp_shadow.get_width()/2, hp_shadow.get_height()/2))
             hp=pygame.transform.scale(hp, (hp.get_width()/2, hp.get_height()/2))
-            screen.blit(hp, (x+60, y+164))
+            screen.blit(hp_shadow, (x+20, y+1+(self.overlayedUnit_overlay.get_height()/100*80)))
+            screen.blit(hp, (x+20, y+(self.overlayedUnit_overlay.get_height()/100*80)))
 
-            atk=Main.font.render('Attack:'+str(self.overlayedUnit.atk), True, (29,12,28))
+            atk=Main.font.render('Attack:'+str(self.overlayedUnit.atk), True, (210,125,44))
+            atk_shadow=Main.font.render('Attack:'+str(self.overlayedUnit.atk), True, (68,36,52))
+            atk_shadow=pygame.transform.scale(atk_shadow, (atk_shadow.get_width()/2, atk_shadow.get_height()/2))
             atk=pygame.transform.scale(atk, (atk.get_width()/2, atk.get_height()/2))
-            screen.blit(atk, (x+220, y+164))
+            screen.blit(atk_shadow, (x+self.overlayedUnit_overlay.get_width()-atk_shadow.get_width()-20, y+(self.overlayedUnit_overlay.get_height()/100*10)))
+            screen.blit(atk, (x+self.overlayedUnit_overlay.get_width()-atk.get_width()-20, y+(self.overlayedUnit_overlay.get_height()/100*10)))
 
-            name=Main.font.render('Name:'+str(self.overlayedUnit.nome), True, (29,12,28))
+            name=Main.font.render('Name:'+str(self.overlayedUnit.nome), True, (210,125,44))
+            name_shadow=Main.font.render('Name:'+str(self.overlayedUnit.nome), True, (68,36,52))
+            name_shadow=pygame.transform.scale(name_shadow, (name_shadow.get_width()/2, name_shadow.get_height()/2))
             name=pygame.transform.scale(name, (name.get_width()/2, name.get_height()/2))
-            screen.blit(name, (x+220, y+100))
+            screen.blit(name_shadow, (x+20, y+(self.overlayedUnit_overlay.get_height()/100*10)))
+            screen.blit(name, (x+20, y+(self.overlayedUnit_overlay.get_height()/100*10)))
 
-            self.overlayedUnit.drawHpBar(screen,80,15,x+90+Main.resizable_layer_x,y+160+Main.resizable_layer_y)
+            self.overlayedUnit.drawHpBar(screen,80,15,x+23+hp.get_width()+Main.resizable_layer_x,y-1+(self.overlayedUnit_overlay.get_height()/100*80)+Main.resizable_layer_y)
 
     # elimino unità morte dall'array units e le metto nell'array deadunits
     def kill(self, unit):

@@ -738,8 +738,10 @@ class Unit:
             self.totmovepts += 2
 
         elif self.race == "dwarf":
-            self.img[1] = pygame.image.load("./media/races/orc/orc_base_body_0.png")
+            self.img[1] = pygame.image.load("./media/races/dwarf/dwarf_base_body_0.png")
             self.orig_img[1] = self.img[1]
+            self.img[2] = pygame.image.load("./media/races/dwarf/dwarf_base_head_0.png")
+            self.orig_img[2] = self.img[2]
             self.hp += 3
             self.maxhp += 3
 
