@@ -224,7 +224,7 @@ class Button:
                             if equip==self.description:
 
                                 #pygame.draw.rect(screen,(117,113,97),self.rect,border_radius=10)
-                                pygame.draw.rect(screen,(68,36,52),self.rect,3,border_radius=10)
+                                #pygame.draw.rect(screen,(68,36,52),self.rect,3)
 
                                 text1=Main.font1.render(equip, True, (210,125,44))
 
@@ -393,36 +393,8 @@ class Button:
 
                                         elif self.description=='buy':
                                             Main.shop_overlay_active=True
-
-                                            #creo un pulsante per ogni equipaggiamento
-                                            increment=20
-                                            for equipgroups in equipment.all.values():
-                                                for equip in equipgroups.keys():
-                                                    if self.relatedObject.race in equip:
-
-                                                        equip_button=Button(
-
-                                                            Main.shop_overlay_rect.x+20,
-                                                            Main.shop_overlay_rect.y+increment+20,
-                                                            Main.shop_overlay_rect.width/6,
-                                                            Main.shop_overlay_rect.height/12,
-                                                            'unitsInventoryMenu_buy',
-                                                            f'{equip}',
-                                                            self)
-
-                                                        Main.shop_overlay_buttons.append(equip_button)
-                                                        increment+=60
-
-                                            close_Shop_Button=Button(
-                                                Main.shop_overlay_rect.x+Main.shop_overlay_rect.width-80,
-                                                Main.shop_overlay_rect.y+Main.shop_overlay_rect.height-60,
-                                                64,
-                                                32,
-                                                'unitsInventoryMenu_buy',
-                                                'close',
-                                                None
-                                            )
-                                            Main.shop_overlay_buttons.append(close_Shop_Button)
+                                            Main.shop_overlay_menu.addButtons(relatedObject=self)
+                                            
 
 
 
@@ -432,7 +404,8 @@ class Button:
                                     Main.overlay_menu_box_layer.fill((0, 0, 0, 0))
                                     Main.shop_overlay_active=False
                                     Main.screen.blit(Main.overlay_menu_box_layer,(0,0))
-                                    Main.shop_overlay_buttons=[]
+                                    Main.shop_overlay_menu.buttons=[]
+                                    #Main.shop_overlay_buttons=[]
 
 
 

@@ -2,6 +2,7 @@ import pygame
 import Main
 import button
 import control
+import equipment
 
 class Menu:
     def __init__(self,width,height,x,y,type):
@@ -76,8 +77,8 @@ class Menu:
             case 'skirmish':                                        #skirmish menu
 
                 
-                text=Main.font1.render('choose the points for players to buy units and equipment', True, (210,125,44))
-                text_shadow=Main.font1.render('choose the points for players to buy units and equipment', True, (68,36,52))
+                text=Main.font1.render('Choose the points for players to buy units and equipment', True, (210,125,44))
+                text_shadow=Main.font1.render('Choose the points for players to buy units and equipment', True, (68,36,52))
                 text_shadow=pygame.transform.scale(text_shadow, (self.width-20, 16))
                 text=pygame.transform.scale(text, (self.width-20, 16))
                 screen.blit(text_shadow,(self.x+10,self.y+9))
@@ -89,20 +90,20 @@ class Menu:
             case 'unitsInventoryMenu':                              #units inventory menu
 
                 
-                text=Main.font1.render('choose the units to use in game', True, (210,125,44))
-                text_shadow=Main.font1.render('choose the units to use in game', True, (68,36,52))
+                text=Main.font1.render('Choose the units to use in game', True, (210,125,44))
+                text_shadow=Main.font1.render('Choose the units to use in game', True, (68,36,52))
                 text_shadow=pygame.transform.scale(text_shadow, (self.width/2, 16))
                 text=pygame.transform.scale(text, (self.width/2, 16))
                 screen.blit(text_shadow,(self.x+10,self.y+8))
                 screen.blit(text, (self.x+10,self.y+7))
-                text=Main.font1.render('points remaining: ' + str(Main.players[0].points), True, (210,125,44))
-                text_shadow=Main.font1.render('points remaining: ' + str(Main.players[0].points), True, (68,36,52))
+                text=Main.font1.render('Points remaining: ' + str(Main.players[0].points), True, (210,125,44))
+                text_shadow=Main.font1.render('Points remaining: ' + str(Main.players[0].points), True, (68,36,52))
                 text_shadow=pygame.transform.scale(text_shadow, (160, 16))
                 text=pygame.transform.scale(text, (160, 16))
                 screen.blit(text_shadow,(self.x+10,self.y+20+17))
                 screen.blit(text, (self.x+10,self.y+20+16))
-                text=Main.font1.render('click on buy to shop gear', True, (210,125,44))
-                text_shadow=Main.font1.render('click on buy to shop gear', True, (68,36,52))
+                text=Main.font1.render('Click on buy to shop gear', True, (210,125,44))
+                text_shadow=Main.font1.render('Click on buy to shop gear', True, (68,36,52))
                 text_shadow=pygame.transform.scale(text_shadow, (200, 16))
                 text=pygame.transform.scale(text, (200, 16))
                 screen.blit(text_shadow,(self.x+self.width-220,self.y+20+17))
@@ -111,13 +112,21 @@ class Menu:
                 for button in self.buttons:
                     button.draw(Main.menu_buttons_layer)
                     
-            
+            case 'shop_overlay': #shop overlay
+                text=Main.font1.render('Buy equipment for your unit', True, (210,125,44))
+                text_shadow=Main.font1.render('Buy equipment for your unit', True, (68,36,52))
+                text_shadow=pygame.transform.scale(text_shadow, (self.width/2, 16))
+                text=pygame.transform.scale(text, (self.width/2, 16))
+                screen.blit(text_shadow,(self.x+10,self.y+11))
+                screen.blit(text, (self.x+10,self.y+9))
+                for button in self.buttons:
+                    button.draw(Main.menu_buttons_layer)
 
             case 'upi':                                             #unit placing interface
                 
                 
-                text=Main.font1.render('position your units on the grid by clicking on it', True, (210,125,44))
-                text_shadow=Main.font1.render('position your units on the grid by clicking on it', True, (68,36,52))
+                text=Main.font1.render('Position your units on the grid by clicking on it', True, (210,125,44))
+                text_shadow=Main.font1.render('Position your units on the grid by clicking on it', True, (68,36,52))
                 text_shadow=pygame.transform.scale(text_shadow, (640, 16))
                 text=pygame.transform.scale(text, (640, 16))
                 screen.blit(text_shadow,(self.x+10,self.y+8))
@@ -128,7 +137,7 @@ class Menu:
 
 
     
-    def addButtons(self):
+    def addButtons(self,relatedObject=None):
 
         if self.buttons==[]:
 
@@ -179,6 +188,37 @@ class Menu:
                         increment+=unit.img[1].get_height()+20
                     
                     self.buttons.append(button.Button(self.x+self.width-120,self.y+self.height-120,80,40,'unitsInventoryMenu','next',None))
+
+                case 'shop_overlay':  #shop overlay
+                    #creo un pulsante per ogni equipaggiamento
+                    increment=30
+                    for equipgroups in equipment.all.values():
+                        for equip in equipgroups.keys():
+                             if relatedObject.relatedObject.race in equip:
+
+                                equip_button=button.Button(
+
+                                    Main.shop_overlay_menu.x+20,
+                                    Main.shop_overlay_menu.y+increment+20,
+                                    Main.shop_overlay_menu.width/3,
+                                    Main.shop_overlay_menu.height/14,
+                                    'unitsInventoryMenu_buy',
+                                    f'{equip}',
+                                    relatedObject)
+
+                                Main.shop_overlay_menu.buttons.append(equip_button)
+                                increment+=60
+
+                    close_Shop_Button=button.Button(
+                        Main.shop_overlay_menu.x+Main.shop_overlay_menu.width-80,
+                        Main.shop_overlay_menu.y+Main.shop_overlay_menu.height-60,
+                        64,
+                        32,
+                        'unitsInventoryMenu_buy',
+                        'close',
+                        None
+                    )
+                    Main.shop_overlay_menu.buttons.append(close_Shop_Button)
 
                 
                 case 'upi':        #unit placing interface

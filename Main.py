@@ -209,13 +209,14 @@ skirmish_menu=Menu(screen.get_width()/4,screen.get_height()/2,screen.get_width()
 options_menu=Menu(screen.get_width()-600,450,300,0+height-700,'options')                       #menu opzioni
 
 shop_overlay_active=False
-shop_overlay_buttons=[]
-shop_overlay_rect=pygame.Rect(300,300,screen.get_width()/2,screen.get_height()/2)
+shop_overlay_menu=Menu(screen.get_width()/4,screen.get_height()/100*70,unitsInventoryMenu.x+unitsInventoryMenu.width-screen.get_width()/4,unitsInventoryMenu.y-(screen.get_height()/100*70-unitsInventoryMenu.height)/2,'shop_overlay')
+#shop_overlay_buttons=[]
+#shop_overlay_rect=pygame.Rect(300,300,screen.get_width()/2,screen.get_height()/2)
 
 menus.append(mainMenu)
 menus.append(unitsInventoryMenu)
 menus.append(menu1)
-""" menus.append(end_turn_button) """
+#menus.append(end_turn_button)
 menus.append(skirmish_menu)
 menus.append(options_menu)
 
@@ -337,13 +338,9 @@ while running:
 
                 #draw rettangolone dell'overlay
 
-                pygame.draw.rect(overlay_menu_box_layer,(117,113,97),shop_overlay_rect)
-                pygame.draw.rect(overlay_menu_box_layer,(68,36,52),shop_overlay_rect,3)
-                #draw titolo dell'overlay
-                text=font1.render('Buy equipment', True, (29,12,28))
-                text=pygame.transform.scale(text, (text.get_width()/2, text.get_height()/2 ))
-                overlay_menu_box_layer.blit(text,(shop_overlay_rect.x+6,shop_overlay_rect.y+6))
-                for button in shop_overlay_buttons:
+
+                shop_overlay_menu.draw(overlay_menu_box_layer)
+                for button in shop_overlay_menu.buttons:
                     button.draw(overlay_menu_buttons_layer)
                     button.input()
 
