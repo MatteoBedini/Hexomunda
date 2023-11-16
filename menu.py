@@ -158,16 +158,17 @@ class Menu:
 
 
                 case 'skirmish':  #skirmish menu
+                    
                     distance_between_buttons=(self.height/100)*15
-                    self.buttons.append(button.Button(self.x+60,self.y+distance_between_buttons,40,40,'skirmish','10',None))    #10 punti
+                    self.buttons.append(button.Button(self.x+60,self.y+distance_between_buttons,40,40,'skirmish','10',None,'Small'))    #10 punti
                     distance_between_buttons+=(self.height/100)*15
-                    self.buttons.append(button.Button(self.x+60,self.y+distance_between_buttons,40,40,'skirmish','15',None))    #15 punti
+                    self.buttons.append(button.Button(self.x+60,self.y+distance_between_buttons,40,40,'skirmish','15',None,'Small'))    #15 punti
                     distance_between_buttons+=(self.height/100)*15
-                    self.buttons.append(button.Button(self.x+60,self.y+distance_between_buttons,40,40,'skirmish','20',None))    #20 punti
+                    self.buttons.append(button.Button(self.x+60,self.y+distance_between_buttons,40,40,'skirmish','20',None,'Small'))    #20 punti
                     distance_between_buttons+=(self.height/100)*15
-                    self.buttons.append(button.Button(self.x+60,self.y+distance_between_buttons,40,40,'skirmish','25',None))    #25 punti
+                    self.buttons.append(button.Button(self.x+60,self.y+distance_between_buttons,40,40,'skirmish','25',None,'Small'))    #25 punti
                     distance_between_buttons+=(self.height/100)*15
-                    self.buttons.append(button.Button(self.x+60,self.y+distance_between_buttons,40,40,'skirmish','60',None))    #30 punti
+                    self.buttons.append(button.Button(self.x+60,self.y+distance_between_buttons,40,40,'skirmish','60',None,'Small'))    #30 punti
                     
                     
 
@@ -204,7 +205,8 @@ class Menu:
                                     Main.shop_overlay_menu.height/14,
                                     'unitsInventoryMenu_buy',
                                     f'{equip}',
-                                    relatedObject)
+                                    relatedObject,
+                                    )
 
                                 Main.shop_overlay_menu.buttons.append(equip_button)
                                 increment+=60

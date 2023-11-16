@@ -3,7 +3,7 @@ import Main
 import unitt
 import equipment
 class Button:
-    def __init__(self,x,y,width,height,type,description,relatedObject):
+    def __init__(self,x,y,width,height,type,description,relatedObject,size='Normal'):
 
         self.x=x
         self.y=y
@@ -17,19 +17,31 @@ class Button:
         self.description=description
         self.counter=0
 
+        self.size=size
         self.relatedObject=relatedObject
         self.fakeboy=None
-
-        # self.img=[middle,up,down,left,right,up_dx,down_dx,up_sx,down_sx]
-        self.img_bg=[pygame.image.load('./media/layouts_and_menus/layout_try_middle.png'),
-                  pygame.image.load('./media/layouts_and_menus/layout_try_up.png'),
-                  pygame.image.load('./media/layouts_and_menus/layout_try_down.png'),
-                  pygame.image.load('./media/layouts_and_menus/layout_try_left.png'),
-                  pygame.image.load('./media/layouts_and_menus/layout_try_right.png'),
-                  pygame.image.load('./media/layouts_and_menus/layout_try_up_dx_empty.png'),
-                  pygame.image.load('./media/layouts_and_menus/layout_try_down_dx_empty.png'),
-                  pygame.image.load('./media/layouts_and_menus/layout_try_up_sx_empty.png'),
-                  pygame.image.load('./media/layouts_and_menus/layout_try_down_sx_empty.png')] 
+        if self.size=='Small':
+            self.img_bg=[pygame.image.load('./media/layouts_and_menus/layout_try_middle.png'),
+                    pygame.image.load('./media/layouts_and_menus/layout_try_up.png'),
+                    pygame.image.load('./media/layouts_and_menus/layout_try_down.png'),
+                    pygame.image.load('./media/layouts_and_menus/layout_try_left.png'),
+                    pygame.image.load('./media/layouts_and_menus/layout_try_right.png'),
+                    pygame.image.load('./media/layouts_and_menus/layout_try_up_dx_empty_round.png'),
+                    pygame.image.load('./media/layouts_and_menus/layout_try_down_dx_empty_round.png'),
+                    pygame.image.load('./media/layouts_and_menus/layout_try_up_sx_empty_round.png'),
+                    pygame.image.load('./media/layouts_and_menus/layout_try_down_sx_empty_round.png')]
+        else:
+            # self.img=[middle,up,down,left,right,up_dx,down_dx,up_sx,down_sx]
+            self.img_bg=[pygame.image.load('./media/layouts_and_menus/layout_try_middle.png'),
+                    pygame.image.load('./media/layouts_and_menus/layout_try_up.png'),
+                    pygame.image.load('./media/layouts_and_menus/layout_try_down.png'),
+                    pygame.image.load('./media/layouts_and_menus/layout_try_left.png'),
+                    pygame.image.load('./media/layouts_and_menus/layout_try_right.png'),
+                    pygame.image.load('./media/layouts_and_menus/layout_try_up_dx_empty.png'),
+                    pygame.image.load('./media/layouts_and_menus/layout_try_down_dx_empty.png'),
+                    pygame.image.load('./media/layouts_and_menus/layout_try_up_sx_empty.png'),
+                    pygame.image.load('./media/layouts_and_menus/layout_try_down_sx_empty.png')] 
+        
         
         
 
@@ -47,23 +59,47 @@ class Button:
         repetitions_height=self.rect.height//img_height
         repetitions_width=self.rect.width//img_width
         
-        #left, middle and right
-        for i in range(repetitions_height):
-            screen.blit(self.img_bg[3],(self.x,(i*img_height)+self.y))
-            screen.blit(self.img_bg[4],(self.x+self.rect.width-img_width,(i*img_height)+self.y))
-            for j in range(1,repetitions_width,-1):
-                screen.blit(self.img_bg[0],(self.x+(j*img_width),self.y+(i*img_height)))
+        if self.size is not 'Small':
+            #left, middle and right
+            for i in range(repetitions_height):
+                screen.blit(self.img_bg[3],(self.x,(i*img_height)+self.y))
+                screen.blit(self.img_bg[4],(self.x+self.rect.width-img_width,(i*img_height)+self.y))
+                for j in range(1,repetitions_width,-1):
+                    screen.blit(self.img_bg[0],(self.x+(j*img_width),self.y+(i*img_height)))
 
-        #up and down
-        for i in range(repetitions_width):
-            screen.blit(self.img_bg[1],(self.x+(i*img_width),self.y))
-            screen.blit(self.img_bg[2],(self.x+(i*img_width),self.y+self.rect.height-img_height))
+            #up and down
+            
+            for i in range(repetitions_width):
+                screen.blit(self.img_bg[1],(self.x+(i*img_width),self.y))
+                screen.blit(self.img_bg[2],(self.x+(i*img_width),self.y+self.rect.height-img_height))
 
-        #corners
-        screen.blit(self.img_bg[7],(self.x,self.y))
-        screen.blit(self.img_bg[5],(self.x+self.rect.width-img_width,self.y))
-        screen.blit(self.img_bg[8],(self.x,self.y+self.rect.height-img_height))
-        screen.blit(self.img_bg[6],(self.x+self.rect.width-img_width,self.y+self.rect.height-img_height))
+
+            #corners
+            screen.blit(self.img_bg[7],(self.x,self.y))
+            screen.blit(self.img_bg[5],(self.x+self.rect.width-img_width,self.y))
+            screen.blit(self.img_bg[8],(self.x,self.y+self.rect.height-img_height))
+            screen.blit(self.img_bg[6],(self.x+self.rect.width-img_width,self.y+self.rect.height-img_height))
+        
+        else:
+            #left, middle and right
+            for i in range(1,repetitions_height,-1):
+                screen.blit(self.img_bg[3],(self.x,(i*img_height)+self.y))
+                screen.blit(self.img_bg[4],(self.x+self.rect.width-img_width,(i*img_height)+self.y))
+                for j in range(1,repetitions_width,-1):
+                    screen.blit(self.img_bg[0],(self.x+(j*img_width),self.y+(i*img_height)))
+
+            #up and down
+            
+            for i in range(1,repetitions_width-1):
+                screen.blit(self.img_bg[1],(self.x+(i*img_width),self.y))
+                screen.blit(self.img_bg[2],(self.x+(i*img_width),self.y+self.rect.height-img_height))
+
+
+            #corners
+            screen.blit(self.img_bg[7],(self.x,self.y))
+            screen.blit(self.img_bg[5],(self.x+self.rect.width-img_width,self.y))
+            screen.blit(self.img_bg[8],(self.x,self.y+self.rect.height-img_height))
+            screen.blit(self.img_bg[6],(self.x+self.rect.width-img_width,self.y+self.rect.height-img_height))
 
     def draw(self,screen):
         a=self.x 
@@ -121,6 +157,7 @@ class Button:
 
             #skirmish prepare menu
             case 'skirmish':
+                 
                 
                 match self.description:
                     case "10":
@@ -168,18 +205,18 @@ class Button:
                 if self.description=='next':
                         self.img=Main.font1.render('Next', True, (210,125,44))
                         self.img_shadow=Main.font1.render('Next', True, (68,36,52))
-                        self.img_shadow=pygame.transform.scale(self.img_shadow, (self.width-20, self.height-4))
-                        self.img=pygame.transform.scale(self.img, (self.width-20, self.height-4))
-                        screen.blit(self.img_shadow,(a+11,b+5))
-                        screen.blit(self.img,(a+11,b+4))
+                        self.img_shadow=pygame.transform.scale(self.img_shadow, (self.width-20, self.height-10))
+                        self.img=pygame.transform.scale(self.img, (self.width-20, self.height-10))
+                        screen.blit(self.img_shadow,(a+11,b+8))
+                        screen.blit(self.img,(a+11,b+7))
 
                 elif self.description=='add':
                         self.img=Main.font1.render('Add', True, (210,125,44))
                         self.img_shadow=Main.font1.render('Add', True, (68,36,52))
-                        self.img_shadow=pygame.transform.scale(self.img_shadow, (self.width-16, self.height-6))
-                        self.img=pygame.transform.scale(self.img, (self.width-16, self.height-6))
-                        screen.blit(self.img_shadow,(a+8,b+5))
-                        screen.blit(self.img,(a+8,b+4))
+                        self.img_shadow=pygame.transform.scale(self.img_shadow, (self.width-16, self.height-10))
+                        self.img=pygame.transform.scale(self.img, (self.width-16, self.height-10))
+                        screen.blit(self.img_shadow,(a+8,b+7))
+                        screen.blit(self.img,(a+8,b+6))
 
                         text=Main.font1.render(f'{self.counter}', True, (210,125,44))
                         text_shadow=Main.font1.render(f'{self.counter}', True, (68,36,52))
@@ -191,10 +228,10 @@ class Button:
                 elif self.description=='buy':
                         self.img=Main.font1.render('Buy', True, (210,125,44))
                         self.img_shadow=Main.font1.render('Buy', True, (68,36,52))
-                        self.img_shadow=pygame.transform.scale(self.img_shadow, (self.width-16, self.height-16))
-                        self.img=pygame.transform.scale(self.img, (self.width-16, self.height-16))
-                        screen.blit(self.img_shadow,(a+8,b+9))
-                        screen.blit(self.img,(a+8,b+8))
+                        self.img_shadow=pygame.transform.scale(self.img_shadow, (self.width-16, self.height-14))
+                        self.img=pygame.transform.scale(self.img, (self.width-16, self.height-14))
+                        screen.blit(self.img_shadow,(a+8,b+8))
+                        screen.blit(self.img,(a+8,b+7))
 
                 for unit in Main.units_type_INVENTORY:
                     if unit.nome==self.description:
@@ -228,9 +265,9 @@ class Button:
 
                                 text1=Main.font1.render(equip, True, (210,125,44))
 
-                                text1=pygame.transform.scale(text1, (self.rect.width - 20, self.rect.height- 20))
+                                text1=pygame.transform.scale(text1, (self.rect.width - 20, self.rect.height- 28))
 
-                                screen.blit(text1,(self.x+10,self.y+10))
+                                screen.blit(text1,(self.x+10,self.y+14))
                                 if equipgroups[equip][6]!=None:
 
                                     self.img =pygame.transform.scale(equipgroups[equip][6],(128,128))
@@ -320,6 +357,7 @@ class Button:
 
 
                             case 'skirmish':
+                                
                                 for player in Main.players:
                                     match self.description:
                                         case "10":
@@ -448,12 +486,53 @@ class Button:
 
 
 
-    def mouseCollisionDraw(self,screen):
+    """ def mouseCollisionDraw(self,screen):
          if self.checkMousecollision()==self:
-            pygame.draw.line(screen, (68,36,52), (self.x, self.y), (self.x, self.y + self.height-1), 2)  # Lato sinistro 
-            pygame.draw.line(screen, (210,125,44), (self.x + self.width-2, self.y), (self.x + self.width-2, self.y + self.height-1), 2)  # Lato destro
-            pygame.draw.line(screen, (210,125,44), (self.x, self.y + self.height-2), (self.x + self.width-1, self.y + self.height-2), 2)  # Lato inferiore
-            pygame.draw.line(screen, (68,36,52), (self.x, self.y), (self.x + self.width-1, self.y), 2)  # Lato superiore
+            if self.size == 'Small':
+                for img in self.img_bg:
+                    pixel_array=pygame.surfarray.array3d(img)
+                    color_to_replace=(210,125,44)
+                    color_to_replace2=(68,36,52)
+                    locked_pixels=[]
+                    # Iterate over pixels
+                    for y in range(pixel_array.shape[0]):
+                        for x in range(pixel_array.shape[1]):
+                            pixel = pixel_array[y, x]
+
+                            # Check if the pixel matches color_to_replace2
+                            if (pixel == color_to_replace2).all():
+                                locked_pixels.append((x, y))  # Store the position of the pixel
+
+                            # Check if the pixel matches color_to_replace
+                            elif (pixel == color_to_replace).all():
+                                pixel_array[y, x] = color_to_replace2
+
+                    # Modify the locked pixels to color_to_replace
+                    for x, y in locked_pixels:
+                        pixel_array[y, x] = color_to_replace
+
+            else:
+                pygame.draw.line(screen, (68,36,52), (self.x, self.y), (self.x, self.y + self.height-1), 2)  # Lato sinistro 
+                pygame.draw.line(screen, (210,125,44), (self.x + self.width-2, self.y), (self.x + self.width-2, self.y + self.height-1), 2)  # Lato destro
+                pygame.draw.line(screen, (210,125,44), (self.x, self.y + self.height-2), (self.x + self.width-1, self.y + self.height-2), 2)  # Lato inferiore
+                pygame.draw.line(screen, (68,36,52), (self.x, self.y), (self.x + self.width-1, self.y), 2)  # Lato superiore """
+    def mouseCollisionDraw(self, screen):
+        if self.checkMousecollision() == self:
+            if self.size == 'Small':
+                text=Main.font1.render(self.description, True, (68, 36, 52))
+                
+                
+                text=pygame.transform.scale(text, (self.width-16, self.height-16))
+                screen.blit(text,(self.x+8,self.y+8))
+
+            else:
+                # Draw lines for the larger size
+                pygame.draw.line(screen, (68, 36, 52), (self.x, self.y), (self.x, self.y + self.height - 1), 2)  # Lato sinistro 
+                pygame.draw.line(screen, (210, 125, 44), (self.x + self.width - 2, self.y), (self.x + self.width - 2, self.y + self.height - 1), 2)  # Lato destro
+                pygame.draw.line(screen, (210, 125, 44), (self.x, self.y + self.height - 2), (self.x + self.width - 1, self.y + self.height - 2), 2)  # Lato inferiore
+                pygame.draw.line(screen, (68, 36, 52), (self.x, self.y), (self.x + self.width - 1, self.y), 2)  # Lato superiore
+
+            
             
 
     def checkMousecollision(self):
