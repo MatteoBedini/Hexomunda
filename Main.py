@@ -44,7 +44,7 @@ overlay_menu_buttons_layer = pygame.Surface((width, height), pygame.SRCALPHA)  #
 layout_layer = pygame.Surface((width, height), pygame.SRCALPHA)  #z-index=9
 
 
-
+zoom=1
 
 
 resizable_layer_x=0
@@ -125,21 +125,24 @@ controller = Control()
 cells_img = [pygame.image.load("./media/cell1.png"), pygame.image.load("./media/cell2.png")]
 # creo la griglia
 hex_cells = []
-for row in range(ROW_COUNT):
-    for col in range(COL_COUNT):
+def create_grid():
+    for row in range(ROW_COUNT):
+        for col in range(COL_COUNT):
 
-        x = (
-            col * 1.5 * HEX_RADIUS + grid_x
-        )  # Aggiungo l'offset per centrare nello schermo
+            x = (
+                col * 1.5 * HEX_RADIUS + grid_x
+            )  # Aggiungo l'offset per centrare nello schermo
 
-        y = (
-            row * math.floor(math.sqrt(3)* HEX_RADIUS) + grid_y
-        )  # Aggiungo l'offset per centrare nello schermo
-        if col % 2 == 1:
-            y += math.floor(math.sqrt(3) / 2 * HEX_RADIUS)
+            y = (
+                row * math.floor(math.sqrt(3)* HEX_RADIUS) + grid_y
+            )  # Aggiungo l'offset per centrare nello schermo
+            if col % 2 == 1:
+                y += math.floor(math.sqrt(3) / 2 * HEX_RADIUS)
 
-        center = [x, y]
-        hex_cells.append(HexCell(row, col, center, HEX_RADIUS,cells_img[random.randint(0,len(cells_img)-1)]))
+            center = [x, y]
+            hex_cells.append(HexCell(row, col, center, HEX_RADIUS,cells_img[random.randint(0,len(cells_img)-1)]))
+
+create_grid()
 
 
 # creo le unità
@@ -441,7 +444,7 @@ while running:
 
                     elif event.type == pygame.KEYDOWN and event.key == pygame.K_TAB:
                         if controller.gameFase==1:
-                            controller.turnEnd()
+                            controller.gridAndUnitsZoom()
 
                     elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                         if controller.gameFase==1:

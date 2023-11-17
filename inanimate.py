@@ -12,6 +12,8 @@ class Inanimated:
         # posizione
         self.x = 0
         self.y = 0
+        self.col=0
+        self.row=0
 
         # immagine e centro immagine
         self.center = [0, 0]

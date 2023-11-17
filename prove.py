@@ -1,40 +1,46 @@
-import pygame
+#prova per animazioni
 
-# Inizializzazione di Pygame
+import pygame
+import sys
+import os
+
+# Inizializza Pygame
 pygame.init()
 
-# Impostazione delle dimensioni della finestra
-larghezza = 400
-altezza = 300
-finestra = pygame.display.set_mode((larghezza, altezza))
-pygame.display.set_caption('Rettangolo con lati colorati')
+# Imposta il display
+width, height = 800, 600
+screen = pygame.display.set_mode((width, height))
+pygame.display.set_caption("Idle Animation")
 
-# Posizione e dimensioni del rettangolo
-x = 50
-y = 50
-larghezza_rettangolo = 200
-altezza_rettangolo = 100
+# Carica le immagini
+image_folder = "path/to/your/image/folder"
+idle_images = [pygame.image.load(os.path.join(image_folder, f"idle_{i}.png")) for i in range(1, 11)]  # Supponendo 10 frame
 
-# Colori dei lati
-rosso = (255, 0, 0)
-verde = (0, 255, 0)
-blu = (0, 0, 255)
-giallo = (255, 255, 0)
+# Imposta le variabili
+clock = pygame.time.Clock()
+animation_speed = 0.2  # Regola questa variabile per cambiare la velocità dell'animazione
+current_frame = 0
+elapsed_time = 0
 
-running = True
-while running:
+# Ciclo principale del gioco
+while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            running = False
+            pygame.quit()
+            sys.exit()
 
-    finestra.fill((255, 255, 255))  # Sfondo bianco
+    # Calcola il tempo trascorso
+    elapsed_time += clock.get_rawtime()
+    clock.tick_busy_loop(60)  # Imposta una frequenza di clock
 
-    # Disegno dei lati del rettangolo con colori diversi
-    pygame.draw.line(finestra, blu, (x, y), (x, y + altezza_rettangolo), 3)  # Lato sinistro (blu)
-    pygame.draw.line(finestra, verde, (x + larghezza_rettangolo, y), (x + larghezza_rettangolo, y + altezza_rettangolo), 3)  # Lato destro (verde)
-    pygame.draw.line(finestra, giallo, (x, y), (x + larghezza_rettangolo, y), 3)  # Lato superiore (giallo)
-    pygame.draw.line(finestra, rosso, (x, y + altezza_rettangolo), (x + larghezza_rettangolo, y + altezza_rettangolo), 3)  # Lato inferiore (rosso)
+    # Aggiorna l'animazione in base al tempo trascorso
+    if elapsed_time >= animation_speed * 1000:  # Converti la velocità in millisecondi
+        current_frame = (current_frame + 1) % len(idle_images)
+        elapsed_time = 0
 
-    pygame.display.update()
+    # Disegna il frame corrente
+    screen.fill((255, 255, 255))  # Riempie lo sfondo di bianco
+    screen.blit(idle_images[current_frame], (width // 2 - idle_images[current_frame].get_width() // 2, height // 2 - idle_images[current_frame].get_height() // 2))
 
-pygame.quit()
+    # Aggiorna il display
+    pygame.display.flip()

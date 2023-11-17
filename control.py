@@ -302,47 +302,78 @@ class Control:
                     
 
             
-    """ def AdaptObjectsToScreenSize(self,resize_x,resize_y):
-        
+    def gridAndUnitsZoom(self):
+        if Main.zoom <2:
+            
+            Main.zoom+=1
+        else:
+            Main.zoom=1
+        Main.cell_layer=pygame.transform.scale(Main.cell_layer,(Main.cell_layer.get_width()*Main.zoom,Main.cell_layer.get_height()*Main.zoom))
+        Main.cell_layer2=pygame.transform.scale(Main.cell_layer2,(Main.cell_layer2.get_width()*Main.zoom,Main.cell_layer2.get_height()*Main.zoom))
+        Main.unit_layer=pygame.transform.scale(Main.unit_layer,(Main.unit_layer.get_width()*Main.zoom,Main.unit_layer.get_height()*Main.zoom))
         for player in Main.players:
-                for unit in player.units:
-                    unit.x+=resize_x
-                    unit.y+=resize_y
-                    if unit.middle!=None:
-                        unit.middle[0]+=resize_x
-                        unit.middle[1]+=resize_y
-                        unit.start_x+=resize_x
-                        unit.start_y+=resize_y
-                    unit.getCenter(unit.x,unit.y)
-                    unit.createMask()
-                    unit.getParentCell()
-
-        for cell in Main.hex_cells:
-            cell.center[0]+=resize_x
-            cell.center[1]+=resize_y
-            
-            cell.create_rect_mask()
-        
-        for inan in Main.inanimated_in_game:
-            inan.x+=resize_x
-            inan.y+=resize_y
-            inan.getCenter(inan.x,inan.y)
-            inan.createMask()
-            inan.getParentCell()
-
-        for men in Main.menus :
-            men.x+=resize_x
-            men.y+=resize_y
-
-            
-
-            for butto in men.buttons:
-                butto.x+=resize_x
-                butto.y+=resize_y """
+            for unit in player.units:
                 
+                unit.col=unit.parentcell.col
+                unit.row=unit.parentcell.row
 
-                #print(butto.x,butto.y)
+        for inan in Main.inanimated_in_game:
+            inan.col=inan.parentcell.col
+            inan.row=inan.parentcell.row
+        
+        Main.HEX_RADIUS*=Main.zoom
+        Main.hex_cells=[]
+        Main.create_grid()
 
+        for player in Main.players:
+            for unit in player.units:
+                
+                if unit.img[0] != None:
+                    unit.img[0]=pygame.transform.scale(unit.img[0],(unit.img[0].get_width()*Main.zoom,unit.img[0].get_height()*Main.zoom))
+
+                if unit.img[1] != None:
+                    unit.img[1]=pygame.transform.scale(unit.img[1],(unit.img[1].get_width()*Main.zoom,unit.img[1].get_height()*Main.zoom))
+
+                if unit.img[2] != None:
+                    unit.img[2]=pygame.transform.scale(unit.img[2],(unit.img[2].get_width()*Main.zoom,unit.img[2].get_height()*Main.zoom))
+
+                if unit.img[3] != None:
+                    unit.img[3]=pygame.transform.scale(unit.img[3],(unit.img[3].get_width()*Main.zoom,unit.img[3].get_height()*Main.zoom))
+
+                if unit.orig_img[0] != None:
+                    unit.orig_img[0]=pygame.transform.scale(unit.orig_img[0],(unit.orig_img[0].get_width()*Main.zoom,unit.orig_img[0].get_height()*Main.zoom))
+                
+                if unit.orig_img[1] != None:
+                    unit.orig_img[1]=pygame.transform.scale(unit.orig_img[1],(unit.orig_img[1].get_width()*Main.zoom,unit.orig_img[1].get_height()*Main.zoom))
+                
+                if unit.orig_img[2] != None:
+                    unit.orig_img[2]=pygame.transform.scale(unit.orig_img[2],(unit.orig_img[2].get_width()*Main.zoom,unit.orig_img[2].get_height()*Main.zoom))
+                
+                if unit.orig_img[3] != None:
+                    unit.orig_img[3]=pygame.transform.scale(unit.orig_img[3],(unit.orig_img[3].get_width()*Main.zoom,unit.orig_img[3].get_height()*Main.zoom))
+
+                
+                for cell in Main.hex_cells:
+                    if cell.col==unit.col and cell.row==unit.row:
+                        unit.x=cell.center[0]
+                        unit.y=cell.center[1]
+                        unit.getCenter(unit.x,unit.y)
+                        unit.createMask()
+                        unit.getParentCell()
+                        cell.occupied=True
+
+        for inan in Main.inanimated_in_game:
+            if inan.img!=None:
+                inan.img=pygame.transform.scale(inan.img,(inan.img.get_width()*Main.zoom,inan.img.get_height()*Main.zoom))
+            for cell in Main.hex_cells:
+                if cell.col==inan.col and cell.row==inan.row:
+                    inan.x=cell.center[0]
+                    inan.y=cell.center[1]
+                    inan.getCenter(inan.x, inan.y)
+                    inan.createMask()
+                    inan.getParentCell()
+                    cell.occupied=True
+                
                 
             
         

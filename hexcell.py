@@ -20,7 +20,8 @@ class HexCell:
         self.create_rect_mask()
         self.dts = 999  # DISTANCE TO SELECTED
         self.occupied = False
-        self.img=img
+        self.img=pygame.transform.scale(img,(self.radius*2,self.radius*2))
+        
 
     # trovo e creo i vertici dell'esagono
     def vertices_create(self):
@@ -100,7 +101,7 @@ class HexCell:
             else:
                 for cell in list_of_measured_cells:
                     if(
-                        Main.dist(self.center[0], cell.center[0], self.center[1], cell.center[1])<= 100
+                        Main.dist(self.center[0], cell.center[0], self.center[1], cell.center[1])<= 100*Main.zoom
                         and self.dts >=x + 1
                     ):
                         self.dts = x + 1

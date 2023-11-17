@@ -15,6 +15,8 @@ class Unit:
         # posizione
         self.x = 0
         self.y = 0
+        self.col=0
+        self.row=0
 
         # immagine e centro immagine
         self.center = [0, 0]
@@ -155,10 +157,13 @@ class Unit:
                             ),
                         )
         # disegno l'omino
-        # big_img=pygame.transform.scale(self.img, (64, 64))
+        
+        
         for i in self.img:
+            
             if i != None:
-                # i=pygame.transform.scale(i, (132, 132))
+                
+                #i=pygame.transform.scale(i, (i.get_width()*Main.zoom, i.get_height()*Main.zoom))
                 screen.blit(
                     i,
                     (
@@ -288,12 +293,6 @@ class Unit:
         # print("unselected")
         for cell in Main.hex_cells:
             cell.dts = 999
-
-    """ def recalculateDts(self):
-        for cell in Main.hex_cells:
-            while cell.dts == 999:
-                for cell in Main.hex_cells:
-                    cell.dtsf() """
 
     def recalculateDts(self):
         for cell in Main.hex_cells:
