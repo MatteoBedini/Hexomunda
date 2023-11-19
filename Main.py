@@ -33,15 +33,17 @@ height = 1080
 layers=[]
 
 screen = pygame.display.set_mode((width, height),pygame.FULLSCREEN)  # z-index=0 #sopra non ci va niente,solo lo sfondo
-cell_layer = pygame.Surface((width*2, height*2), pygame.SRCALPHA)  # z-index=1
-cell_layer2=pygame.Surface((width*2, height*2), pygame.SRCALPHA)  # z-index=2
-unit_layer = pygame.Surface((width*2, height*2), pygame.SRCALPHA)  # z-index=3
+cell_layer = pygame.Surface((width, height), pygame.SRCALPHA)  # z-index=1
+cell_layer2=pygame.Surface((width, height), pygame.SRCALPHA)  # z-index=2
+unit_layer = pygame.Surface((width, height), pygame.SRCALPHA)  # z-index=3
 overlays_layer = pygame.Surface((width, height), pygame.SRCALPHA)  # z-index=4
 menu_box_layer = pygame.Surface((width, height), pygame.SRCALPHA)  #z-index=5
 menu_buttons_layer = pygame.Surface((width, height), pygame.SRCALPHA)  #z-index=6
 overlay_menu_box_layer = pygame.Surface((width, height), pygame.SRCALPHA)  #z-index=7
 overlay_menu_buttons_layer = pygame.Surface((width, height), pygame.SRCALPHA)  #z-index=8
 layout_layer = pygame.Surface((width, height), pygame.SRCALPHA)  #z-index=9
+
+
 
 
 zoom=1

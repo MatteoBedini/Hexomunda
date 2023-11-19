@@ -174,19 +174,20 @@ class Unit:
 
         # se siamo nella room di gioco degli esagoni faccio vedere la barra della vita
         if Main.room.roomNumber == 2:
-            self.drawHpBar(screen, 40, 7, self.center[0] + 12, self.center[1])
+            self.drawHpBar(screen, 40, 7*Main.zoom, self.center[0], self.center[1])
 
     # sottometodo:disegno la barra della vita
     def drawHpBar(self, screen, max, height, x, y):
         hpPercentage = self.hp * 100 / self.maxhp
-        rectMaxLength = max
+        rectMaxLength = max*Main.zoom
         rectWidth = rectMaxLength * hpPercentage / 100
         if self.ai == True:
             pygame.draw.rect(
                 screen,
                 (242, 39, 39),
                 (
-                    x - Main.resizable_layer_x,
+                    x - Main.resizable_layer_x  - rectMaxLength/2 + self.img[1].get_width()/2,
+                    
                     y + 4 - Main.resizable_layer_y,
                     rectWidth,
                     height,
@@ -198,7 +199,7 @@ class Unit:
                 screen,
                 (34, 32, 52),
                 (
-                    x - Main.resizable_layer_x,
+                    x - Main.resizable_layer_x  - rectMaxLength/2 + self.img[1].get_width()/2,
                     y + 4 - Main.resizable_layer_y,
                     rectMaxLength,
                     height,
@@ -211,7 +212,7 @@ class Unit:
                 screen,
                 (3, 166, 74),
                 (
-                    x - Main.resizable_layer_x,
+                    x - Main.resizable_layer_x - rectMaxLength/2 + self.img[1].get_width()/2,
                     y + 4 - Main.resizable_layer_y,
                     rectWidth,
                     height,
@@ -223,7 +224,7 @@ class Unit:
                 screen,
                 (34, 32, 52),
                 (
-                    x - Main.resizable_layer_x,
+                    x - Main.resizable_layer_x  - rectMaxLength/2 + self.img[1].get_width()/2,
                     y + 4 - Main.resizable_layer_y,
                     rectMaxLength,
                     height,
@@ -238,7 +239,7 @@ class Unit:
         screen.blit(
             text,
             (
-                x + rectMaxLength / 4 - Main.resizable_layer_x,
+                x - Main.resizable_layer_x - rectMaxLength / 4 + self.img[1].get_width()/2,
                 y - 6 - Main.resizable_layer_y,
             ),
         )

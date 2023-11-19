@@ -102,6 +102,13 @@ class Control:
 
     #draw del suddetto overlay
     def drawObjectOverlay(self,screen):
+        
+        if Main.zoom <2:
+            zoomey=2
+        else:
+            
+            zoomey=1
+
         if self.overlayedUnit!=None:
             inventory=pygame.image.load("media/ObjectInfo_inventory.png")
             x=20
@@ -112,7 +119,7 @@ class Control:
             for i in self.overlayedUnit.img:
                 if i!=None:
                     equipment_image=i
-                    equipment_image=pygame.transform.scale(equipment_image,(i.get_width()*2,i.get_height()*2))
+                    equipment_image=pygame.transform.scale(equipment_image,(i.get_width()*zoomey,i.get_height()*zoomey))
                     screen.blit(equipment_image,(x+self.overlayedUnit_overlay.get_width()/100*50-equipment_image.get_width()/2,y+self.overlayedUnit_overlay.get_height()/100*50-equipment_image.get_height()/2))
                     
             screen.blit(inventory,(20,Main.screen.get_height()-inventory.get_height()-20-self.overlayedUnit_overlay.get_height()))
@@ -122,25 +129,25 @@ class Control:
             #head
             if self.overlayedUnit.img[2]!=None:
                 p=self.overlayedUnit.img[2]
-                p=pygame.transform.scale(p,(p.get_width()*2,p.get_height()*2))
+                p=pygame.transform.scale(p,(p.get_width()*zoomey,p.get_height()*zoomey))
                 screen.blit(p, (inventory_x+inventory.get_width()/100*50-p.get_width()/2,inventory_y+inventory.get_height()/100*20-p.get_height()/2))
 
             #weapon
             if self.overlayedUnit.img[0]!=None:
                 p=self.overlayedUnit.img[0]
-                p=pygame.transform.scale(p,(p.get_width()*2,p.get_height()*2))
+                p=pygame.transform.scale(p,(p.get_width()*zoomey,p.get_height()*zoomey))
                 screen.blit(p, (inventory_x+inventory.get_width()/100*80-p.get_width()/2, inventory_y+inventory.get_height()/100*50-p.get_height()/2))
 
             #shield
             if self.overlayedUnit.img[3]!=None:
                 p=self.overlayedUnit.img[3]
-                p=pygame.transform.scale(p,(p.get_width()*2,p.get_height()*2))
+                p=pygame.transform.scale(p,(p.get_width()*zoomey,p.get_height()*zoomey))
                 screen.blit(p, (inventory_x+inventory.get_width()/100*20-p.get_width()/2, inventory_y+inventory.get_height()/100*50-p.get_height()/2))
 
             #body
             if self.overlayedUnit.img[1]!=None:
                 p=self.overlayedUnit.img[1]
-                p=pygame.transform.scale(p,(p.get_width()*2,p.get_height()*2))
+                p=pygame.transform.scale(p,(p.get_width()*zoomey,p.get_height()*zoomey))
                 screen.blit(p, (inventory_x+inventory.get_width()/100*50-p.get_width()/2, inventory_y+inventory.get_height()/100*50-p.get_height()/2))
 
             hp=Main.font.render('Hp:', True, (210,125,44))
@@ -303,6 +310,7 @@ class Control:
 
             
     def gridAndUnitsZoom(self):
+
         zoomey=0
         if Main.zoom <2:
             Main.speed=20
@@ -310,8 +318,8 @@ class Control:
             zoomey=2
         else:
             Main.speed=10
-            Main.zoom=1
-            zoomey=0.5
+            Main.zoom=1  #THIS IS FOR DTS
+            zoomey=0.5   #THIS IS FOR CHANGING IMAGES SIZE
         
 
         
@@ -328,7 +336,7 @@ class Control:
             inan.col=inan.parentcell.col
             inan.row=inan.parentcell.row
         
-        Main.HEX_RADIUS*=Main.zoom
+        Main.HEX_RADIUS*=zoomey
         Main.hex_cells=[]
         Main.create_grid()
 
