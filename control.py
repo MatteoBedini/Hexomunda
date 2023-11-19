@@ -303,14 +303,21 @@ class Control:
 
             
     def gridAndUnitsZoom(self):
+        zoomey=0
         if Main.zoom <2:
-            
-            Main.zoom+=1
+            Main.speed=20
+            Main.zoom=2
+            zoomey=2
         else:
+            Main.speed=10
             Main.zoom=1
-        Main.cell_layer=pygame.transform.scale(Main.cell_layer,(Main.cell_layer.get_width()*Main.zoom,Main.cell_layer.get_height()*Main.zoom))
-        Main.cell_layer2=pygame.transform.scale(Main.cell_layer2,(Main.cell_layer2.get_width()*Main.zoom,Main.cell_layer2.get_height()*Main.zoom))
-        Main.unit_layer=pygame.transform.scale(Main.unit_layer,(Main.unit_layer.get_width()*Main.zoom,Main.unit_layer.get_height()*Main.zoom))
+            zoomey=0.5
+        
+
+        
+        Main.cell_layer=pygame.transform.scale(Main.cell_layer,(Main.cell_layer.get_width()*zoomey,Main.cell_layer.get_height()*zoomey))
+        Main.cell_layer2=pygame.transform.scale(Main.cell_layer2,(Main.cell_layer2.get_width()*zoomey,Main.cell_layer2.get_height()*zoomey))
+        Main.unit_layer=pygame.transform.scale(Main.unit_layer,(Main.unit_layer.get_width()*zoomey,Main.unit_layer.get_height()*zoomey))
         for player in Main.players:
             for unit in player.units:
                 
@@ -329,28 +336,28 @@ class Control:
             for unit in player.units:
                 
                 if unit.img[0] != None:
-                    unit.img[0]=pygame.transform.scale(unit.img[0],(unit.img[0].get_width()*Main.zoom,unit.img[0].get_height()*Main.zoom))
+                    unit.img[0]=pygame.transform.scale(unit.img[0],(unit.img[0].get_width()*zoomey,unit.img[0].get_height()*zoomey))
 
                 if unit.img[1] != None:
-                    unit.img[1]=pygame.transform.scale(unit.img[1],(unit.img[1].get_width()*Main.zoom,unit.img[1].get_height()*Main.zoom))
+                    unit.img[1]=pygame.transform.scale(unit.img[1],(unit.img[1].get_width()*zoomey,unit.img[1].get_height()*zoomey))
 
                 if unit.img[2] != None:
-                    unit.img[2]=pygame.transform.scale(unit.img[2],(unit.img[2].get_width()*Main.zoom,unit.img[2].get_height()*Main.zoom))
+                    unit.img[2]=pygame.transform.scale(unit.img[2],(unit.img[2].get_width()*zoomey,unit.img[2].get_height()*zoomey))
 
                 if unit.img[3] != None:
-                    unit.img[3]=pygame.transform.scale(unit.img[3],(unit.img[3].get_width()*Main.zoom,unit.img[3].get_height()*Main.zoom))
+                    unit.img[3]=pygame.transform.scale(unit.img[3],(unit.img[3].get_width()*zoomey,unit.img[3].get_height()*zoomey))
 
                 if unit.orig_img[0] != None:
-                    unit.orig_img[0]=pygame.transform.scale(unit.orig_img[0],(unit.orig_img[0].get_width()*Main.zoom,unit.orig_img[0].get_height()*Main.zoom))
+                    unit.orig_img[0]=pygame.transform.scale(unit.orig_img[0],(unit.orig_img[0].get_width()*zoomey,unit.orig_img[0].get_height()*zoomey))
                 
                 if unit.orig_img[1] != None:
-                    unit.orig_img[1]=pygame.transform.scale(unit.orig_img[1],(unit.orig_img[1].get_width()*Main.zoom,unit.orig_img[1].get_height()*Main.zoom))
+                    unit.orig_img[1]=pygame.transform.scale(unit.orig_img[1],(unit.orig_img[1].get_width()*zoomey,unit.orig_img[1].get_height()*zoomey))
                 
                 if unit.orig_img[2] != None:
-                    unit.orig_img[2]=pygame.transform.scale(unit.orig_img[2],(unit.orig_img[2].get_width()*Main.zoom,unit.orig_img[2].get_height()*Main.zoom))
+                    unit.orig_img[2]=pygame.transform.scale(unit.orig_img[2],(unit.orig_img[2].get_width()*zoomey,unit.orig_img[2].get_height()*zoomey))
                 
                 if unit.orig_img[3] != None:
-                    unit.orig_img[3]=pygame.transform.scale(unit.orig_img[3],(unit.orig_img[3].get_width()*Main.zoom,unit.orig_img[3].get_height()*Main.zoom))
+                    unit.orig_img[3]=pygame.transform.scale(unit.orig_img[3],(unit.orig_img[3].get_width()*zoomey,unit.orig_img[3].get_height()*zoomey))
 
                 
                 for cell in Main.hex_cells:
@@ -364,7 +371,7 @@ class Control:
 
         for inan in Main.inanimated_in_game:
             if inan.img!=None:
-                inan.img=pygame.transform.scale(inan.img,(inan.img.get_width()*Main.zoom,inan.img.get_height()*Main.zoom))
+                inan.img=pygame.transform.scale(inan.img,(inan.img.get_width()*zoomey,inan.img.get_height()*zoomey))
             for cell in Main.hex_cells:
                 if cell.col==inan.col and cell.row==inan.row:
                     inan.x=cell.center[0]
