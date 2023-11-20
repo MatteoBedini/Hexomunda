@@ -110,7 +110,7 @@ class Unit:
                             screen,
                             (247, 247, 247),
                             pygame.Rect(
-                                dot[0] + self.center[0] - Main.resizable_layer_x,
+                                dot[0] + self.center[0],
                                 dot[1] + self.center[1],
                                 1,
                                 1,
@@ -120,7 +120,7 @@ class Unit:
                             screen,
                             (247, 247, 247),
                             pygame.Rect(
-                                dot[0] + self.center[0] + 1 - Main.resizable_layer_x,
+                                dot[0] + self.center[0] + 1,
                                 dot[1] + self.center[1],
                                 1,
                                 1,
@@ -130,7 +130,7 @@ class Unit:
                             screen,
                             (247, 247, 247),
                             pygame.Rect(
-                                dot[0] + self.center[0] - 1 - Main.resizable_layer_x,
+                                dot[0] + self.center[0] - 1,
                                 dot[1] + self.center[1],
                                 1,
                                 1,
@@ -140,7 +140,7 @@ class Unit:
                             screen,
                             (247, 247, 247),
                             pygame.Rect(
-                                dot[0] + self.center[0] - Main.resizable_layer_x,
+                                dot[0] + self.center[0],
                                 dot[1] + self.center[1] - 1,
                                 1,
                                 1,
@@ -150,7 +150,7 @@ class Unit:
                             screen,
                             (247, 247, 247),
                             pygame.Rect(
-                                dot[0] + self.center[0] - Main.resizable_layer_x,
+                                dot[0] + self.center[0],
                                 dot[1] + self.center[1] + 1,
                                 1,
                                 1,
@@ -167,7 +167,7 @@ class Unit:
                 screen.blit(
                     i,
                     (
-                        self.center[0] - Main.resizable_layer_x,
+                        self.center[0],
                         self.center[1],
                     ),
                 )
@@ -212,7 +212,7 @@ class Unit:
                 screen,
                 (3, 166, 74),
                 (
-                    x - Main.resizable_layer_x - rectMaxLength/2 + self.img[1].get_width()/2,
+                    x - rectMaxLength/2 + self.img[1].get_width()/2,
                     y + 4,
                     rectWidth,
                     height,
@@ -239,7 +239,7 @@ class Unit:
         screen.blit(
             text,
             (
-                x - Main.resizable_layer_x - rectMaxLength / 4 + self.img[1].get_width()/2,
+                x - rectMaxLength / 4 + self.img[1].get_width()/2,
                 y - 6,
             ),
         )

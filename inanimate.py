@@ -47,7 +47,7 @@ class Inanimated:
                         pygame.draw.rect(screen, (247, 247, 247), pygame.Rect(dot[0]+self.center[0], dot[1]+self.center[1]+1, 1, 1)) """
                 
         #disegno l'omino
-        screen.blit(self.img, (self.center[0]-Main.resizable_layer_x, self.center[1]-10-Main.resizable_layer_y))
+        screen.blit(self.img, (self.center[0], self.center[1]-10))
 
     def getParentCell(self):
         self.rectForParent = pygame.Rect((self.x - 5, self.y - 5), (10, 10))
