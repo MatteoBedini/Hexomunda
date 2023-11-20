@@ -20,6 +20,7 @@ pygame.init()
 
 
 clock = pygame.time.Clock()
+elapsed_time = 0
 
 
 # costanti varie
@@ -249,6 +250,11 @@ layout=Layout()
 running = True
 while running:
     DELTA=1/pygame.time.get_ticks()
+    # Calcola il tempo trascorso
+    elapsed_time += clock.get_rawtime()
+    
+
+
     screen.fill((16, 26, 38))
     cell_layer.fill((0, 0, 0, 0))  # pulisco gli schermi, i layers li faccio trasparenti
     cell_layer2.fill((0, 0, 0, 0))  

@@ -21,8 +21,11 @@ class Unit:
         # immagine e centro immagine
         self.center = [0, 0]
         self.img = [None, None, None, None]
+        self.orig_img = [None, None, None, None]  # template [rhand,body,head,lhand]
 
-        self.orig_img = [None, None, None, None]  # template [body,rhand,head,lhand]
+        self.animation = [None, None, None, None]
+        self.animated = False
+        
 
         self.flipChecker = False
         # self.getCenter(self.x, self.y)
@@ -98,6 +101,31 @@ class Unit:
         self.center[0] = x - ((self.img[1].get_width()) / 2)
         self.center[1] = y - ((self.img[1].get_height()) / 2)
 
+    def controlAnimation(self,img):
+        #img[-1]= elapsed time
+        #img[-2]= animation speed
+        #img[-3]= current frame
+        print (img)
+
+        #img[-4]= frame number
+        #img[0]= animation list
+        img[-1] += Main.clock.get_rawtime()  #images specific elapsed time
+        
+        if img[-1] >= img[-2]* 1000:  #animation speed
+            if img[-3] >= len(img[0]) - 1:
+                img[-3] = 0
+                
+            else:
+                img[-3] += 1
+                
+            img[-1] = 0
+
+        return img[0][img[-3]]
+
+       
+
+                    
+
     # disegno
     def draw(self, screen):
         mouse_pos = pygame.mouse.get_pos()
@@ -156,21 +184,46 @@ class Unit:
                                 1,
                             ),
                         )
-        # disegno l'omino
+
+        # UNIT DRAW
         
-        
-        for i in self.img:
-            
-            if i != None:
-                
-                #i=pygame.transform.scale(i, (i.get_width()*Main.zoom, i.get_height()*Main.zoom))
-                screen.blit(
-                    i,
-                    (
-                        self.center[0],
-                        self.center[1],
-                    ),
-                )
+        if self.animated==True:
+            for img_counter in range(0, len(self.animation)):
+                if self.animation[img_counter] != None:
+                    
+                    
+                    to_be_drawn=self.controlAnimation(self.animation[img_counter])
+                    
+                    screen.blit(
+                        to_be_drawn,
+                        (
+                            self.center[0],
+                            self.center[1],
+                        ),
+                    )
+                    
+                else:
+
+                    if self.img[img_counter] != None:
+                        
+                            
+                            screen.blit(
+                                self.img[img_counter],
+                                (
+                                    self.center[0],
+                                    self.center[1],
+                                ),
+                            )
+        else:
+            for i in self.img:
+                if i != None:
+                    screen.blit(
+                        i,
+                        (
+                            self.center[0],
+                            self.center[1],
+                        ),
+                    )
 
         # se siamo nella room di gioco degli esagoni faccio vedere la barra della vita
         if Main.room.roomNumber == 2:
@@ -258,6 +311,7 @@ class Unit:
 
     # creo la maschera per le collisioni
     def createMask(self):
+        
         self.rectMask = pygame.Rect(
             self.center[0],
             self.center[1],
@@ -691,6 +745,19 @@ class Unit:
                 return hex
 
     def flipImage(self):
+        if self.animation[0]!=None:
+            for i in range(len(self.animation[0][0])):
+                self.animation[0][0][i]=pygame.transform.flip(self.animation[0][0][i], True, False)
+        if self.animation[1]!=None:
+            for i in range(len(self.animation[1][0])):
+                self.animation[1][0][i]=pygame.transform.flip(self.animation[1][0][i], True, False)
+        if self.animation[2]!=None:
+            for i in range(len(self.animation[2][0])):
+                self.animation[2][0][i]=pygame.transform.flip(self.animation[2][0][i], True, False)
+        if self.animation[3]!=None:
+            for i in range(len(self.animation[3][0])):
+                self.animation[3][0][i]=pygame.transform.flip(self.animation[3][0][i], True, False)
+            
         if self.img[0] != None:
             self.img[0] = pygame.transform.flip(self.img[0], True, False)
 
@@ -706,8 +773,14 @@ class Unit:
     def applyRaceModifiers(self):
         # imposto le statistiche di base in base alla razza
         if self.race == "human":
+            self.animated=True
+            self.animation[1] = equipment.loadAnimation("./media/races/human/animations/",
+                                                  "human_base_body_0",4,animation_speed=0.3)
+
             self.img[1] = pygame.image.load("./media/races/human/human_base_body_0.png")
             self.orig_img[1] = self.img[1]
+            self.animation[2] = equipment.loadAnimation("./media/races/human/animations/",
+                                                  "human_base_head_0",4,animation_speed=0.3)
             self.img[2] = pygame.image.load("./media/races/human/human_base_head_0.png")
             self.orig_img[2] = self.img[2]
             self.hp += 2

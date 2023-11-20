@@ -348,6 +348,20 @@ class Control:
         for player in Main.players:
             for unit in player.units:
                 
+
+                if unit.animation[0]!=None:
+                    for i in range(len(unit.animation[0][0])):
+                        unit.animation[0][0][i]=pygame.transform.scale(unit.animation[0][0][i],(unit.animation[0][0][i].get_width()*zoomey,unit.animation[0][0][i].get_height()*zoomey))
+                if unit.animation[1]!=None:
+                    for i in range(len(unit.animation[1][0])):
+                        unit.animation[1][0][i]=pygame.transform.scale(unit.animation[1][0][i],(unit.animation[1][0][i].get_width()*zoomey,unit.animation[1][0][i].get_height()*zoomey))
+                if unit.animation[2]!=None:
+                    for i in range(len(unit.animation[2][0])):
+                        unit.animation[2][0][i]=pygame.transform.scale(unit.animation[2][0][i],(unit.animation[2][0][i].get_width()*zoomey,unit.animation[2][0][i].get_height()*zoomey))
+                if unit.animation[3]!=None:
+                    for i in range(len(unit.animation[3][0])):
+                        unit.animation[3][0][i]=pygame.transform.scale(unit.animation[3][0][i],(unit.animation[3][0][i].get_width()*zoomey,unit.animation[3][0][i].get_height()*zoomey))
+                    
                 if unit.img[0] != None:
                     unit.img[0]=pygame.transform.scale(unit.img[0],(unit.img[0].get_width()*zoomey,unit.img[0].get_height()*zoomey))
 
