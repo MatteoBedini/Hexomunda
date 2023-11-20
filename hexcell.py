@@ -107,19 +107,13 @@ class HexCell:
                         self.dts = x + 1
                         break
                 
-            
-                
-        
-
-    
-
     # illumino la cella se in range col selected
     def illuminateCell(self, screen):
         if (
             Main.controller.selectedd != None
             and self.dts <= Main.controller.selectedd.movepts
             and self.occupied==False
-            # and hexagon.controller.selectedd.movepts>0
+            and Main.controller.selectedd.movepts>0
         ):
             pygame.draw.polygon(screen, (255, 255, 0, 40), self.vertices)
 

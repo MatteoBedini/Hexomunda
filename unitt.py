@@ -517,7 +517,7 @@ class Unit:
             # print('movimento finito')
             Main.controller.actingUnit = None
             self.moved = False
-
+            
         if self.move_target != None:
             if Main.controller.actingUnit == None or Main.controller.actingUnit == self:
                 path = pygame.math.Vector2(0, 0)
@@ -779,10 +779,12 @@ class Unit:
 
             self.img[1] = pygame.image.load("./media/races/human/human_base_body_0.png")
             self.orig_img[1] = self.img[1]
+
             self.animation[2] = equipment.loadAnimation("./media/races/human/animations/",
                                                   "human_base_head_0",4,animation_speed=0.3)
             self.img[2] = pygame.image.load("./media/races/human/human_base_head_0.png")
             self.orig_img[2] = self.img[2]
+
             self.hp += 2
             self.maxhp += 2
             self.movepts += 1
