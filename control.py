@@ -105,6 +105,7 @@ class Control:
         
         if Main.zoom <2:
             zoomey=2
+            
         else:
             
             zoomey=1
@@ -171,7 +172,11 @@ class Control:
             screen.blit(name_shadow, (x+20, y+(self.overlayedUnit_overlay.get_height()/100*10)))
             screen.blit(name, (x+20, y+(self.overlayedUnit_overlay.get_height()/100*10)))
 
-            self.overlayedUnit.drawHpBar(screen,80,15,x+23+hp.get_width()+Main.resizable_layer_x,y-1+(self.overlayedUnit_overlay.get_height()/100*80)+Main.resizable_layer_y)
+            if zoomey==2:
+                self.overlayedUnit.drawHpBar(screen,80,15,x+30+hp.get_width(),y-1+(self.overlayedUnit_overlay.get_height()/100*80)+Main.resizable_layer_y)
+            else:
+                self.overlayedUnit.drawHpBar(screen,80/2,15,x+30+hp.get_width()-32,y-1+(self.overlayedUnit_overlay.get_height()/100*80)+Main.resizable_layer_y)
+            
 
     # elimino unità morte dall'array units e le metto nell'array deadunits
     def kill(self, unit):
@@ -270,8 +275,8 @@ class Control:
 
                 if event.type == pygame.MOUSEMOTION:
                     
-                    Main.resizable_layer_x+=pygame.mouse.get_pos()[0]-starting_mouse_x
-                    Main.resizable_layer_y+=pygame.mouse.get_pos()[1]-starting_mouse_y
+                    """ Main.resizable_layer_x+=pygame.mouse.get_pos()[0]-starting_mouse_x
+                    Main.resizable_layer_y+=pygame.mouse.get_pos()[1]-starting_mouse_y """
                     
                     #devo muovere anche tutte le x e y di tutte le unita
                     for player in Main.players:

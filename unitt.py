@@ -111,7 +111,7 @@ class Unit:
                             (247, 247, 247),
                             pygame.Rect(
                                 dot[0] + self.center[0] - Main.resizable_layer_x,
-                                dot[1] + self.center[1] - Main.resizable_layer_y,
+                                dot[1] + self.center[1],
                                 1,
                                 1,
                             ),
@@ -121,7 +121,7 @@ class Unit:
                             (247, 247, 247),
                             pygame.Rect(
                                 dot[0] + self.center[0] + 1 - Main.resizable_layer_x,
-                                dot[1] + self.center[1] - Main.resizable_layer_y,
+                                dot[1] + self.center[1],
                                 1,
                                 1,
                             ),
@@ -131,7 +131,7 @@ class Unit:
                             (247, 247, 247),
                             pygame.Rect(
                                 dot[0] + self.center[0] - 1 - Main.resizable_layer_x,
-                                dot[1] + self.center[1] - Main.resizable_layer_y,
+                                dot[1] + self.center[1],
                                 1,
                                 1,
                             ),
@@ -141,7 +141,7 @@ class Unit:
                             (247, 247, 247),
                             pygame.Rect(
                                 dot[0] + self.center[0] - Main.resizable_layer_x,
-                                dot[1] + self.center[1] - 1 - Main.resizable_layer_y,
+                                dot[1] + self.center[1] - 1,
                                 1,
                                 1,
                             ),
@@ -151,7 +151,7 @@ class Unit:
                             (247, 247, 247),
                             pygame.Rect(
                                 dot[0] + self.center[0] - Main.resizable_layer_x,
-                                dot[1] + self.center[1] + 1 - Main.resizable_layer_y,
+                                dot[1] + self.center[1] + 1,
                                 1,
                                 1,
                             ),
@@ -168,7 +168,7 @@ class Unit:
                     i,
                     (
                         self.center[0] - Main.resizable_layer_x,
-                        self.center[1] - Main.resizable_layer_y,
+                        self.center[1],
                     ),
                 )
 
@@ -186,9 +186,9 @@ class Unit:
                 screen,
                 (242, 39, 39),
                 (
-                    x - Main.resizable_layer_x  - rectMaxLength/2 + self.img[1].get_width()/2,
+                    x - rectMaxLength/2 + self.img[1].get_width()/2,
                     
-                    y + 4 - Main.resizable_layer_y,
+                    y + 4,
                     rectWidth,
                     height,
                 ),
@@ -199,8 +199,8 @@ class Unit:
                 screen,
                 (34, 32, 52),
                 (
-                    x - Main.resizable_layer_x  - rectMaxLength/2 + self.img[1].get_width()/2,
-                    y + 4 - Main.resizable_layer_y,
+                    x - rectMaxLength/2 + self.img[1].get_width()/2,
+                    y + 4,
                     rectMaxLength,
                     height,
                 ),
@@ -213,7 +213,7 @@ class Unit:
                 (3, 166, 74),
                 (
                     x - Main.resizable_layer_x - rectMaxLength/2 + self.img[1].get_width()/2,
-                    y + 4 - Main.resizable_layer_y,
+                    y + 4,
                     rectWidth,
                     height,
                 ),
@@ -224,8 +224,8 @@ class Unit:
                 screen,
                 (34, 32, 52),
                 (
-                    x - Main.resizable_layer_x  - rectMaxLength/2 + self.img[1].get_width()/2,
-                    y + 4 - Main.resizable_layer_y,
+                    x - rectMaxLength/2 + self.img[1].get_width()/2,
+                    y + 4,
                     rectMaxLength,
                     height,
                 ),
@@ -240,7 +240,7 @@ class Unit:
             text,
             (
                 x - Main.resizable_layer_x - rectMaxLength / 4 + self.img[1].get_width()/2,
-                y - 6 - Main.resizable_layer_y,
+                y - 6,
             ),
         )
 

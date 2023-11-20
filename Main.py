@@ -250,7 +250,7 @@ running = True
 while running:
     DELTA=1/pygame.time.get_ticks()
     screen.fill((16, 26, 38))
-    cell_layer.fill((0, 0, 0, 0))  # pulisco gli schermi, i layers li faccio trasparenti
+    cell_layer.fill((56, 2, 10))  # pulisco gli schermi, i layers li faccio trasparenti
     cell_layer2.fill((0, 0, 0, 0))  
     unit_layer.fill((0, 0, 0, 0))  
     menu_box_layer.fill((0, 0, 0, 0))  
