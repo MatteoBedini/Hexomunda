@@ -803,10 +803,15 @@ class Unit:
             self.atk += 1
 
         elif self.race == "goblin":
+            self.animated=True
+            self.animation[1] = equipment.loadAnimation("./media/races/goblin/animations/",
+                                                  "goblin_base_body_0",4,animation_speed=0.2)
             self.img[1] = pygame.image.load(
                 "./media/races/goblin/goblin_base_body_0.png"
             )
             self.orig_img[1] = self.img[1]
+            self.animation[2] = equipment.loadAnimation("./media/races/goblin/animations/",
+                                                  "goblin_base_head_0",4,animation_speed=0.2)
             self.img[2] = pygame.image.load(
                 "./media/races/goblin/goblin_base_head_0.png"
             )

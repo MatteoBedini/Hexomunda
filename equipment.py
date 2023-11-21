@@ -28,7 +28,7 @@ def loadAnimation(image_folder,images_partial_name,images_number,current_frame=0
 all={}
 
 all['head']={   #goblins
-                'goblin hood 1': [1,0,0,0,0,2,load('./media/races/goblin/goblin_base_hood_0.png'),None],
+                'goblin hood 1': [1,0,0,0,0,2,load('./media/races/goblin/goblin_base_hood_0.png'),('./media/races/goblin/animations/','goblin_base_hood_0',4)],
                 'goblin boss hood': [2,0,0,0,0,4,load('./media/races/goblin/goblin_boss_hood_0.png'),None],
                 #humans
                 'human plumed leather helmet': [1,0,0,0,0,2,load('./media/races/human/human_plumed_helmet_0.png'),('./media/races/human/animations/','human_plumed_helmet_0',4)],
@@ -45,7 +45,7 @@ all['head']={   #goblins
 }
 
 all['body']={   #goblins
-                'goblin base robe': [1,0,0,0,0,2,load('./media/races/goblin/goblin_base_robe_0.png'),None],
+                'goblin base robe': [1,0,0,0,0,2,load('./media/races/goblin/goblin_base_robe_0.png'),('./media/races/goblin/animations/','goblin_base_robe_0',4)],
                 #humans
                 'human steel half armor 1': [2,0,0,0,0,3,load('./media/races/human/human_base_armor_1.png'),None],
                 'human steel half armor 0': [2,0,0,0,0,3,load('./media/races/human/human_base_armor_0.png'),('./media/races/human/animations/','human_base_armor_0',4)],
@@ -59,9 +59,9 @@ all['body']={   #goblins
 }
 
 all['rhand']={  #goblins
-                'goblin shield': [1,0,0,0,0,2,load('./media/races/goblin/goblin_base_shield_0.png'),None],
+                'goblin shield': [1,0,0,0,0,2,load('./media/races/goblin/goblin_base_shield_0.png'),('./media/races/goblin/animations/','goblin_base_shield_0',4)],
                 #humans
-                'human shield': [1,0,0,0,0,2,load('./media/races/human/human_base_shield_0.png'),None],
+                'human shield': [1,0,0,0,0,2,load('./media/races/human/human_base_shield_0.png'),('./media/races/human/animations/','human_base_shield_0',4)],
                 #orcs
                 'orc shield': [1,0,0,0,0,2,load('./media/races/orc/orc_base_shield_0.png'),None],
                 #dwarves
@@ -70,9 +70,9 @@ all['rhand']={  #goblins
                }
 
 all['lhand']={  #goblins
-                'goblin sword':[0,1,0,0,0,2,load('./media/races/goblin/goblin_base_sword_0.png'),None],
+                'goblin sword':[0,1,0,0,0,2,load('./media/races/goblin/goblin_base_sword_0.png'),('./media/races/goblin/animations/','goblin_base_sword_0',4)],
                 #humans
-                'human sword':[0,1,0,0,0,2,load('./media/races/human/human_base_sword_0.png'),None],
+                'human sword':[0,1,0,0,0,2,load('./media/races/human/human_base_sword_0.png'),('./media/races/human/animations/','human_base_sword_0',4)],
                 #orcs
                 'orc sword':[0,1,0,0,0,2,load('./media/races/orc/orc_base_sword_0.png'),None],
                 'orc 2h axe':[0,2,0,0,0,4,load('./media/races/orc/orc_two_handed_axe_0.png'),None],
