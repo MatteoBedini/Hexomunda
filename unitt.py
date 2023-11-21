@@ -2,6 +2,7 @@ import pygame
 import Main
 import equipment
 import hexcell
+import copy
 
 
 # classe unità
@@ -21,7 +22,7 @@ class Unit:
         # immagine e centro immagine
         self.center = [0, 0]
         self.img = [None, None, None, None]
-        self.orig_img = [None, None, None, None]  # template [rhand,body,head,lhand]
+        self.orig_img = [None, None, None, None]  # template [lhand,body,head,rhand]
 
         self.animation = [None, None, None, None]
         self.animated = False
@@ -105,7 +106,7 @@ class Unit:
         #img[-1]= elapsed time
         #img[-2]= animation speed
         #img[-3]= current frame
-        print (img)
+        
 
         #img[-4]= frame number
         #img[0]= animation list
@@ -184,7 +185,7 @@ class Unit:
                                 1,
                             ),
                         )
-
+        
         # UNIT DRAW
         
         if self.animated==True:
@@ -775,13 +776,13 @@ class Unit:
         if self.race == "human":
             self.animated=True
             self.animation[1] = equipment.loadAnimation("./media/races/human/animations/",
-                                                  "human_base_body_0",4,animation_speed=0.3)
+                                                  "human_base_body_0",4,animation_speed=0.2)
 
             self.img[1] = pygame.image.load("./media/races/human/human_base_body_0.png")
             self.orig_img[1] = self.img[1]
 
             self.animation[2] = equipment.loadAnimation("./media/races/human/animations/",
-                                                  "human_base_head_0",4,animation_speed=0.3)
+                                                  "human_base_head_0",4,animation_speed=0.2)
             self.img[2] = pygame.image.load("./media/races/human/human_base_head_0.png")
             self.orig_img[2] = self.img[2]
 
@@ -838,6 +839,7 @@ class Unit:
 
     def applyEquipmentModifiers(self):
         # resetto i modifiers (senno me li aggiunge a quelli che c'erao gia prima)
+        
         self.hp = self.basestats[0]
         self.maxhp = self.hp
         self.atk = self.basestats[1]
@@ -867,29 +869,57 @@ class Unit:
                                 if equipment.all[key] == group and ke == key:
                                     if key == "lhand":
                                         self.img[0] = group[equipo][6]
+                                        if group[equipo][7] != None:
+                                            self.animation[0]=group[equipo][7].copy()
+                                        
+                                        
                                         # inverto l'immagine dell'equip se di ai
                                         if self.ai == True and self.img[0] != None:
+                                            """ if self.animation[0]!=None:
+                                                for i in range(len(self.animation[0][0])):
+                                                    self.animation[0][0][i]=pygame.transform.flip(self.animation[0][0][i], True, False) """
+        
                                             self.img[0] = pygame.transform.flip(
                                                 self.img[0], True, False
                                             )
 
                                     elif key == "body":
                                         self.img[1] = group[equipo][6]
+                                        if group[equipo][7] != None:
+                                            self.animation[1]=group[equipo][7].copy()
+                                        
                                         if self.ai == True and self.img[1] != None:
+                                            """ if self.animation[1]!=None:
+                                                for i in range(len(self.animation[1][0])):
+                                                    self.animation[1][0][i]=pygame.transform.flip(self.animation[1][0][i], True, False) """
+        
                                             self.img[1] = pygame.transform.flip(
                                                 self.img[1], True, False
                                             )
 
                                     elif key == "head":
                                         self.img[2] = group[equipo][6]
+                                        if group[equipo][7] != None:
+                                            self.animation[2]=group[equipo][7].copy()
+                                        
                                         if self.ai == True and self.img[2] != None:
                                             self.img[2] = pygame.transform.flip(
                                                 self.img[2], True, False
                                             )
+                                            """ if self.animation[2]!=None:
+                                                for i in range(len(self.animation[2][0])):
+                                                    self.animation[2][0][i]=pygame.transform.flip(self.animation[2][0][i], True, False) """
+        
+                                            
 
                                     elif key == "rhand":
                                         self.img[3] = group[equipo][6]
+                                        if group[equipo][7] != None:
+                                            self.animation[3]=group[equipo][7].copy()
                                         if self.ai == True and self.img[3] != None:
+                                            """ if self.animation[3]!=None:
+                                                for i in range(len(self.animation[3][0])):
+                                                    self.animation[3][0][i]=pygame.transform.flip(self.animation[3][0][i], True, False) """
                                             self.img[3] = pygame.transform.flip(
                                                 self.img[3], True, False
                                             )

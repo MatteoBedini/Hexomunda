@@ -310,10 +310,6 @@ class Control:
                     Main.resizable_layer_x=starting_resizable_layer_x
                     Main.resizable_layer_y=starting_resizable_layer_y
                     
-
-                    
-
-            
     def gridAndUnitsZoom(self):
 
         zoomey=0
