@@ -24,6 +24,7 @@ class Unit:
         self.img = [None, None, None, None]
         self.orig_img = [None, None, None, None]  # template [lhand,body,head,rhand]
 
+        
         self.animation = [None, None, None, None]
         self.animated = False
         
@@ -833,8 +834,6 @@ class Unit:
         else:
             pass
 
-        if self.ai == True:
-            self.flipImage()
         self.createMask()
 
     def applyEquipmentModifiers(self):
@@ -867,69 +866,31 @@ class Unit:
                         for key in equipment.all.keys():
                             for ke in self.inventory.keys():
                                 if equipment.all[key] == group and ke == key:
+
                                     if key == "lhand":
                                         self.img[0] = group[equipo][6]
                                         if group[equipo][7] != None:
                                             self.animation[0]=group[equipo][7].copy()
-                                        
-                                        
-                                        # inverto l'immagine dell'equip se di ai
-                                        if self.ai == True and self.img[0] != None:
-                                            """ if self.animation[0]!=None:
-                                                for i in range(len(self.animation[0][0])):
-                                                    self.animation[0][0][i]=pygame.transform.flip(self.animation[0][0][i], True, False) """
-        
-                                            self.img[0] = pygame.transform.flip(
-                                                self.img[0], True, False
-                                            )
 
                                     elif key == "body":
                                         self.img[1] = group[equipo][6]
                                         if group[equipo][7] != None:
                                             self.animation[1]=group[equipo][7].copy()
                                         
-                                        if self.ai == True and self.img[1] != None:
-                                            """ if self.animation[1]!=None:
-                                                for i in range(len(self.animation[1][0])):
-                                                    self.animation[1][0][i]=pygame.transform.flip(self.animation[1][0][i], True, False) """
-        
-                                            self.img[1] = pygame.transform.flip(
-                                                self.img[1], True, False
-                                            )
-
                                     elif key == "head":
                                         self.img[2] = group[equipo][6]
                                         if group[equipo][7] != None:
                                             self.animation[2]=group[equipo][7].copy()
                                         
-                                        if self.ai == True and self.img[2] != None:
-                                            self.img[2] = pygame.transform.flip(
-                                                self.img[2], True, False
-                                            )
-                                            """ if self.animation[2]!=None:
-                                                for i in range(len(self.animation[2][0])):
-                                                    self.animation[2][0][i]=pygame.transform.flip(self.animation[2][0][i], True, False) """
-        
-                                            
-
                                     elif key == "rhand":
                                         self.img[3] = group[equipo][6]
                                         if group[equipo][7] != None:
                                             self.animation[3]=group[equipo][7].copy()
-                                        if self.ai == True and self.img[3] != None:
-                                            """ if self.animation[3]!=None:
-                                                for i in range(len(self.animation[3][0])):
-                                                    self.animation[3][0][i]=pygame.transform.flip(self.animation[3][0][i], True, False) """
-                                            self.img[3] = pygame.transform.flip(
-                                                self.img[3], True, False
-                                            )
+
                                     else:
                                         pass
 
         self.createMask()
 
-        """ self.img[0]=self.inventory['body']
-        self.img[1]=self.inventory['rhand']
-        self.img[2]=self.inventory['lhand']
-        self.img[3]=self.inventory['head']
-                 """
+        
+                                     

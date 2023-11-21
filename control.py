@@ -209,6 +209,7 @@ class Control:
                     #print(f'{unit.x},{unit.y},{unit.id},{unit.nome}')
                     unit.createMask()
                     randomcell.occupied = True
+                    unit.flipImage()
                     
     # ai_selezione unità
     def ai_select_control(self):
