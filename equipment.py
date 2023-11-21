@@ -3,7 +3,7 @@ import os
 
 def load(img):
     return pygame.image.load(img)
-#template [hp,atk,move,atkpts,atkrange,cost,img]
+#template [hp,atk,move,atkpts,atkrange,cost,img,animation]
 def loadAnimation(image_folder,images_partial_name,images_number,current_frame=0,animation_speed=0.2,elapsed_time=0):
 
     
@@ -31,7 +31,7 @@ all['head']={   #goblins
                 'goblin hood 1': [1,0,0,0,0,2,load('./media/races/goblin/goblin_base_hood_0.png'),None],
                 'goblin boss hood': [2,0,0,0,0,4,load('./media/races/goblin/goblin_boss_hood_0.png'),None],
                 #humans
-                'human plumed leather helmet': [1,0,0,0,0,2,load('./media/races/human/human_plumed_helmet_0.png'),loadAnimation('./media/races/human/animations/','human_plumed_helmet_0',4,animation_speed=0.2)],
+                'human plumed leather helmet': [1,0,0,0,0,2,load('./media/races/human/human_plumed_helmet_0.png'),('./media/races/human/animations/','human_plumed_helmet_0',4)],
                 'human half steel helmet': [1,0,0,0,0,2,load('./media/races/human/human_steel_half_helmet_0.png'),None],
                 'human full steel helmet': [2,0,0,0,0,4,load('./media/races/human/human_steel_full_helm_0.png'),None],
                 'human leather helmet': [2,0,0,0,0,4,load('./media/races/human/human_plumed_leather_helmet_0.png'),None],
@@ -48,7 +48,7 @@ all['body']={   #goblins
                 'goblin base robe': [1,0,0,0,0,2,load('./media/races/goblin/goblin_base_robe_0.png'),None],
                 #humans
                 'human steel half armor 1': [2,0,0,0,0,3,load('./media/races/human/human_base_armor_1.png'),None],
-                'human steel half armor 0': [2,0,0,0,0,3,load('./media/races/human/human_base_armor_0.png'),loadAnimation('./media/races/human/animations/','human_base_armor_0',4,animation_speed=0.2)],
+                'human steel half armor 0': [2,0,0,0,0,3,load('./media/races/human/human_base_armor_0.png'),('./media/races/human/animations/','human_base_armor_0',4)],
                 'human full steel armor': [3,0,0,0,0,5,load('./media/races/human/human_steel_full_armor_0.png'),None],
                 #orcs
                 'orc steel full armor': [3,0,0,0,0,5,load('./media/races/orc/orc_steel_full_armor_0.png'),None],

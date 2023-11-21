@@ -3,6 +3,7 @@ import Main
 import equipment
 import hexcell
 import copy
+import ast
 
 
 # classe unità
@@ -870,22 +871,22 @@ class Unit:
                                     if key == "lhand":
                                         self.img[0] = group[equipo][6]
                                         if group[equipo][7] != None:
-                                            self.animation[0]=group[equipo][7].copy()
+                                            self.animation[0]=equipment.loadAnimation(*group[equipo][7])  #*asterisco prima del nome della variabile per fare un unpack della tupla
 
                                     elif key == "body":
                                         self.img[1] = group[equipo][6]
                                         if group[equipo][7] != None:
-                                            self.animation[1]=group[equipo][7].copy()
+                                            self.animation[1]=equipment.loadAnimation(*group[equipo][7])
                                         
                                     elif key == "head":
                                         self.img[2] = group[equipo][6]
                                         if group[equipo][7] != None:
-                                            self.animation[2]=group[equipo][7].copy()
-                                        
+                                            self.animation[2]=equipment.loadAnimation(*group[equipo][7])
+
                                     elif key == "rhand":
                                         self.img[3] = group[equipo][6]
                                         if group[equipo][7] != None:
-                                            self.animation[3]=group[equipo][7].copy()
+                                            self.animation[3]=equipment.loadAnimation(*group[equipo][7])
 
                                     else:
                                         pass
