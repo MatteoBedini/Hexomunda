@@ -794,8 +794,15 @@ class Unit:
             self.totmovepts += 1
 
         elif self.race == "orc":
+            self.animated=True
+            self.animation[1] = equipment.loadAnimation("./media/races/orc/animations/",
+                                                  "orc_base_body_0",4,animation_speed=0.2)
+
             self.img[1] = pygame.image.load("./media/races/orc/orc_base_body_0.png")
             self.orig_img[1] = self.img[1]
+
+            self.animation[2] = equipment.loadAnimation("./media/races/orc/animations/",
+                                                  "orc_base_head_0",4,animation_speed=0.2)
             self.img[2] = pygame.image.load("./media/races/orc/orc_base_head_0.png")
             self.orig_img[2] = self.img[2]
             self.hp += 2
@@ -821,8 +828,14 @@ class Unit:
             self.totmovepts += 2
 
         elif self.race == "dwarf":
+            self.animated=True
+            self.animation[1] = equipment.loadAnimation("./media/races/dwarf/animations/",
+                                                  "dwarf_base_body_0",4,animation_speed=0.2)
             self.img[1] = pygame.image.load("./media/races/dwarf/dwarf_base_body_0.png")
             self.orig_img[1] = self.img[1]
+
+            self.animation[2] = equipment.loadAnimation("./media/races/dwarf/animations/",
+                                                  "dwarf_base_head_0",4,animation_speed=0.2)
             self.img[2] = pygame.image.load("./media/races/dwarf/dwarf_base_head_0.png")
             self.orig_img[2] = self.img[2]
             self.hp += 3
