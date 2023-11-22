@@ -30,11 +30,13 @@ all={}
 all['head']={   #goblins
                 'goblin hood 1': [1,0,0,0,0,2,load('./media/races/goblin/goblin_base_hood_0.png'),('./media/races/goblin/animations/','goblin_base_hood_0',4)],
                 'goblin boss hood': [2,0,0,0,0,4,load('./media/races/goblin/goblin_boss_hood_0.png'),('./media/races/goblin/animations/','goblin_boss_hood_0',4)],
+                'goblin cap': [1,0,0,0,0,2,load('./media/races/goblin/goblin_base_cap_0.png'),('./media/races/goblin/animations/','goblin_base_cap_0',4)],
                 #humans
                 'human plumed leather helmet': [1,0,0,0,0,2,load('./media/races/human/human_plumed_helmet_0.png'),('./media/races/human/animations/','human_plumed_helmet_0',4)],
                 'human half steel helmet': [1,0,0,0,0,2,load('./media/races/human/human_steel_half_helmet_0.png'),('./media/races/human/animations/','human_steel_half_helmet_0',4)],
                 'human full steel helmet': [2,0,0,0,0,4,load('./media/races/human/human_steel_full_helm_0.png'),('./media/races/human/animations/','human_steel_full_helm_0',4)],
                 'human leather helmet': [2,0,0,0,0,4,load('./media/races/human/human_plumed_leather_helmet_0.png'),('./media/races/human/animations/','human_plumed_leather_helmet_0',4)],
+                'human half steel helmet 1': [1,0,0,0,0,2,load('./media/races/human/human_steel_half_helmet_1.png'),('./media/races/human/animations/','human_steel_half_helmet_1',4)],
                 #orcs
                 'orc full steel helm 1': [1,0,0,0,0,2,load('./media/races/orc/orc_steel_full_helm_0.png'),('./media/races/orc/animations/','orc_steel_full_helm_0',4)],
                 'orc full steel helm 2': [1,0,0,0,0,2,load('./media/races/orc/orc_steel_full_helm_1.png'),('./media/races/orc/animations/','orc_steel_full_helm_1',4)],
@@ -46,6 +48,7 @@ all['head']={   #goblins
 
 all['body']={   #goblins
                 'goblin base robe': [1,0,0,0,0,2,load('./media/races/goblin/goblin_base_robe_0.png'),('./media/races/goblin/animations/','goblin_base_robe_0',4)],
+                'goblin leather armor': [1,0,0,0,0,2,load('./media/races/goblin/goblin_leather_armor_0.png'),('./media/races/goblin/animations/','goblin_leather_armor_0',4)],
                 #humans
                 'human steel half armor 1': [2,0,0,0,0,3,load('./media/races/human/human_base_armor_1.png'),('./media/races/human/animations/','human_base_armor_1',4)],
                 'human steel half armor 0': [2,0,0,0,0,3,load('./media/races/human/human_base_armor_0.png'),('./media/races/human/animations/','human_base_armor_0',4)],
@@ -71,6 +74,7 @@ all['rhand']={  #goblins
 
 all['lhand']={  #goblins
                 'goblin sword':[0,1,0,0,0,2,load('./media/races/goblin/goblin_base_sword_0.png'),('./media/races/goblin/animations/','goblin_base_sword_0',4)],
+                'goblin shortbow':[0,0,0,0,2,6,load('./media/races/goblin/goblin_bow_0.png'),('./media/races/goblin/animations/','goblin_bow_0',4)],
                 #humans
                 'human sword':[0,1,0,0,0,2,load('./media/races/human/human_base_sword_0.png'),('./media/races/human/animations/','human_base_sword_0',4)],
                 #orcs

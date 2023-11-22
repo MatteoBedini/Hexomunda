@@ -2,8 +2,7 @@ import pygame
 import Main
 import equipment
 import hexcell
-import copy
-import ast
+
 
 
 # classe unità
@@ -360,8 +359,6 @@ class Unit:
         else:
             self.recalculateDts()
         
-                
-
     # seleziono e deseleziono
     def select(self):
         # SELEZIONE PER GIOCATORE
@@ -628,7 +625,7 @@ class Unit:
 
     # attack animation
     def attackAnimation(self, animSpeed):
-        if self.attacked_target != None:
+        if self.attacked_target != None and self.atkrange==1:
             if Main.controller.actingUnit == None or Main.controller.actingUnit == self:
                 # print(self.x, self.middle[0],self.attacked_target.x)
 
@@ -690,6 +687,9 @@ class Unit:
                         Main.controller.actingUnit = None
 
                 self.getCenter(self.x, self.y)
+        else:
+            self.attacked_target = None
+
 
     def aiEndTurn(self):
         enemy = self.aiCalculateNearestEnemy()
@@ -913,3 +913,5 @@ class Unit:
 
         
                                      
+                
+
