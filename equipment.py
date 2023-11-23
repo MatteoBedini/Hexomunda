@@ -108,3 +108,4 @@ all['lhand']={  #goblins
 
 #various animations
 atk_animation=loadAnimation('./media/various_anims/','attack',7,animation_speed=0.05)
+ranged_atk_animation=loadAnimation('./media/various_anims/','ranged',7,animation_speed=0.05)

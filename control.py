@@ -32,6 +32,7 @@ class Control:
         self.zoomed_img=False
         self.img=None
         self.atkedUnit=None
+        self.rngAtkedUnit=None
         
 
         
@@ -130,6 +131,14 @@ class Control:
                 if self.img[-3]==len(self.img[0])-1:
                     equipment.atk_animation[-3]=0 
                     self.atkedUnit=None
+                    return
+                
+            if self.rngAtkedUnit!=None:
+                current_frame=self.controlAnimation(self.img)
+                Main.unit_layer.blit(current_frame,(self.rngAtkedUnit.center[0],self.rngAtkedUnit.center[1]))
+                if self.img[-3]==len(self.img[0])-1:
+                    equipment.ranged_atk_animation[-3]=0 
+                    self.rngAtkedUnit=None
                     return
 
     #overlay informativo al clic su un oggetto

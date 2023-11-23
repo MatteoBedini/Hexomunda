@@ -593,8 +593,12 @@ class Unit:
                         self.start_x = self.x
                         self.start_y = self.y
                         self.attacked_target = unit  # per l'animazione di attacco
-                        Main.controller.atkedUnit=unit
-                        Main.controller.img=equipment.atk_animation
+                        if self.atkrange<2:
+                            Main.controller.atkedUnit=unit
+                            Main.controller.img=equipment.atk_animation
+                        else:
+                            Main.controller.rngAtkedUnit=unit
+                            Main.controller.img=equipment.ranged_atk_animation
                         self.middle = self.calculateMidPoint()
                         unit.hp -= self.atk
                         self.atkpts -= 1
@@ -623,8 +627,12 @@ class Unit:
                 self.start_x = self.x
                 self.start_y = self.y
                 self.attacked_target = enemy  # per l'animazione di attacco
-                Main.controller.atkedUnit=enemy
-                Main.controller.img=equipment.atk_animation
+                if self.atkrange<2:
+                    Main.controller.atkedUnit=enemy
+                    Main.controller.img=equipment.atk_animation
+                else:
+                    Main.controller.rngAtkedUnit=enemy
+                    Main.controller.img=equipment.ranged_atk_animation
                 self.middle = self.calculateMidPoint()
                 enemy.hp -= self.atk
                 self.atkpts -= 1
