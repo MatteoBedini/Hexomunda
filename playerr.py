@@ -42,9 +42,12 @@ class Player:
                                 
                                 indice_casuale=random.randint(0,len(chiavi)-1)
                                 if new_unit.race in chiavi[indice_casuale]:
-                                    new_unit.inventory[j]=chiavi[indice_casuale]
-                               
-                                    self.points-=equipment.all[j][chiavi[indice_casuale]][5] #costo dell equipaggiamento
+                                    if i=='rhand' and new_unit.animation[0]!=None and new_unit.animation[0][-4]==True:
+                                        pass
+                                    else:
+                                        new_unit.inventory[j]=chiavi[indice_casuale]
+                                
+                                        self.points-=equipment.all[j][chiavi[indice_casuale]][5] #costo dell equipaggiamento
 
             new_unit.applyEquipmentModifiers()
            

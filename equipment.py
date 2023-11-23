@@ -4,7 +4,7 @@ import os
 def load(img):
     return pygame.image.load(img)
 #template [hp,atk,move,atkpts,atkrange,cost,img,animation]
-def loadAnimation(image_folder,images_partial_name,images_number,current_frame=0,animation_speed=0.2,elapsed_time=0):
+def loadAnimation(image_folder,images_partial_name,images_number,twohanded=False,current_frame=0,animation_speed=0.2,elapsed_time=0):
 
     
     animation_images = []
@@ -15,6 +15,7 @@ def loadAnimation(image_folder,images_partial_name,images_number,current_frame=0
     
     full_array=[]
     full_array.append(animation_images)
+    full_array.append(twohanded)
     full_array.append(current_frame)
     full_array.append(animation_speed)
     full_array.append(elapsed_time)
@@ -74,16 +75,16 @@ all['rhand']={  #goblins
 
 all['lhand']={  #goblins
                 'goblin sword':[0,1,0,0,0,2,load('./media/races/goblin/goblin_base_sword_0.png'),('./media/races/goblin/animations/','goblin_base_sword_0',4)],
-                'goblin shortbow':[0,0,0,0,2,6,load('./media/races/goblin/goblin_bow_0.png'),('./media/races/goblin/animations/','goblin_bow_0',4)],
+                'goblin shortbow':[0,0,0,0,2,6,load('./media/races/goblin/goblin_bow_0.png'),('./media/races/goblin/animations/','goblin_bow_0',4,True)],
                 #humans
                 'human sword':[0,1,0,0,0,2,load('./media/races/human/human_base_sword_0.png'),('./media/races/human/animations/','human_base_sword_0',4)],
                 #orcs
                 'orc sword':[0,1,0,0,0,2,load('./media/races/orc/orc_base_sword_0.png'),('./media/races/orc/animations/','orc_base_sword_0',4)],
                 
-                'orc 2h axe':[0,2,0,0,0,4,load('./media/races/orc/orc_two_handed_axe_0.png'),('./media/races/orc/animations/','orc_two_handed_axe_0',4)],
+                'orc 2h axe':[0,2,0,0,0,4,load('./media/races/orc/orc_two_handed_axe_0.png'),('./media/races/orc/animations/','orc_two_handed_axe_0',4,True)],
                 #dwarves
                 'dwarf axe':[0,1,0,0,0,2,load('./media/races/dwarf/dwarf_axe_0.png'),('./media/races/dwarf/animations/','dwarf_axe_0',4)],
-                'dwarf 2h axe':[0,2,0,0,0,4,load('./media/races/dwarf/dwarf_2h_axe_0.png'),('./media/races/dwarf/animations/','dwarf_2h_axe_0',4)],
+                'dwarf 2h axe':[0,2,0,0,0,4,load('./media/races/dwarf/dwarf_2h_axe_0.png'),('./media/races/dwarf/animations/','dwarf_2h_axe_0',4,True)],
                
                }
 
