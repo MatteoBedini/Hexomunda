@@ -24,32 +24,42 @@ class Player:
         if self.points>0 and self.ai==True:
             a=Main.units_type_INVENTORY[random.randrange(0, len(Main.units_type_INVENTORY))]
             new_unit=unitt.Unit(True,a.id,a.nome,a.race) 
-            for i in new_unit.img:
+            """ for i in new_unit.img:
                 for j in a.img:
                     for d in range(3):
                         if new_unit.img[d]==i and a.img[d]==j:
-                            i=j
+                            i=j """
             
 
             #compro dell'equipaggiamento casuale
             for i in new_unit.inventory.keys():
-                for j in equipment.all.keys():
-                       
-                        if j==i and new_unit.inventory[j] != None:
+               print(i)
+               if new_unit.inventory[i]=="":
+                    
+                    if i=="rhand" and new_unit.animation[0]!=None and new_unit.animation[0][-4]==True:
+                        print('2handed')
+                        pass
+                    else:
+                        for j in equipment.all.keys():
                             
-                            chiavi=list(equipment.all[j].keys())
-                            if chiavi != []:
-                                
-                                indice_casuale=random.randint(0,len(chiavi)-1)
-                                if new_unit.race in chiavi[indice_casuale]:
-                                    if i=='rhand' and new_unit.animation[0]!=None and new_unit.animation[0][-4]==True:
-                                        pass
-                                    else:
-                                        new_unit.inventory[j]=chiavi[indice_casuale]
-                                
-                                        self.points-=equipment.all[j][chiavi[indice_casuale]][5] #costo dell equipaggiamento
+                                if j==i:
+                                    
+                                    chiavi=list(equipment.all[j].keys())
+                                    race_keys=[]
+                                    for keyy in chiavi:
+                                        if new_unit.race in keyy:
+                                            race_keys.append(keyy)
 
-            new_unit.applyEquipmentModifiers()
+                                    indice_casuale=random.randint(0,len(race_keys)-1)
+                                            
+                                    if new_unit.race in race_keys[indice_casuale]:
+                                        
+                                        
+                                            new_unit.inventory[j]=race_keys[indice_casuale]
+                                    
+                                            self.points-=equipment.all[j][chiavi[indice_casuale]][5] #costo dell equipaggiamento
+                        new_unit.applyEquipmentModifiers()
+            
            
             self.points-=5
             self.units.append(new_unit)

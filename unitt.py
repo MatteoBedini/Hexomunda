@@ -85,9 +85,9 @@ class Unit:
             self.atkrange,
         ]
         self.inventory = {
-            "head": "",
-            "body": "",
             "lhand": "",
+            "body": "",
+            "head": "",
             "rhand": "",
         }
         self.applyEquipmentModifiers()
@@ -131,7 +131,6 @@ class Unit:
             for d in range(0,len(self.glow)):  
                 if self.glow[d] != None:
                     i=self.animation[d][-3]
-                    print(i)
                     for dot in self.glow[d][i]:
                         pygame.draw.rect(
                             screen,
@@ -333,8 +332,6 @@ class Unit:
                         self.mask[img_counter].append(pygame.mask.from_surface(
                             self.animation[img_counter][0][i]
                         ))
-
-                    print(self.mask)
 
                 else:
 

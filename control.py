@@ -312,7 +312,6 @@ class Control:
                     new_inanimated.createMask()
                     new_inanimated.getParentCell()
             
-            print(Main.inanimated_in_game)
                     
         
     def moveCamera(self):
