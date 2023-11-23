@@ -1,7 +1,7 @@
 import pygame
 import Main
 import equipment
-import hexcell
+
 
 
 
@@ -123,69 +123,70 @@ class Unit:
             img[-1] = 0
 
         return img[0][img[-3]]
-
-       
-
-                    
-
-    # disegno
-    def draw(self, screen):
+    
+    def glower(self,screen):
         mouse_pos = pygame.mouse.get_pos()
         # illumino l'omino in base alla maschera se ci passo sopra col mouse
         if self.rectMask.collidepoint(mouse_pos[0], mouse_pos[1]) == True:
-            for i in self.glow:
-                if i != None:
-                    for dot in i:
+            for d in range(0,len(self.glow)):  
+                if self.glow[d] != None:
+                    i=self.animation[d][-3]
+                    print(i)
+                    for dot in self.glow[d][i]:
                         pygame.draw.rect(
                             screen,
-                            (247, 247, 247),
+                            (216, 235, 246,150),
                             pygame.Rect(
-                                dot[0] + self.center[0],
-                                dot[1] + self.center[1],
-                                1,
-                                1,
+                                dot[0] + self.center[0]-1,
+                                dot[1] + self.center[1]-1,
+                                3,
+                                3,
                             ),
                         )
                         pygame.draw.rect(
                             screen,
-                            (247, 247, 247),
+                            (216, 235, 246,150),
                             pygame.Rect(
-                                dot[0] + self.center[0] + 1,
-                                dot[1] + self.center[1],
-                                1,
-                                1,
+                                dot[0] + self.center[0]-1 + 1,
+                                dot[1] + self.center[1]-1,
+                                3,
+                                3,
                             ),
                         )
                         pygame.draw.rect(
                             screen,
-                            (247, 247, 247),
+                            (216, 235, 246,150),
                             pygame.Rect(
-                                dot[0] + self.center[0] - 1,
-                                dot[1] + self.center[1],
-                                1,
-                                1,
+                                dot[0] + self.center[0]-1 - 1,
+                                dot[1] + self.center[1]-1,
+                                3,
+                                3,
                             ),
                         )
                         pygame.draw.rect(
                             screen,
-                            (247, 247, 247),
+                            (216, 235, 246,150),
                             pygame.Rect(
-                                dot[0] + self.center[0],
-                                dot[1] + self.center[1] - 1,
-                                1,
-                                1,
+                                dot[0] + self.center[0]-1,
+                                dot[1] + self.center[1]-1 - 1,
+                                3,
+                                3,
                             ),
                         )
                         pygame.draw.rect(
                             screen,
-                            (247, 247, 247),
+                            (216, 235, 246,150),
                             pygame.Rect(
-                                dot[0] + self.center[0],
-                                dot[1] + self.center[1] + 1,
-                                1,
-                                1,
+                                dot[0] + self.center[0]-1,
+                                dot[1] + self.center[1]-1 + 1,
+                                2,
+                                2,
                             ),
-                        )
+                    )
+
+    # disegno
+    def draw(self, screen):
+        self.glower(screen)
         
         # UNIT DRAW
         
@@ -321,22 +322,33 @@ class Unit:
             self.img[1].get_height(),
         )
 
-        # creo la maschera
-        for j in self.img:
-            if j != None:
-                for i in self.mask:
-                    for d in range(4):
-                        if self.mask[d] == i and self.img[d] == j:
-                            self.mask[d] = pygame.mask.from_surface(j)
+        self.mask=[None,None,None,None]
+        self.glow=[None,None,None,None]
+        if self.animated==True:
+            #creo la maschera
+            for img_counter in range(0, len(self.animation)):
+                if self.animation[img_counter] != None:
+                    self.mask[img_counter] = []
+                    for i in range(len(self.animation[img_counter][0])):
+                        self.mask[img_counter].append(pygame.mask.from_surface(
+                            self.animation[img_counter][0][i]
+                        ))
 
-        # creo l'outline
-        for k in self.mask:
-            if k != None:
-                for l in self.glow:
-                    for d in range(4):
-                        if self.glow[d] == l and self.mask[d] == k:
-                            self.glow[d] = self.mask[d].outline()
+                    print(self.mask)
 
+                else:
+
+                    if self.img[img_counter] != None:
+                        self.mask[img_counter] = pygame.mask.from_surface(
+                            self.img[img_counter]
+                        )
+            #creo l'outline
+            for img_counter in range(0, len(self.mask)):
+                if self.mask[img_counter] != None:
+                    self.glow[img_counter] = []
+                    for i in range(len(self.mask[img_counter])):
+                        self.glow[img_counter].append((self.mask[img_counter][i].outline()))
+        
     # resetto il select
     def resectSelect(self):
         # RESET
@@ -581,6 +593,8 @@ class Unit:
                         self.start_x = self.x
                         self.start_y = self.y
                         self.attacked_target = unit  # per l'animazione di attacco
+                        Main.controller.atkedUnit=unit
+                        Main.controller.img=equipment.atk_animation
                         self.middle = self.calculateMidPoint()
                         unit.hp -= self.atk
                         self.atkpts -= 1
@@ -609,6 +623,8 @@ class Unit:
                 self.start_x = self.x
                 self.start_y = self.y
                 self.attacked_target = enemy  # per l'animazione di attacco
+                Main.controller.atkedUnit=enemy
+                Main.controller.img=equipment.atk_animation
                 self.middle = self.calculateMidPoint()
                 enemy.hp -= self.atk
                 self.atkpts -= 1
@@ -913,5 +929,9 @@ class Unit:
 
         
                                      
+       
+
+                    
+
                 
 

@@ -23,7 +23,23 @@ def loadAnimation(image_folder,images_partial_name,images_number,twohanded=False
     
     return full_array
     
+def loadVariousAnimation(image_folder,images_partial_name,images_number,current_frame=0,animation_speed=0.2,elapsed_time=0):
 
+    
+    animation_images = []
+    for i in range(1,images_number+1):
+        
+        animation_images.append(pygame.image.load(os.path.join(image_folder, f"{images_partial_name}_{i}.png")))
+        
+    
+    full_array=[]
+    full_array.append(animation_images)
+    full_array.append(current_frame)
+    full_array.append(animation_speed)
+    full_array.append(elapsed_time)
+
+    
+    return full_array
 
 
 all={}
@@ -89,3 +105,6 @@ all['lhand']={  #goblins
                }
 
 
+
+#various animations
+atk_animation=loadAnimation('./media/various_anims/','attack',7,animation_speed=0.05)

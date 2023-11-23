@@ -12,9 +12,8 @@ import random
 import Main 
 import pygame
 from inanimate import Inanimated
-import math
-import menu
-import button
+import equipment
+
 # classe controllore del gioco
 # ----------------------------------------------------------------------------------------------------------------------------------------------------
 class Control:
@@ -29,6 +28,10 @@ class Control:
         self.overlayedUnit=None
         self.overlayedUnit_overlay=None
         self.screenSize=[Main.width,Main.height]
+
+        self.zoomed_img=False
+        self.img=None
+        self.atkedUnit=None
         
 
         
@@ -89,7 +92,45 @@ class Control:
             print("next: ", self.actingPlayer)
         self.checkOccupiedCells()
 
+    def controlAnimation(self,img):
+        #img[-1]= elapsed time
+        #img[-2]= animation speed
+        #img[-3]= current frame
+        #img[0]= animation list
+        img[-1] += Main.clock.get_rawtime()  #images specific elapsed time
         
+        if img[-1] >= img[-2]* 1000:  #animation speed
+            if img[-3] >= len(img[0]) - 1:
+                img[-3] = 0
+                
+            else:
+                img[-3] += 1
+                
+            img[-1] = 0
+
+        return img[0][img[-3]]
+    
+    def drawAnimations(self):
+        if self.img is not None:
+            if Main.zoom == 2 and self.zoomed_img==False:
+                self.zoomed_img=True
+                zoomey=2   
+                for i in range(len(Main.controller.img[0])):
+                    Main.controller.img[0][i]=pygame.transform.scale(Main.controller.img[0][i],(Main.controller.img[0][i].get_width()*zoomey,Main.controller.img[0][i].get_height()*zoomey))
+            elif Main.zoom==1 and self.zoomed_img==True:
+                self.zoomed_img=False
+                zoomey=0.5
+                for i in range(len(Main.controller.img[0])):
+                    Main.controller.img[0][i]=pygame.transform.scale(Main.controller.img[0][i],(Main.controller.img[0][i].get_width()*zoomey,Main.controller.img[0][i].get_height()*zoomey))
+
+            if self.atkedUnit!=None:
+                
+                current_frame=self.controlAnimation(self.img)
+                Main.unit_layer.blit(current_frame,(self.atkedUnit.center[0],self.atkedUnit.center[1]))
+                if self.img[-3]==len(self.img[0])-1:
+                    equipment.atk_animation[-3]=0 
+                    self.atkedUnit=None
+                    return
 
     #overlay informativo al clic su un oggetto
     def createObjectOverlay(self,unit):
@@ -207,9 +248,10 @@ class Control:
                     unit.getParentCell()
                     #print (randomcell)
                     #print(f'{unit.x},{unit.y},{unit.id},{unit.nome}')
-                    unit.createMask()
+                    
                     randomcell.occupied = True
                     unit.flipImage()
+                    unit.createMask()
                     
     # ai_selezione unità
     def ai_select_control(self):
@@ -405,9 +447,7 @@ class Control:
                     inan.getParentCell()
                     cell.occupied=True
                 
-                
-            
-        
+       
 
 
 
