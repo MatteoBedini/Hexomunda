@@ -466,6 +466,8 @@ class Button:
                                                             if equip in equipment.all[a].keys() and equipment.all[a][equip][5]<=Main.players[0].points:
                                                                 if part=='rhand' and unit.animation[0]!=None and unit.animation[0][-4]==True:
                                                                     pass
+                                                                elif part=='lhand' and unit.inventory['rhand']!="" and equipment.all[a][self.description][7][-1]==True:
+                                                                    pass
                                                                 else:
                                                                     Main.players[0].points-=equipment.all[a][equip][5]
                                                                     unit.inventory[part]=self.description

@@ -711,7 +711,6 @@ class Unit:
         else:
             self.attacked_target = None
 
-
     def aiEndTurn(self):
         enemy = self.aiCalculateNearestEnemy()
         if (
@@ -931,6 +930,7 @@ class Unit:
                                         pass
 
         self.createMask()
+
 
         
                                      
