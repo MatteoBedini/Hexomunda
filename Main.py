@@ -26,9 +26,10 @@ elapsed_time = 0
 # costanti varie
 font = pygame.font.Font('freesansbold.ttf', 32)
 font1 = pygame.font.Font('data/fonts/Press_Start_2P/PressStart2P-Regular.ttf', 64)
-font1 = pygame.font.Font('data/fonts/yoster-island/yoster.ttf', 128)
+font1 = pygame.font.Font('freesansbold.ttf', 64)
+#font1 = pygame.font.Font('data/fonts/yoster-island/yoster.ttf', 128)
 #font1 = pygame.font.Font('data/fonts/pricedown/pricedown bl.otf', 128)
-font1 = pygame.font.Font('data/fonts/game-over/GameOver/game over.ttf', 32)
+#font1 = pygame.font.Font('data/fonts/game-over/GameOver/game over.ttf', 32)
 
 
 # Dimensioni della finestra
