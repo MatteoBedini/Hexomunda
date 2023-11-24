@@ -81,6 +81,7 @@ class Control:
                 unit.activated = False
                 unit.selected = False
                 unit.aiFinishedTurn=False
+                unit.atkOpportunityCheck=False
                 self.ai_selected = None
         
         if (

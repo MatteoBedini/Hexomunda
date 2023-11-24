@@ -435,8 +435,8 @@ while running:
                     for unit in player.units:
 
                         unit.moveAnimation()
-
-                        unit.attackAnimation(5)
+                        unit.attackOfOpportunity()
+                        unit.attackAnimation(5*zoom)
                         unit.draw(unit_layer)
                 
                 controller.drawAnimations()
