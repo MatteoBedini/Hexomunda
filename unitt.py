@@ -125,7 +125,7 @@ class Unit:
 
         return img[0][img[-3]]
     
-    def glower(self,screen):
+    def makeItGlow(self,screen):
         mouse_pos = pygame.mouse.get_pos()
         # illumino l'omino in base alla maschera se ci passo sopra col mouse
         if self.rectMask.collidepoint(mouse_pos[0], mouse_pos[1]) == True:
@@ -186,7 +186,7 @@ class Unit:
 
     # disegno
     def draw(self, screen):
-        self.glower(screen)
+        self.makeItGlow(screen)
         
         # UNIT DRAW
         
@@ -791,10 +791,11 @@ class Unit:
                 and cell not in CellsWhereAIcanMove
                 and nearest.parentcell.dts > self.atkrange
             ):
-                CellsWhereAIcanMove.append(cell)
-                CellsWhereAIcanMove_dist.append(
-                    Main.dist(cell.center[0], nearest.x, cell.center[1], nearest.y)
-                )
+                if nearest.parentcell.dts-cell.dts>=self.atkrange:
+                    CellsWhereAIcanMove.append(cell)
+                    CellsWhereAIcanMove_dist.append(
+                        Main.dist(cell.center[0], nearest.x, cell.center[1], nearest.y)
+                    )
         CellsWhereAIcanMove_dist.sort()
         for hex in CellsWhereAIcanMove:
             if (
