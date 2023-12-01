@@ -38,6 +38,7 @@ class Unit:
 
         self.totmovepts = 1
         self.movepts = 1
+        self.cells_where_can_move=[]
 
         self.atk = 1
         self.atkpts = 1
@@ -362,10 +363,20 @@ class Unit:
             cell.dts = 999
 
     def recalculateDts(self):
+        
         for cell in Main.hex_cells:
             cell.dtsf() # dtsf=DISTANCE TO SELECTED FUNCTION
+            if cell.dts<=self.movepts and cell not in self.cells_where_can_move:
+                self.cells_where_can_move.append(cell)
+                  
         if all(cell.dts != 999 for cell in Main.hex_cells):
+            for cell in Main.hex_cells:
+                
+
+                cell.checkForBarrier()
+            
             return
+            
         else:
             self.recalculateDts()
         
@@ -382,19 +393,19 @@ class Unit:
 
             if self.rectMask.collidepoint(mouse_pos[0], mouse_pos[1]) == 1:
                 if self.selected == False and self.activated == True:
+                    
                     for cell in Main.hex_cells:
                         cell.dts = 999
+                    
                     self.selected = True
                     # print("selected")
                     Main.controller.selectedd = self
+                
                     self.getParentCell()
 
+                    self.cells_where_can_move = []
                     if self.moved == False:
                         self.recalculateDts()
-
-                    """ if self.moved == False:
-                        hexcell.dtsf2(self.parentcell) """
-
                 # DESELEZIONE CLICCANDO SU SE STESSO
                 elif self.selected == True:
                     self.deselect()
@@ -429,6 +440,7 @@ class Unit:
                 for cell in Main.hex_cells:
                     cell.dts = 999
                 self.getParentCell()
+                self.cells_where_can_move = []
                 if self.moved == False:
                     self.recalculateDts()
             else:
@@ -452,6 +464,7 @@ class Unit:
                         and cell != self.parentcell
                         and cell.dts <= self.movepts
                         and not cell.occupied
+                        and not cell.blockedForMovement
                     ):
                         # flip img
                         mouse_pos = pygame.mouse.get_pos()
@@ -461,12 +474,13 @@ class Unit:
                             self.flipChecker = True
 
                         elif mouse_pos[0] > self.x and self.flipChecker == True:
-                            print("ciao")
+
                             self.flipImage()
 
                             self.flipChecker = False
                         else:
                             pass
+                       
 
                         self.movepts -= cell.dts
                         self.move_target = cell
@@ -514,20 +528,22 @@ class Unit:
     def moveAnimation(self):
         if self.moved:
             for cell in Main.hex_cells:
+                cell.blockedForMovement = False
                 cell.dts = 999
+            
             self.getParentCell()
             self.createMask()
             self.move_target = None
 
-            self.recalculateDts()
-            """ for cell in Main.hex_cells:
-                        while cell.dts == 999:
-                            for hex in Main.hex_cells:
-                                hex.dtsf() """
-
+            #self.recalculateDts()
+ 
             self.moving = False
             # print('movimento finito')
             Main.controller.actingUnit = None
+            Main.controller.checkOccupiedCells()
+            self.cells_where_can_move = []
+            self.recalculateDts()
+ 
             self.moved = False
             
         if self.move_target != None:
@@ -597,8 +613,8 @@ class Unit:
                             Main.controller.atkedUnit=unit
                             Main.controller.img=equipment.atk_animation
                         else:
-                            Main.controller.rngAtkedUnit=unit
-                            Main.controller.img=equipment.ranged_atk_animation
+                           Main.controller.rngAtkedUnit=unit
+                           Main.controller.img=equipment.ranged_atk_animation
                         self.middle = self.calculateMidPoint()
                         unit.hp -= self.atk
                         self.atkpts -= 1
@@ -790,6 +806,7 @@ class Unit:
                 and cell.occupied == False
                 and cell not in CellsWhereAIcanMove
                 and nearest.parentcell.dts > self.atkrange
+                and not cell.blockedForMovement 
             ):
                 if nearest.parentcell.dts-cell.dts>=self.atkrange:
                     CellsWhereAIcanMove.append(cell)

@@ -290,7 +290,7 @@ class Control:
 
     def InanimatePlace(self):
          #faccio piazzare all' ai degli oggetti inanimati randomicamente tra la seconda e la penultima colonna
-        if len(Main.inanimated_in_game)<=5:
+        if len(Main.inanimated_in_game)<=10:
             for inanimatedd in Main.inanimate_objects_inventory:
                 random_count=0
                 while random_count <= random.randint(1,3):
@@ -376,9 +376,9 @@ class Control:
         
 
         
-        Main.cell_layer=pygame.transform.scale(Main.cell_layer,(Main.cell_layer.get_width()*zoomey,Main.cell_layer.get_height()*zoomey))
+        """ Main.cell_layer=pygame.transform.scale(Main.cell_layer,(Main.cell_layer.get_width()*zoomey,Main.cell_layer.get_height()*zoomey))
         Main.cell_layer2=pygame.transform.scale(Main.cell_layer2,(Main.cell_layer2.get_width()*zoomey,Main.cell_layer2.get_height()*zoomey))
-        Main.unit_layer=pygame.transform.scale(Main.unit_layer,(Main.unit_layer.get_width()*zoomey,Main.unit_layer.get_height()*zoomey))
+        Main.unit_layer=pygame.transform.scale(Main.unit_layer,(Main.unit_layer.get_width()*zoomey,Main.unit_layer.get_height()*zoomey)) """
         for player in Main.players:
             for unit in player.units:
                 
@@ -457,8 +457,7 @@ class Control:
                     cell.occupied=True
                 
        
-
-
+ 
 
        
         

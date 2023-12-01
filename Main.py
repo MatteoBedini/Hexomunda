@@ -10,6 +10,7 @@ from control import Control
 from button import Button
 from inanimate import Inanimated
 from layout import Layout
+from polygon import Polygono
 
 
 
@@ -77,6 +78,7 @@ pygame.display.set_caption("Warbands")
 HEX_RADIUS = 50  # Raggio dell'esagono
 ROW_COUNT = random.randrange(7,9)   # Numero di righe
 COL_COUNT = random.randrange(13,15)   # Numero di colonne
+APOTEMA= math.floor(math.sqrt(3) * HEX_RADIUS)/2
 
 # Calcola le dimensioni totali della griglia esagonale
 grid_width = 1.5 * HEX_RADIUS * COL_COUNT
@@ -86,6 +88,7 @@ grid_y = height/5  # Calcola la posizione Y per centrare la griglia
 
 #variabili varie
 speed=10
+
 
 
 # funzioni generali
@@ -100,6 +103,20 @@ def maximum(a, b):
         return a
     else:
         return b
+    
+def getLinePoints(punto1, punto2):
+        punti = []
+        distanza_x = punto2[0] - punto1[0]
+        distanza_y = punto2[1] - punto1[1]
+        distanza_totale = int(max(abs(distanza_x), abs(distanza_y)))
+
+        for i in range(distanza_totale + 1):
+            x = punto1[0] + (i / distanza_totale) * distanza_x
+            y = punto1[1] + (i / distanza_totale) * distanza_y
+            punti.append((round(x), round(y)))
+
+        return punti
+
 
 
 # classe cursor MOUSE
@@ -249,6 +266,32 @@ inanimated_in_game=[]
 #layout
 layout=Layout()
 
+""" dis=math.floor(50*math.sqrt(3))
+incl=math.floor(1000*math.sqrt(3)/3)
+traps=[]
+trap_dx=Polygono([[50+25,-dis/2],[50+25,dis-dis/2],[50+25+1000,dis+incl-dis/2],[50+25+1000,0-incl-dis/2]],'dx')
+traps.append(trap_dx)
+
+trap_sx=Polygono([[-50-25,-dis/2],[-50-25,dis-dis/2],[-50-25-1000,dis+incl-dis/2],[-50-25-1000,0-incl-dis/2]],'sx')
+trap_sx.color=(125,125,0,120)
+traps.append(trap_sx)
+
+trap_up_dx=Polygono([[0,-dis],[50+25,-dis/2],[0+dis+1000,-dis/2-incl],[0,-dis-1000]],'updx')
+trap_up_dx.color=(125,125,253,120)
+traps.append(trap_up_dx)
+
+trap_up_sx=Polygono([[0,-dis],[-50-25,-dis/2],[-50-25-1000,0-incl-dis/2],[0,-dis-1000]],'upsx')
+trap_up_sx.color=(125,12,12,120)
+traps.append(trap_up_sx)
+
+trap_down_dx=Polygono([[0,+dis],[50+25,dis-dis/2],[50+25+1000,dis+incl-dis/2],[0,dis+1000]],'dwdx')
+trap_down_dx.color=(125,15,232,120)
+traps.append(trap_down_dx)
+
+trap_down_sx=Polygono([[-50-25,dis-dis/2],[0,+dis],[0,dis+1000],[-50-25-1000,dis+incl-dis/2]],'dwsx')
+trap_down_sx.color=(190,121,12,120)
+traps.append(trap_down_sx) """
+
 # Ciclo di gioco
 # ----------------------------------------------------------------------------------------------------------------------------------------------------
 running = True
@@ -268,9 +311,10 @@ while running:
     overlay_menu_box_layer.fill((0, 0, 0, 0))  
     overlay_menu_buttons_layer.fill((0, 0, 0, 0))  
     overlays_layer.fill((0, 0, 0, 0))  
-    layout_layer.fill((0, 0, 0, 0))
+    #layout_layer.fill((0, 0, 0, 0))
 
     layout.draw(layout_layer)
+
 
     match room.roomNumber:
 
@@ -462,6 +506,7 @@ while running:
 
                     elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                         if controller.gameFase==1:
+                            
                             for player in players:
                                 for unit in player.units:
                                     controller.createObjectOverlay(unit)
