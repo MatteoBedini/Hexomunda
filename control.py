@@ -290,7 +290,7 @@ class Control:
 
     def InanimatePlace(self):
          #faccio piazzare all' ai degli oggetti inanimati randomicamente tra la seconda e la penultima colonna
-        if len(Main.inanimated_in_game)<=10:
+        if len(Main.inanimated_in_game)<=8:
             for inanimatedd in Main.inanimate_objects_inventory:
                 random_count=0
                 while random_count <= random.randint(1,3):
