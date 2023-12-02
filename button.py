@@ -382,7 +382,7 @@ class Button:
 
                                         elif self.description=='add':
 
-                                            if Main.players[0].points>0:
+                                            if Main.players[0].points-5>=0:
                                                 a=self.relatedObject.relatedObject
 
                                                 new_unit=unitt.Unit(a.ai,a.id,a.nome,a.race) #creo una nuova unita uguale alla unita dell'inventario nel Main
@@ -463,7 +463,7 @@ class Button:
                                                         if a==part:
 
 
-                                                            if equip in equipment.all[a].keys() and equipment.all[a][equip][5]<=Main.players[0].points:
+                                                            if equip in equipment.all[a].keys() and Main.players[0].points-equipment.all[a][equip][5]>=0:
                                                                 #se l'unita ha un arma a due mani nella lhand passo
                                                                 if part=='rhand' and unit.animation[0]!=None and unit.animation[0][-4]==True:
                                                                     pass
@@ -474,7 +474,7 @@ class Button:
                                                                     pass
                                                                 elif part=='rhand' and unit.inventory['lhand']!="" and equipment.all[a][self.description][7][-1]==True:
                                                                     pass
-                                                                
+
                                                                 else:
                                                                     Main.players[0].points-=equipment.all[a][equip][5]
                                                                     unit.inventory[part]=self.description
