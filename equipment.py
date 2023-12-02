@@ -82,10 +82,13 @@ all['rhand']={  #goblins
                 'goblin shield': [1,0,0,0,0,2,load('./media/races/goblin/goblin_base_shield_0.png'),('./media/races/goblin/animations/','goblin_base_shield_0',4)],
                 #humans
                 'human shield': [1,0,0,0,0,2,load('./media/races/human/human_base_shield_0.png'),('./media/races/human/animations/','human_base_shield_0',4)],
+                'human crossbow':[0,1,0,0,2,8,load('./media/races/human/human_crossbow_0.png'),('./media/races/human/animations/','human_crossbow_0',4,True)],
                 #orcs
                 'orc shield': [1,0,0,0,0,2,load('./media/races/orc/orc_base_shield_0.png'),('./media/races/orc/animations/','orc_base_shield_0',4)],
                 #dwarves
                 'dwarf shield': [1,0,0,0,0,2,load('./media/races/dwarf/dwarf_blue_shield_0.png'),('./media/races/dwarf/animations/','dwarf_blue_shield_0',4)],
+
+
                 
                }
 

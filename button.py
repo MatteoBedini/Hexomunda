@@ -464,10 +464,17 @@ class Button:
 
 
                                                             if equip in equipment.all[a].keys() and equipment.all[a][equip][5]<=Main.players[0].points:
+                                                                #se l'unita ha un arma a due mani nella lhand passo
                                                                 if part=='rhand' and unit.animation[0]!=None and unit.animation[0][-4]==True:
+                                                                    pass
+                                                                #se l'unita ha un arma a due mani nella rhand passo
+                                                                elif part=='lhand' and unit.animation[3]!=None and unit.animation[3][-4]==True:
                                                                     pass
                                                                 elif part=='lhand' and unit.inventory['rhand']!="" and equipment.all[a][self.description][7][-1]==True:
                                                                     pass
+                                                                elif part=='rhand' and unit.inventory['lhand']!="" and equipment.all[a][self.description][7][-1]==True:
+                                                                    pass
+                                                                
                                                                 else:
                                                                     Main.players[0].points-=equipment.all[a][equip][5]
                                                                     unit.inventory[part]=self.description
