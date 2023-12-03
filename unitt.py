@@ -657,36 +657,37 @@ class Unit:
 
     
     def attackOfOpportunity(self):
-        if self.parentcell.dts ==1 and Main.controller.selectedd != None and Main.controller.selectedd.move_target != None and not self.activated and self.atkOpportunityCheck==False:
-            
-            self.atkOpportunityCheck=True
-         # flip image
-            if Main.controller.selectedd.x > self.x and self.flipChecker == False:
-                self.flipImage()
-                self.flipChecker = True
-            elif Main.controller.selectedd.x < self.x and self.flipChecker == True:
-                increment = 0
-                self.flipImage()
-                self.flipChecker = False
-            else:
-                pass
+        if self.parentcell!=None:
+            if self.parentcell.dts ==1 and Main.controller.selectedd != None and Main.controller.selectedd.move_target != None and not self.activated and self.atkOpportunityCheck==False:
+                
+                self.atkOpportunityCheck=True
+            # flip image
+                if Main.controller.selectedd.x > self.x and self.flipChecker == False:
+                    self.flipImage()
+                    self.flipChecker = True
+                elif Main.controller.selectedd.x < self.x and self.flipChecker == True:
+                    increment = 0
+                    self.flipImage()
+                    self.flipChecker = False
+                else:
+                    pass
 
-            self.start_x = self.x
-            self.start_y = self.y
-            self.attacked_target = Main.controller.selectedd  # per l'animazione di attacco
-            if self.atkrange<2:
-                Main.controller.atkedUnit=Main.controller.selectedd
-                Main.controller.img=equipment.atk_animation
-            else:
-                Main.controller.rngAtkedUnit=Main.controller.selectedd
-                Main.controller.img=equipment.ranged_atk_animation
-            self.middle = self.calculateMidPoint()
-            Main.controller.selectedd.hp -= self.atk
-            self.atkpts -= 1
-            if Main.controller.selectedd.hp <= 0:
-                Main.controller.kill(Main.controller.selectedd)
-                Main.controller.selectedd = None
-                Main.controller.actingUnit = None
+                self.start_x = self.x
+                self.start_y = self.y
+                self.attacked_target = Main.controller.selectedd  # per l'animazione di attacco
+                if self.atkrange<2:
+                    Main.controller.atkedUnit=Main.controller.selectedd
+                    Main.controller.img=equipment.atk_animation
+                else:
+                    Main.controller.rngAtkedUnit=Main.controller.selectedd
+                    Main.controller.img=equipment.ranged_atk_animation
+                self.middle = self.calculateMidPoint()
+                Main.controller.selectedd.hp -= self.atk
+                self.atkpts -= 1
+                if Main.controller.selectedd.hp <= 0:
+                    Main.controller.kill(Main.controller.selectedd)
+                    Main.controller.selectedd = None
+                    Main.controller.actingUnit = None
 
     # calcola il punto medio
     def calculateMidPoint(self):
@@ -897,7 +898,7 @@ class Unit:
                 "./media/races/goblin/goblin_base_head_0.png"
             )
             self.orig_img[2] = self.img[2]
-            self.atkpts += 1
+            #self.atkpts += 1
             self.movepts += 2
             self.totmovepts += 2
 
@@ -912,8 +913,8 @@ class Unit:
                                                   "dwarf_base_head_0",4,animation_speed=0.2)
             self.img[2] = pygame.image.load("./media/races/dwarf/dwarf_base_head_0.png")
             self.orig_img[2] = self.img[2]
-            self.hp += 3
-            self.maxhp += 3
+            self.hp += 4
+            self.maxhp += 4
 
         elif self.race == "elf":
             self.img[1] = pygame.image.load("./media/races/orc/orc_base_body_0.png")

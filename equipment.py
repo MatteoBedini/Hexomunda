@@ -46,6 +46,7 @@ all={}
 
 all['head']={   #goblins
                 'goblin hood 1': [1,0,0,0,0,2,load('./media/races/goblin/goblin_base_hood_0.png'),('./media/races/goblin/animations/','goblin_base_hood_0',4)],
+                'goblin hood 2': [1,0,0,0,0,2,load('./media/races/goblin/goblin_base_hood_1.png'),('./media/races/goblin/animations/','goblin_base_hood_1',4)],
                 'goblin boss hood': [2,0,0,0,0,4,load('./media/races/goblin/goblin_boss_hood_0.png'),('./media/races/goblin/animations/','goblin_boss_hood_0',4)],
                 'goblin cap': [1,0,0,0,0,2,load('./media/races/goblin/goblin_base_cap_0.png'),('./media/races/goblin/animations/','goblin_base_cap_0',4)],
                 #humans
@@ -60,6 +61,7 @@ all['head']={   #goblins
                 #dwarves
                 'dwarf helmet 1': [1,0,0,0,0,2,load('./media/races/dwarf/dwarf_winged_helmet_0.png'),('./media/races/dwarf/animations/','dwarf_winged_helmet_0',4)],
                 'dwarf lord helm': [2,0,0,0,0,4,load('./media/races/dwarf/dwarf_lord_horned_helm_0.png'),('./media/races/dwarf/animations/','dwarf_lord_horned_helm_0',4)],
+                'dwarf helmet 0': [1,0,0,0,0,2,load('./media/races/dwarf/dwarf_base_helm_0.png'),('./media/races/dwarf/animations/','dwarf_base_helm_0',4)],
 
 }
 
@@ -79,10 +81,13 @@ all['body']={   #goblins
 }
 
 all['rhand']={  #goblins
-                'goblin shield': [1,0,0,0,0,2,load('./media/races/goblin/goblin_base_shield_0.png'),('./media/races/goblin/animations/','goblin_base_shield_0',4)],
+                'goblin moon shield': [1,0,0,0,0,2,load('./media/races/goblin/goblin_base_shield_0.png'),('./media/races/goblin/animations/','goblin_base_shield_0',4)],
+                'goblin spear': [0,1,0,0,0,8,load('./media/races/goblin/goblin_pike_0.png'),('./media/races/goblin/animations/','goblin_pike_0',4,True)],
+                'goblin leather shield': [1,0,0,0,0,2,load('./media/races/goblin/goblin_base_shield_1.png'),('./media/races/goblin/animations/','goblin_base_shield_1',4)],
                 #humans
                 'human shield': [1,0,0,0,0,2,load('./media/races/human/human_base_shield_0.png'),('./media/races/human/animations/','human_base_shield_0',4)],
                 'human crossbow':[0,1,0,0,2,8,load('./media/races/human/human_crossbow_0.png'),('./media/races/human/animations/','human_crossbow_0',4,True)],
+                'human halberd':[0,2,0,0,0,6,load('./media/races/human/human_halberd_0.png'),('./media/races/human/animations/','human_halberd_0',4,True)],
                 #orcs
                 'orc shield': [1,0,0,0,0,2,load('./media/races/orc/orc_base_shield_0.png'),('./media/races/orc/animations/','orc_base_shield_0',4)],
                 #dwarves
@@ -100,10 +105,10 @@ all['lhand']={  #goblins
                 #orcs
                 'orc sword':[0,1,0,0,0,2,load('./media/races/orc/orc_base_sword_0.png'),('./media/races/orc/animations/','orc_base_sword_0',4)],
                 
-                'orc 2h axe':[0,2,0,0,0,4,load('./media/races/orc/orc_two_handed_axe_0.png'),('./media/races/orc/animations/','orc_two_handed_axe_0',4,True)],
+                'orc 2h axe':[0,2,0,0,0,6,load('./media/races/orc/orc_two_handed_axe_0.png'),('./media/races/orc/animations/','orc_two_handed_axe_0',4,True)],
                 #dwarves
                 'dwarf axe':[0,1,0,0,0,2,load('./media/races/dwarf/dwarf_axe_0.png'),('./media/races/dwarf/animations/','dwarf_axe_0',4)],
-                'dwarf 2h axe':[0,2,0,0,0,4,load('./media/races/dwarf/dwarf_2h_axe_0.png'),('./media/races/dwarf/animations/','dwarf_2h_axe_0',4,True)],
+                'dwarf 2h axe':[0,2,0,0,0,6,load('./media/races/dwarf/dwarf_2h_axe_0.png'),('./media/races/dwarf/animations/','dwarf_2h_axe_0',4,True)],
                
                }
 

@@ -329,12 +329,6 @@ while running:
 
 
             for event in pygame.event.get():
-                """ if event.type == pygame.KEYDOWN and event.key == pygame.K_f:
-                    screen=pygame.display.set_mode((1280,720),pygame.RESIZABLE)
-                    resize_x=(1280-controller.screenSize[0])/2
-                    resize_y=(720-controller.screenSize[1])/2
-                    controller.screenSize=(1280,720)
-                    controller.AdaptObjectsToScreenSize(resize_x,resize_y) """
 
 
                 if event.type == pygame.QUIT:
@@ -349,13 +343,6 @@ while running:
                 button.input()
 
             for event in pygame.event.get():
-
-                """ if event.type == pygame.VIDEORESIZE:
-                    screen=pygame.display.set_mode((event.w,event.h),pygame.RESIZABLE)
-                    resize_x=(event.w-controller.screenSize[0])/2
-                    resize_y=(event.h-controller.screenSize[1])/2
-                    controller.screenSize=(event.w,event.h)
-                    controller.AdaptObjectsToScreenSize(resize_x,resize_y) """
 
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                     room.roomNumber=0
@@ -420,7 +407,7 @@ while running:
                 controller.checkOccupiedCells()
                 for player in players:
                     player.ai_units_random_choice()
-                    if player.ai==True and player.points<=0:
+                    if player.ai==True and player.ai_selection_ended==True:
                             controller.ai_pos()
 
                 menu1.draw(menu_box_layer)
