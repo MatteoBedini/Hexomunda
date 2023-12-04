@@ -117,3 +117,26 @@ all['lhand']={  #goblins
 #various animations
 atk_animation=loadAnimation('./media/various_anims/','attack',7,animation_speed=0.05)
 ranged_atk_animation=loadAnimation('./media/various_anims/','ranged',7,animation_speed=0.05)
+
+
+#button sprites
+button_bg=[pygame.image.load('./media/layouts_and_menus/layout_try_middle.png'),
+            pygame.image.load('./media/layouts_and_menus/layout_try_up.png'),
+            pygame.image.load('./media/layouts_and_menus/layout_try_down.png'),
+            pygame.image.load('./media/layouts_and_menus/layout_try_left.png'),
+            pygame.image.load('./media/layouts_and_menus/layout_try_right.png'),
+            pygame.image.load('./media/layouts_and_menus/layout_try_up_dx_empty.png'),
+            pygame.image.load('./media/layouts_and_menus/layout_try_down_dx_empty.png'),
+            pygame.image.load('./media/layouts_and_menus/layout_try_up_sx_empty.png'),
+            pygame.image.load('./media/layouts_and_menus/layout_try_down_sx_empty.png')] 
+
+small_button_bg=[pygame.image.load('./media/layouts_and_menus/layout_try_middle.png'),
+                    pygame.image.load('./media/layouts_and_menus/layout_try_up.png'),
+                    pygame.image.load('./media/layouts_and_menus/layout_try_down.png'),
+                    pygame.image.load('./media/layouts_and_menus/layout_try_left.png'),
+                    pygame.image.load('./media/layouts_and_menus/layout_try_right.png'),
+                    pygame.image.load('./media/layouts_and_menus/layout_try_up_dx_empty_round.png'),
+                    pygame.image.load('./media/layouts_and_menus/layout_try_down_dx_empty_round.png'),
+                    pygame.image.load('./media/layouts_and_menus/layout_try_up_sx_empty_round.png'),
+                    pygame.image.load('./media/layouts_and_menus/layout_try_down_sx_empty_round.png')]
+        

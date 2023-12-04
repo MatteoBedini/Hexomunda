@@ -3,6 +3,7 @@ import Main
 import button
 import control
 import equipment
+from ui_others import *
 
 class Menu:
     def __init__(self,width,height,x,y,type):
@@ -13,6 +14,7 @@ class Menu:
         self.rect=pygame.Rect(x,y,width,height)
         self.type=type
         self.buttons=[]
+        
         self.rect1=pygame.Rect(0,0,100,100)
         # self.img=[middle,up,down,left,right,up_dx,down_dx,up_sx,down_sx]
         self.img=[pygame.image.load('./media/layouts_and_menus/layout_try_middle.png'),
@@ -59,21 +61,18 @@ class Menu:
         self.rect=pygame.Rect(self.x,self.y,self.width,self.height)
         self.calculateImgDraw(screen)
         match self.type: 
+
             case 'mainmenu':                                        #mainmenu
-                
                 self.addButtons()
                 for button in self.buttons:
                     button.draw(Main.menu_buttons_layer)
+
 
             case 'options':                                          #options menu
-                
                 self.addButtons()
                 for button in self.buttons:
-                
                     button.draw(Main.menu_buttons_layer)
-
-
-
+                
             case 'skirmish':                                        #skirmish menu
 
                 
@@ -155,8 +154,6 @@ class Menu:
                     self.buttons.append(button.Button(self.x+self.width/2-60,self.y+150,120,90,'options','1280x720',None))
                     self.buttons.append(button.Button(self.x+self.width/2-60,self.y+250,120,90,'options','800x600',None))
                     
-
-
                 case 'skirmish':  #skirmish menu
                     
                     distance_between_buttons=(self.height/100)*15
@@ -170,10 +167,6 @@ class Menu:
                     distance_between_buttons+=(self.height/100)*15
                     self.buttons.append(button.Button(self.x+60,self.y+distance_between_buttons,40,40,'skirmish','60',None,'Small'))    #30 punti
                     
-                    
-
-                    
-                
                 case 'unitsInventoryMenu':  #units inventory menu
                     increment=20 
                     for unit in Main.units_type_INVENTORY:
@@ -193,24 +186,6 @@ class Menu:
                 case 'shop_overlay':  #shop overlay
                     #creo un pulsante per ogni equipaggiamento
                     increment=30
-                    for equipgroups in equipment.all.values():
-                        for equip in equipgroups.keys():
-                             if relatedObject.relatedObject.race in equip:
-
-                                equip_button=button.Button(
-
-                                    Main.shop_overlay_menu.x+20,
-                                    Main.shop_overlay_menu.y+increment+20,
-                                    Main.shop_overlay_menu.width/3,
-                                    Main.shop_overlay_menu.height/14,
-                                    'unitsInventoryMenu_buy',
-                                    f'{equip}',
-                                    relatedObject,
-                                    )
-
-                                Main.shop_overlay_menu.buttons.append(equip_button)
-                                increment+=60
-
                     close_Shop_Button=button.Button(
                         Main.shop_overlay_menu.x+Main.shop_overlay_menu.width-80,
                         Main.shop_overlay_menu.y+Main.shop_overlay_menu.height-60,
@@ -220,9 +195,47 @@ class Menu:
                         'close',
                         None
                     )
+                    scrollbar=Scrollbar(
+                                        Main.shop_overlay_menu.x+10,
+                                        Main.shop_overlay_menu.y+30,
+                                        20,
+                                        Main.shop_overlay_menu.height-40
+                                    )
                     Main.shop_overlay_menu.buttons.append(close_Shop_Button)
+                    for equipgroups in equipment.all.values():
+                        for equip in equipgroups.keys():
+                             
+                            if relatedObject.relatedObject.race in equip:
 
-                
+                                
+                                equip_button=button.Button(
+
+                                    Main.shop_overlay_menu.x+40,
+                                    scrollbar.scroller.y+increment,
+                                    Main.shop_overlay_menu.width/3,
+                                    Main.shop_overlay_menu.height/14,
+                                    'unitsInventoryMenu_buy',
+                                    f'{equip}',
+                                    relatedObject,
+                                    )
+                                equip_button.distanceFromFirstBrotherButton=increment
+                                if equip_button.y>Main.shop_overlay_menu.y+Main.shop_overlay_menu.height-60:
+                                    scrollbar.color=(0,0,0,120)
+                                    scrollbar.scroller.color=(125,125,125,120)
+                                    Main.shop_overlay_menu.buttons.append(equip_button)
+                                    equip_button.img=None
+                                    equip_button.img_bg=None
+                                    equip_button.img_shadow=None
+                                    Main.scrollbars.append(scrollbar)
+                                else:
+                                    scrollbar.color=(0,0,0,0)
+                                    scrollbar.scroller.color=(125,125,125,0)
+                                    Main.shop_overlay_menu.buttons.append(equip_button)
+                                    increment+=60
+                                
+
+                    
+
                 case 'upi':        #unit placing interface
                     increment=20
                     self.buttons.append(button.Button(self.x+self.width-120,self.y+self.height-120,80,40,'upi','start',None))
@@ -237,7 +250,18 @@ class Menu:
                     buy_button=button.Button(unit.center[0]+10,unit.center[1]+50,40,25,'unitsInventoryMenu','buy',unit)
                     if buy_button not in self.buttons:
                         self.buttons.append(buy_button)
+                
+                
+
+
+
                     
+
+                    
+                
+                    
+
+
 
 
 

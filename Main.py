@@ -225,7 +225,7 @@ menus=[]                                    #lista di tutti i menu
 
 mainMenu=Menu(screen.get_width()/4,screen.get_height()/2,screen.get_width()/2-screen.get_width()/8,screen.get_height()/4,'mainmenu')                       #menu principale
 
-unitsInventoryMenu=Menu(screen.get_width()/2,screen.get_height()/2,screen.get_width()/2-screen.get_width()/4,screen.get_height()/4,'unitsInventoryMenu')   #menu per l'inventario di unità
+unitsInventoryMenu=Menu(screen.get_width()/3,screen.get_height()/2,screen.get_width()/2-screen.get_width()/4,screen.get_height()/4,'unitsInventoryMenu')   #menu per l'inventario di unità
 
 menu1=Menu(screen.get_width()-300,130,150,0+height-140,'upi')                                     #menu for unit placing in grid
 
@@ -236,7 +236,7 @@ skirmish_menu=Menu(screen.get_width()/4,screen.get_height()/2,screen.get_width()
 options_menu=Menu(screen.get_width()-600,450,300,0+height-700,'options')                       #menu opzioni
 
 shop_overlay_active=False
-shop_overlay_menu=Menu(screen.get_width()/4,screen.get_height()/100*70,unitsInventoryMenu.x+unitsInventoryMenu.width-screen.get_width()/4,unitsInventoryMenu.y-(screen.get_height()/100*70-unitsInventoryMenu.height)/2,'shop_overlay')
+shop_overlay_menu=Menu(screen.get_width()/4,screen.get_height()/100*70,unitsInventoryMenu.x+unitsInventoryMenu.width,unitsInventoryMenu.y-(screen.get_height()/100*70-unitsInventoryMenu.height)/2,'shop_overlay')
 #shop_overlay_buttons=[]
 #shop_overlay_rect=pygame.Rect(300,300,screen.get_width()/2,screen.get_height()/2)
 
@@ -248,6 +248,8 @@ menus.append(skirmish_menu)
 menus.append(options_menu)
 
 
+#others
+scrollbars=[]
 # definizione dell'appartenenza al giocatore delle unit
 for player in players:
     for unit in player.units:
@@ -389,6 +391,11 @@ while running:
                 for button in shop_overlay_menu.buttons:
                     button.draw(overlay_menu_buttons_layer)
                     button.input()
+                    button.otherEvents()
+                
+                for scrollbar in scrollbars:
+                    scrollbar.draw(overlay_menu_buttons_layer)
+                    scrollbar.scroller.input()
 
 
             for event in pygame.event.get():
