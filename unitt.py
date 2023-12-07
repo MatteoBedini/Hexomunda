@@ -853,13 +853,13 @@ class Unit:
         if self.race == "human":
             self.animated=True
             self.animation[1] = equipment.loadAnimation("./media/races/human/animations/",
-                                                  "human_base_body_0",4,animation_speed=0.2)
+                                                  "human_base_body_0",4)
 
             self.img[1] = pygame.image.load("./media/races/human/human_base_body_0.png")
             self.orig_img[1] = self.img[1]
 
             self.animation[2] = equipment.loadAnimation("./media/races/human/animations/",
-                                                  "human_base_head_0",4,animation_speed=0.2)
+                                                  "human_base_head_0",4)
             self.img[2] = pygame.image.load("./media/races/human/human_base_head_0.png")
             self.orig_img[2] = self.img[2]
 
@@ -871,13 +871,13 @@ class Unit:
         elif self.race == "orc":
             self.animated=True
             self.animation[1] = equipment.loadAnimation("./media/races/orc/animations/",
-                                                  "orc_base_body_0",4,animation_speed=0.2)
+                                                  "orc_base_body_0",4)
 
             self.img[1] = pygame.image.load("./media/races/orc/orc_base_body_0.png")
             self.orig_img[1] = self.img[1]
 
             self.animation[2] = equipment.loadAnimation("./media/races/orc/animations/",
-                                                  "orc_base_head_0",4,animation_speed=0.2)
+                                                  "orc_base_head_0",4)
             self.img[2] = pygame.image.load("./media/races/orc/orc_base_head_0.png")
             self.orig_img[2] = self.img[2]
             self.hp += 2
@@ -887,13 +887,13 @@ class Unit:
         elif self.race == "goblin":
             self.animated=True
             self.animation[1] = equipment.loadAnimation("./media/races/goblin/animations/",
-                                                  "goblin_base_body_0",4,animation_speed=0.2)
+                                                  "goblin_base_body_0",4)
             self.img[1] = pygame.image.load(
                 "./media/races/goblin/goblin_base_body_0.png"
             )
             self.orig_img[1] = self.img[1]
             self.animation[2] = equipment.loadAnimation("./media/races/goblin/animations/",
-                                                  "goblin_base_head_0",4,animation_speed=0.2)
+                                                  "goblin_base_head_0",4)
             self.img[2] = pygame.image.load(
                 "./media/races/goblin/goblin_base_head_0.png"
             )
@@ -905,12 +905,12 @@ class Unit:
         elif self.race == "dwarf":
             self.animated=True
             self.animation[1] = equipment.loadAnimation("./media/races/dwarf/animations/",
-                                                  "dwarf_base_body_0",4,animation_speed=0.2)
+                                                  "dwarf_base_body_0",4)
             self.img[1] = pygame.image.load("./media/races/dwarf/dwarf_base_body_0.png")
             self.orig_img[1] = self.img[1]
 
             self.animation[2] = equipment.loadAnimation("./media/races/dwarf/animations/",
-                                                  "dwarf_base_head_0",4,animation_speed=0.2)
+                                                  "dwarf_base_head_0",4)
             self.img[2] = pygame.image.load("./media/races/dwarf/dwarf_base_head_0.png")
             self.orig_img[2] = self.img[2]
             self.hp += 4

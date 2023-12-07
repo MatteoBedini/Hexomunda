@@ -1514,6 +1514,7 @@
    'C:\\Program '
    'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_3.11.1776.0_x64__qbz5n2kfra8p0\\Lib\\typing.py',
    'PYMODULE'),
+  ('ui_others', 'F:\\wa\\pythongames\\Hexomunda\\ui_others.py', 'PYMODULE'),
   ('unitt', 'F:\\wa\\pythongames\\Hexomunda\\unitt.py', 'PYMODULE'),
   ('unittest',
    'C:\\Program '

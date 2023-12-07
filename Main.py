@@ -14,6 +14,7 @@ from polygon import Polygono
 
 
 
+
 # Inizializza Pygame
 pygame.init()
 
@@ -313,7 +314,7 @@ while running:
     overlay_menu_box_layer.fill((0, 0, 0, 0))  
     overlay_menu_buttons_layer.fill((0, 0, 0, 0))  
     overlays_layer.fill((0, 0, 0, 0))  
-    #layout_layer.fill((0, 0, 0, 0))
+    layout_layer.fill((0, 0, 0, 0))
 
     layout.draw(layout_layer)
 
