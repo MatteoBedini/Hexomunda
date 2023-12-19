@@ -39,7 +39,7 @@ width = 1920
 height = 1080
 layers=[]
 
-screen = pygame.display.set_mode((width, height),pygame.FULLSCREEN)  # z-index=0 #sopra non ci va niente,solo lo sfondo
+screen = pygame.display.set_mode((width, height),pygame.FULLSCREEN,pygame.HWSURFACE | pygame.DOUBLEBUF)  # z-index=0 #sopra non ci va niente,solo lo sfondo
 cell_layer = pygame.Surface((width, height), pygame.SRCALPHA)  # z-index=1
 cell_layer2=pygame.Surface((width, height), pygame.SRCALPHA)  # z-index=2
 unit_layer = pygame.Surface((width, height), pygame.SRCALPHA)  # z-index=3
@@ -50,7 +50,8 @@ overlay_menu_box_layer = pygame.Surface((width, height), pygame.SRCALPHA)  #z-in
 overlay_menu_buttons_layer = pygame.Surface((width, height), pygame.SRCALPHA)  #z-index=8
 layout_layer = pygame.Surface((width, height), pygame.SRCALPHA)  #z-index=9
 
-
+vw=screen.get_width()
+vh=screen.get_height()
 
 
 zoom=1
@@ -71,7 +72,7 @@ layers.append(layout_layer)
 
 
 
-FPS=120
+
 
 pygame.display.set_caption("Warbands")
 
@@ -218,6 +219,7 @@ units_type_INVENTORY.append(
     )
 )
 
+all_races=[[],[],[],[]]
 
 
 
@@ -237,7 +239,7 @@ skirmish_menu=Menu(screen.get_width()/4,screen.get_height()/2,screen.get_width()
 options_menu=Menu(screen.get_width()-600,450,300,0+height-700,'options')                       #menu opzioni
 
 shop_overlay_active=False
-shop_overlay_menu=Menu(screen.get_width()/4,screen.get_height()/100*70,unitsInventoryMenu.x+unitsInventoryMenu.width,unitsInventoryMenu.y-(screen.get_height()/100*70-unitsInventoryMenu.height)/2,'shop_overlay')
+shop_overlay_menu=Menu(screen.get_width()/3,screen.get_height()/100*70,unitsInventoryMenu.x+unitsInventoryMenu.width,unitsInventoryMenu.y-(screen.get_height()/100*70-unitsInventoryMenu.height)/2,'shop_overlay')
 #shop_overlay_buttons=[]
 #shop_overlay_rect=pygame.Rect(300,300,screen.get_width()/2,screen.get_height()/2)
 
@@ -269,32 +271,15 @@ inanimated_in_game=[]
 #layout
 layout=Layout()
 
-""" dis=math.floor(50*math.sqrt(3))
-incl=math.floor(1000*math.sqrt(3)/3)
-traps=[]
-trap_dx=Polygono([[50+25,-dis/2],[50+25,dis-dis/2],[50+25+1000,dis+incl-dis/2],[50+25+1000,0-incl-dis/2]],'dx')
-traps.append(trap_dx)
 
-trap_sx=Polygono([[-50-25,-dis/2],[-50-25,dis-dis/2],[-50-25-1000,dis+incl-dis/2],[-50-25-1000,0-incl-dis/2]],'sx')
-trap_sx.color=(125,125,0,120)
-traps.append(trap_sx)
 
-trap_up_dx=Polygono([[0,-dis],[50+25,-dis/2],[0+dis+1000,-dis/2-incl],[0,-dis-1000]],'updx')
-trap_up_dx.color=(125,125,253,120)
-traps.append(trap_up_dx)
+#init
 
-trap_up_sx=Polygono([[0,-dis],[-50-25,-dis/2],[-50-25-1000,0-incl-dis/2],[0,-dis-1000]],'upsx')
-trap_up_sx.color=(125,12,12,120)
-traps.append(trap_up_sx)
+def change_room():
 
-trap_down_dx=Polygono([[0,+dis],[50+25,dis-dis/2],[50+25+1000,dis+incl-dis/2],[0,dis+1000]],'dwdx')
-trap_down_dx.color=(125,15,232,120)
-traps.append(trap_down_dx)
+    screen.fill((16, 26, 38))
 
-trap_down_sx=Polygono([[-50-25,dis-dis/2],[0,+dis],[0,dis+1000],[-50-25-1000,dis+incl-dis/2]],'dwsx')
-trap_down_sx.color=(190,121,12,120)
-traps.append(trap_down_sx) """
-
+change_room()
 # Ciclo di gioco
 # ----------------------------------------------------------------------------------------------------------------------------------------------------
 running = True
@@ -311,31 +296,25 @@ while running:
     unit_layer.fill((0, 0, 0, 0))  
     menu_box_layer.fill((0, 0, 0, 0))  
     menu_buttons_layer.fill((0, 0, 0, 0))  
-    overlay_menu_box_layer.fill((0, 0, 0, 0))  
-    overlay_menu_buttons_layer.fill((0, 0, 0, 0))  
+    """ overlay_menu_box_layer.fill((0, 0, 0, 0))  
+    overlay_menu_buttons_layer.fill((0, 0, 0, 0))  """ 
     overlays_layer.fill((0, 0, 0, 0))  
-    layout_layer.fill((0, 0, 0, 0))
+    """ layout_layer.fill((0, 0, 0, 0)) """
 
-    layout.draw(layout_layer)
+    """ layout.draw() """
 
 
     match room.roomNumber:
-
-
         case 0:
             #MAIN MENU
-
-
             mainMenu.draw(menu_box_layer)
             for butto in mainMenu.buttons:
                 butto.input()
 
-
             for event in pygame.event.get():
-
-
                 if event.type == pygame.QUIT:
                     running = False
+
 
         case 4:
             #OPTIONS MENU
@@ -388,14 +367,14 @@ while running:
                 #draw rettangolone dell'overlay
 
 
-                shop_overlay_menu.draw(overlay_menu_box_layer)
+                shop_overlay_menu.draw(menu_box_layer)
                 for button in shop_overlay_menu.buttons:
-                    button.draw(overlay_menu_buttons_layer)
+                    button.draw(menu_buttons_layer)
                     button.input()
                     button.otherEvents()
                 
                 for scrollbar in scrollbars:
-                    scrollbar.draw(overlay_menu_buttons_layer)
+                    scrollbar.draw(menu_buttons_layer)
                     scrollbar.scroller.input()
 
 
@@ -521,19 +500,29 @@ while running:
     screen.blit(cell_layer,(resizable_layer_x,resizable_layer_y))
     screen.blit(cell_layer2,(resizable_layer_x,resizable_layer_y))
     screen.blit(unit_layer,(resizable_layer_x,resizable_layer_y))
-    screen.blit(overlays_layer,(0,0))
     screen.blit(menu_box_layer,(0,0))
     screen.blit(menu_buttons_layer,(0,0))
-    screen.blit(overlay_menu_box_layer,(0,0))
-    screen.blit(overlay_menu_buttons_layer,(0,0))
+    """ screen.blit(overlay_menu_box_layer,(0,0))
+    screen.blit(overlay_menu_buttons_layer,(0,0)) """
     screen.blit(overlays_layer,(0,0))
-    screen.blit(layout_layer,(0,0))
-     
+    """ screen.blit(layout_layer,(0,0)) """
+    
+    clock.tick(144)
+    fpss = clock.get_fps()
+
+    # Print FPS to console
+    print(f"FPS: {fpss}")
 
     pygame.display.flip()
 
-    clock.tick(FPS)
+    
 
 
 # Chiudi Pygame quando esci dal ciclo di gioco
 pygame.quit()
+
+
+
+
+
+

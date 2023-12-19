@@ -187,7 +187,8 @@ class Unit:
 
     # disegno
     def draw(self, screen):
-        self.makeItGlow(screen)
+        if Main.room.roomNumber != 1:
+            self.makeItGlow(screen)
         
         # UNIT DRAW
         

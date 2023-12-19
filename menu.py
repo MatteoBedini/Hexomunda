@@ -14,6 +14,7 @@ class Menu:
         self.rect=pygame.Rect(x,y,width,height)
         self.type=type
         self.buttons=[]
+        self.startingButtons=[]
         
         self.rect1=pygame.Rect(0,0,100,100)
         # self.img=[middle,up,down,left,right,up_dx,down_dx,up_sx,down_sx]
@@ -27,6 +28,13 @@ class Menu:
                   pygame.image.load('./media/layouts_and_menus/layout_try_up_sx.png'),
                   pygame.image.load('./media/layouts_and_menus/layout_try_down_sx.png')] 
 
+        self.surface=pygame.Surface((self.width,self.height))
+        
+        self.surface.set_colorkey((0,0,0,0))
+        
+        self.blitOnSurface(self.surface)
+        self.originalSurface=self.surface.copy()
+
     def getRect(self):
         self.rect=pygame.Rect(self.x,self.y,self.width,self.height)
         
@@ -38,40 +46,36 @@ class Menu:
         
         #left, middle and right
         for i in range(repetitions_height):
-            screen.blit(self.img[3],(self.x,(i*img_height)+self.y))
-            screen.blit(self.img[4],(self.x+self.rect.width-img_width,(i*img_height)+self.y))
+            screen.blit(self.img[3],(0,(i*img_height)+0))
+            screen.blit(self.img[4],(0+self.rect.width-img_width,(i*img_height)+0))
             for j in range(1,repetitions_width-1):
-                screen.blit(self.img[0],(self.x+(j*img_width),self.y+(i*img_height)))
+                screen.blit(self.img[0],(0+(j*img_width),0+(i*img_height)))
 
         #up and down
         for i in range(repetitions_width):
-            screen.blit(self.img[1],(self.x+(i*img_width),self.y))
-            screen.blit(self.img[2],(self.x+(i*img_width),self.y+self.rect.height-img_height))
+            screen.blit(self.img[1],(0+(i*img_width),0))
+            screen.blit(self.img[2],(0+(i*img_width),0+self.rect.height-img_height))
 
         #corners
-        screen.blit(self.img[7],(self.x,self.y))
-        screen.blit(self.img[5],(self.x+self.rect.width-img_width,self.y))
-        screen.blit(self.img[8],(self.x,self.y+self.rect.height-img_height))
-        screen.blit(self.img[6],(self.x+self.rect.width-img_width,self.y+self.rect.height-img_height))
+        screen.blit(self.img[7],(0,0))
+        screen.blit(self.img[5],(0+self.rect.width-img_width,0))
+        screen.blit(self.img[8],(0,0+self.rect.height-img_height))
+        screen.blit(self.img[6],(0+self.rect.width-img_width,0+self.rect.height-img_height))
                 
             
-            
-
-    def draw(self,screen):
-        self.rect=pygame.Rect(self.x,self.y,self.width,self.height)
+    def blitOnSurface(self,screen):
+        self.rect=pygame.Rect(0,0,self.width,self.height)
         self.calculateImgDraw(screen)
         match self.type: 
 
             case 'mainmenu':                                        #mainmenu
                 self.addButtons()
-                for button in self.buttons:
-                    button.draw(Main.menu_buttons_layer)
+                
 
 
             case 'options':                                          #options menu
                 self.addButtons()
-                for button in self.buttons:
-                    button.draw(Main.menu_buttons_layer)
+                
                 
             case 'skirmish':                                        #skirmish menu
 
@@ -80,11 +84,10 @@ class Menu:
                 text_shadow=Main.font1.render('Choose the points for players to buy units and equipment', True, (68,36,52))
                 text_shadow=pygame.transform.scale(text_shadow, (self.width-20, 16))
                 text=pygame.transform.scale(text, (self.width-20, 16))
-                screen.blit(text_shadow,(self.x+10,self.y+9))
-                screen.blit(text, (self.x+10,self.y+8))
+                screen.blit(text_shadow,(10,9))
+                screen.blit(text, (10,8))
                 self.addButtons()
-                for button in self.buttons:
-                    button.draw(Main.menu_buttons_layer)
+                
 
             case 'unitsInventoryMenu':                              #units inventory menu
 
@@ -93,33 +96,26 @@ class Menu:
                 text_shadow=Main.font1.render('Choose the units to use in game', True, (68,36,52))
                 text_shadow=pygame.transform.scale(text_shadow, (self.width/2, 16))
                 text=pygame.transform.scale(text, (self.width/2, 16))
-                screen.blit(text_shadow,(self.x+10,self.y+8))
-                screen.blit(text, (self.x+10,self.y+7))
-                text=Main.font1.render('Points remaining: ' + str(Main.players[0].points), True, (210,125,44))
-                text_shadow=Main.font1.render('Points remaining: ' + str(Main.players[0].points), True, (68,36,52))
-                text_shadow=pygame.transform.scale(text_shadow, (160, 16))
-                text=pygame.transform.scale(text, (160, 16))
-                screen.blit(text_shadow,(self.x+10,self.y+20+17))
-                screen.blit(text, (self.x+10,self.y+20+16))
+                screen.blit(text_shadow,(10,8))
+                screen.blit(text, (10,7))
+                
                 text=Main.font1.render('Click on buy to shop gear', True, (210,125,44))
                 text_shadow=Main.font1.render('Click on buy to shop gear', True, (68,36,52))
                 text_shadow=pygame.transform.scale(text_shadow, (200, 16))
                 text=pygame.transform.scale(text, (200, 16))
-                screen.blit(text_shadow,(self.x+self.width-220,self.y+20+17))
-                screen.blit(text, (self.x+self.width-220,self.y+20+16))
+                screen.blit(text_shadow,(self.width-220,20+17))
+                screen.blit(text, (self.width-220,20+16))
                 self.addButtons()
-                for button in self.buttons:
-                    button.draw(Main.menu_buttons_layer)
+                
                     
             case 'shop_overlay': #shop overlay
                 text=Main.font1.render('Buy equipment for your unit', True, (210,125,44))
                 text_shadow=Main.font1.render('Buy equipment for your unit', True, (68,36,52))
                 text_shadow=pygame.transform.scale(text_shadow, (self.width/2, 16))
                 text=pygame.transform.scale(text, (self.width/2, 16))
-                screen.blit(text_shadow,(self.x+10,self.y+11))
-                screen.blit(text, (self.x+10,self.y+9))
-                for button in self.buttons:
-                    button.draw(Main.menu_buttons_layer)
+                screen.blit(text_shadow,(10,11))
+                screen.blit(text, (10,9))
+                
 
             case 'upi':                                             #unit placing interface
                 
@@ -128,13 +124,24 @@ class Menu:
                 text_shadow=Main.font1.render('Position your units on the grid by clicking on it', True, (68,36,52))
                 text_shadow=pygame.transform.scale(text_shadow, (640, 16))
                 text=pygame.transform.scale(text, (640, 16))
-                screen.blit(text_shadow,(self.x+10,self.y+8))
-                screen.blit(text, (self.x+10,self.y+7))
+                screen.blit(text_shadow,(10,8))
+                screen.blit(text, (10,7))
                 self.addButtons()
-                for button in self.buttons:
-                    button.draw(Main.menu_buttons_layer)
+                
 
 
+    def draw(self,screen):
+        
+        screen.blit(self.surface,(self.x,self.y))
+        for button in self.buttons:
+            button.draw(Main.menu_buttons_layer)
+
+        if self.type == 'unitsInventoryMenu':
+            text=Main.font1.render('Points remaining: ' + str(Main.players[0].points), True, (210,125,44))
+           
+            text=pygame.transform.scale(text, (160, 16))
+            
+            screen.blit(text, (self.x+10,self.y-40+16))
     
     def addButtons(self,relatedObject=None):
 
@@ -179,9 +186,10 @@ class Menu:
                         self.buttons.append(add_button)
                         add_button.relatedObject=unit_button
                         
-                        increment+=unit.img[1].get_height()+20
+                        increment+=unit.img[1].get_height()+40
                     
                     self.buttons.append(button.Button(self.x+self.width-120,self.y+self.height-120,80,40,'unitsInventoryMenu','next',None))
+                    self.startingButtons=self.buttons.copy()
 
                 case 'shop_overlay':  #shop overlay
                     #creo un pulsante per ogni equipaggiamento
@@ -197,9 +205,9 @@ class Menu:
                     )
                     scrollbar=Scrollbar(
                                         Main.shop_overlay_menu.x+10,
-                                        Main.shop_overlay_menu.y+30,
+                                        Main.shop_overlay_menu.y+50,
                                         20,
-                                        Main.shop_overlay_menu.height-40
+                                        Main.shop_overlay_menu.height/100*80
                                     )
                     Main.shop_overlay_menu.buttons.append(close_Shop_Button)
                     for equipgroups in equipment.all.values():
@@ -212,44 +220,38 @@ class Menu:
 
                                     Main.shop_overlay_menu.x+40,
                                     scrollbar.scroller.y+increment,
-                                    Main.shop_overlay_menu.width/3,
+                                    Main.shop_overlay_menu.width-(Main.shop_overlay_menu.width/7),
                                     Main.shop_overlay_menu.height/14,
                                     'unitsInventoryMenu_buy',
                                     f'{equip}',
                                     relatedObject,
                                     )
                                 equip_button.distanceFromFirstBrotherButton=increment
-                                if equip_button.y>Main.shop_overlay_menu.y+Main.shop_overlay_menu.height-60:
+                                if equip_button.y>Main.shop_overlay_menu.y+Main.shop_overlay_menu.height-120:
                                     scrollbar.color=(0,0,0,120)
-                                    scrollbar.scroller.color=(125,125,125,120)
+                                    scrollbar.scroller.color=(210,125,44,120)
                                     Main.shop_overlay_menu.buttons.append(equip_button)
-                                    equip_button.img=None
-                                    equip_button.img_bg=None
-                                    equip_button.img_shadow=None
                                     Main.scrollbars.append(scrollbar)
                                 else:
                                     scrollbar.color=(0,0,0,0)
-                                    scrollbar.scroller.color=(125,125,125,0)
+                                    scrollbar.scroller.color=(210,125,44,0)
                                     Main.shop_overlay_menu.buttons.append(equip_button)
-                                    increment+=60
+                                increment+=70
                                 
 
                     
 
                 case 'upi':        #unit placing interface
-                    increment=20
                     self.buttons.append(button.Button(self.x+self.width-120,self.y+self.height-120,80,40,'upi','start',None))
-                    for unit in Main.players[0].units_inventory:
-
-                        self.buttons.append(button.Button(self.x+increment,self.y+40,unit.img[1].get_width()+10,unit.img[1].get_height()+10,'upi',unit.nome,unit))
-                        increment+=unit.img[1].get_width()+20
+                    self.startingButtons=self.buttons.copy()
+                    
                         
-        else:
+        """ else:
             if self.type=='unitsInventoryMenu':
                 for unit in Main.players[0].units_inventory:
                     buy_button=button.Button(unit.center[0]+10,unit.center[1]+50,40,25,'unitsInventoryMenu','buy',unit)
                     if buy_button not in self.buttons:
-                        self.buttons.append(buy_button)
+                        self.buttons.append(buy_button) """
                 
                 
 

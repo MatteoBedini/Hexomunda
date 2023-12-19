@@ -3,8 +3,8 @@ import os
 
 def load(img):
     return pygame.image.load(img)
-#template [hp,atk,move,atkpts,atkrange,cost,img,animation]
-def loadAnimation(image_folder,images_partial_name,images_number,twohanded=False,current_frame=0,animation_speed=0.15,elapsed_time=0):
+#template [0 hp,1 atk,2 move,3 atkpts,4 atkrange,5 cost,img,animation]
+def loadAnimation(image_folder,images_partial_name,images_number,twohanded=False,current_frame=0,animation_speed=0.16,elapsed_time=0):
 
     
     animation_images = []

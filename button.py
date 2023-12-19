@@ -28,10 +28,12 @@ class Button:
         else:
             # self.img=[middle,up,down,left,right,up_dx,down_dx,up_sx,down_sx]
             self.img_bg=equipment.button_bg
+        self.surface=pygame.Surface((self.width,self.height))
+        self.visible=True
+        self.surface.set_colorkey((0,0,0,0))
         
-        
-
-        
+        self.blitOnSurface()
+        self.originalSurface=self.surface.copy()
 
     def getRectt(self):
 
@@ -49,50 +51,48 @@ class Button:
             if self.size is not 'Small':
                 #left, middle and right
                 for i in range(repetitions_height):
-                    screen.blit(self.img_bg[3],(self.x,(i*img_height)+self.y))
-                    screen.blit(self.img_bg[4],(self.x+self.rect.width-img_width,(i*img_height)+self.y))
+                    screen.blit(self.img_bg[3],(0,(i*img_height)+0))
+                    screen.blit(self.img_bg[4],(0+self.rect.width-img_width,(i*img_height)+0))
                     for j in range(1,repetitions_width,-1):
-                        screen.blit(self.img_bg[0],(self.x+(j*img_width),self.y+(i*img_height)))
+                        screen.blit(self.img_bg[0],(0+(j*img_width),0+(i*img_height)))
 
                 #up and down
                 
                 for i in range(repetitions_width):
-                    screen.blit(self.img_bg[1],(self.x+(i*img_width),self.y))
-                    screen.blit(self.img_bg[2],(self.x+(i*img_width),self.y+self.rect.height-img_height))
+                    screen.blit(self.img_bg[1],(0+(i*img_width),0))
+                    screen.blit(self.img_bg[2],(0+(i*img_width),0+self.rect.height-img_height))
 
 
                 #corners
-                screen.blit(self.img_bg[7],(self.x,self.y))
-                screen.blit(self.img_bg[5],(self.x+self.rect.width-img_width,self.y))
-                screen.blit(self.img_bg[8],(self.x,self.y+self.rect.height-img_height))
-                screen.blit(self.img_bg[6],(self.x+self.rect.width-img_width,self.y+self.rect.height-img_height))
+                screen.blit(self.img_bg[7],(0,0))
+                screen.blit(self.img_bg[5],(0+self.rect.width-img_width,0))
+                screen.blit(self.img_bg[8],(0,0+self.rect.height-img_height))
+                screen.blit(self.img_bg[6],(0+self.rect.width-img_width,0+self.rect.height-img_height))
             
             else:
                 #left, middle and right
                 for i in range(1,repetitions_height,-1):
-                    screen.blit(self.img_bg[3],(self.x,(i*img_height)+self.y))
-                    screen.blit(self.img_bg[4],(self.x+self.rect.width-img_width,(i*img_height)+self.y))
+                    screen.blit(self.img_bg[3],(0,(i*img_height)+0))
+                    screen.blit(self.img_bg[4],(0+self.rect.width-img_width,(i*img_height)+0))
                     for j in range(1,repetitions_width,-1):
-                        screen.blit(self.img_bg[0],(self.x+(j*img_width),self.y+(i*img_height)))
+                        screen.blit(self.img_bg[0],(0+(j*img_width),0+(i*img_height)))
 
                 #up and down
                 
                 for i in range(1,repetitions_width-1):
-                    screen.blit(self.img_bg[1],(self.x+(i*img_width),self.y))
-                    screen.blit(self.img_bg[2],(self.x+(i*img_width),self.y+self.rect.height-img_height))
+                    screen.blit(self.img_bg[1],(0+(i*img_width),0))
+                    screen.blit(self.img_bg[2],(0+(i*img_width),0+self.rect.height-img_height))
 
 
                 #corners
-                screen.blit(self.img_bg[7],(self.x,self.y))
-                screen.blit(self.img_bg[5],(self.x+self.rect.width-img_width,self.y))
-                screen.blit(self.img_bg[8],(self.x,self.y+self.rect.height-img_height))
-                screen.blit(self.img_bg[6],(self.x+self.rect.width-img_width,self.y+self.rect.height-img_height))
+                screen.blit(self.img_bg[7],(0,0))
+                screen.blit(self.img_bg[5],(0+self.rect.width-img_width,0))
+                screen.blit(self.img_bg[8],(0,0+self.rect.height-img_height))
+                screen.blit(self.img_bg[6],(0+self.rect.width-img_width,0+self.rect.height-img_height))
 
-    def draw(self,screen):
-        a=self.x 
-        b=self.y
+    def blitOnSurface(self):
         self.rect=pygame.Rect(self.x,self.y,self.width,self.height)
-        self.calculateImgDraw(screen)
+        self.calculateImgDraw(self.surface)
 
         match self.type:
 
@@ -107,43 +107,43 @@ class Button:
                         self.img_shadow=Main.font1.render('Play', True, (68,36,52))
                         self.img=pygame.transform.scale(self.img, (self.width-20, self.width-64))
                         self.img_shadow=pygame.transform.scale(self.img_shadow, (self.width-20, self.width-64))
-                        screen.blit(self.img_shadow,(a+self.width/2-self.img.get_width()/2,b+self.height/2-self.img.get_height()/2+3))
-                        screen.blit(self.img,(a+self.width/2-self.img.get_width()/2,b+self.height/2-self.img.get_height()/2))
+                        self.surface.blit(self.img_shadow,(self.width/2-self.img.get_width()/2,self.height/2-self.img.get_height()/2+3))
+                        self.surface.blit(self.img,(self.width/2-self.img.get_width()/2,self.height/2-self.img.get_height()/2))
                     case "options":
                         self.img=Main.font1.render('Options', True, (210,125,44))
                         self.img=pygame.transform.scale(self.img, (self.width-20, self.width-64))
-                        screen.blit(self.img,(a+self.width/2-self.img.get_width()/2,b+self.height/2-self.img.get_height()/2))
+                        self.surface.blit(self.img,(self.width/2-self.img.get_width()/2,self.height/2-self.img.get_height()/2))
                     case "quit":
                         self.img=Main.font1.render('Exit', True, (210,125,44))
                         self.img_shadow=Main.font1.render('Exit', True, (68,36,52))
                         self.img=pygame.transform.scale(self.img, (self.width-20, self.width-64))
                         self.img_shadow=pygame.transform.scale(self.img_shadow, (self.width-20, self.width-64))
-                        screen.blit(self.img_shadow,(a+self.width/2-self.img.get_width()/2,b+self.height/2-self.img.get_height()/2+3))
-                        screen.blit(self.img,(a+self.width/2-self.img.get_width()/2,b+self.height/2-self.img.get_height()/2))
-
-                self.mouseCollisionDraw(Main.menu_buttons_layer)
+                        self.surface.blit(self.img_shadow,(self.width/2-self.img.get_width()/2,self.height/2-self.img.get_height()/2+3))
+                        self.surface.blit(self.img,(self.width/2-self.img.get_width()/2,self.height/2-self.img.get_height()/2))
 
             case 'options':
+                
+
                 
                 match self.description:
                     case "1920x1080":
                         self.img=Main.font1.render('1920x1080', True, (210,125,44))
                         self.img=pygame.transform.scale(self.img, (self.width-16, self.height-16))
-                        screen.blit(self.img,(a+8,b+8))
+                        self.surface.blit(self.img,(8,8))
                     case "1280x720":
                         self.img=Main.font1.render('1280x720', True, (210,125,44))
                         self.img=pygame.transform.scale(self.img, (self.width-16, self.height-16))
-                        screen.blit(self.img,(a+8,b+8))
+                        self.surface.blit(self.img,(8,8))
                     #case "800x600":
                         #self.img=Main.font1.render('800x600', True, (210,125,44))
                         #self.img=pygame.transform.scale(self.img, (self.width-16, self.height-16))
-                        #screen.blit(self.img,(a+8,b+8))
-
-                self.mouseCollisionDraw(Main.menu_buttons_layer)
-
+                        #self.surface.blit(self.img,(8,8))
 
             #skirmish prepare menu
             case 'skirmish':
+                
+
+
                  
                 
                 match self.description:
@@ -152,37 +152,37 @@ class Button:
                         self.img_shadow=Main.font1.render('10', True, (68,36,52))
                         self.img_shadow=pygame.transform.scale(self.img_shadow, (self.width-16, self.height-16))
                         self.img=pygame.transform.scale(self.img, (self.width-16, self.height-16))
-                        screen.blit(self.img_shadow,(a+8,b+9))
-                        screen.blit(self.img,(a+8,b+8))
+                        self.surface.blit(self.img_shadow,(8,9))
+                        self.surface.blit(self.img,(8,8))
                     case "15":
                         self.img=Main.font1.render('15', True, (210,125,44))
                         self.img_shadow=Main.font1.render('15', True, (68,36,52))
                         self.img_shadow=pygame.transform.scale(self.img_shadow, (self.width-16, self.height-16))
                         self.img=pygame.transform.scale(self.img, (self.width-16, self.height-16))
-                        screen.blit(self.img_shadow,(a+8,b+9))
-                        screen.blit(self.img,(a+8,b+8))
+                        self.surface.blit(self.img_shadow,(8,9))
+                        self.surface.blit(self.img,(8,8))
                     case "20":
                         self.img=Main.font1.render('20', True, (210,125,44))
                         self.img_shadow=Main.font1.render('20', True, (68,36,52))
                         self.img=pygame.transform.scale(self.img, (self.width-16, self.height-16))
                         self.img_shadow=pygame.transform.scale(self.img_shadow, (self.width-16, self.height-16))
-                        screen.blit(self.img_shadow,(a+8,b+9))
-                        screen.blit(self.img,(a+8,b+8))
+                        self.surface.blit(self.img_shadow,(8,9))
+                        self.surface.blit(self.img,(8,8))
                     case "25":
                         self.img=Main.font1.render('25', True, (210,125,44))
                         self.img_shadow=Main.font1.render('25', True, (68,36,52))
                         self.img=pygame.transform.scale(self.img, (self.width-16, self.height-16))
                         self.img_shadow=pygame.transform.scale(self.img_shadow, (self.width-16, self.height-16))
-                        screen.blit(self.img_shadow,(a+8,b+9))
-                        screen.blit(self.img,(a+8,b+8))
+                        self.surface.blit(self.img_shadow,(8,9))
+                        self.surface.blit(self.img,(8,8))
                     case "60":
                         self.img=Main.font1.render('60', True, (210,125,44))
                         self.img_shadow=Main.font1.render('60', True, (68,36,52))
                         self.img_shadow=pygame.transform.scale(self.img_shadow, (self.width-16, self.height-16))
                         self.img=pygame.transform.scale(self.img, (self.width-16, self.height-16))
-                        screen.blit(self.img_shadow,(a+8,b+9))
-                        screen.blit(self.img,(a+8,b+8))
-                self.mouseCollisionDraw(Main.menu_buttons_layer)
+                        self.surface.blit(self.img_shadow,(8,9))
+                        self.surface.blit(self.img,(8,8))
+                
 
             #units inventory menu buttons
             case 'unitsInventoryMenu':
@@ -192,42 +192,48 @@ class Button:
                 if self.description=='next':
                         self.img=Main.font1.render('Next', True, (210,125,44))
                         self.img_shadow=Main.font1.render('Next', True, (68,36,52))
-                        self.img_shadow=pygame.transform.scale(self.img_shadow, (self.width-20, self.height-10))
-                        self.img=pygame.transform.scale(self.img, (self.width-20, self.height-10))
-                        screen.blit(self.img_shadow,(a+11,b+8))
-                        screen.blit(self.img,(a+11,b+7))
+                        self.img_shadow=pygame.transform.scale(self.img_shadow, (self.img.get_width()/3, self.height-10))
+                        self.img=pygame.transform.scale(self.img, (self.img.get_width()/3, self.height-10))
+                        self.surface.blit(self.img_shadow,(self.width/2-self.img.get_width()/2,8))
+                        self.surface.blit(self.img,(self.width/2-self.img.get_width()/2,7))
 
                 elif self.description=='add':
-                        self.img=Main.font1.render('Add', True, (210,125,44))
-                        self.img_shadow=Main.font1.render('Add', True, (68,36,52))
-                        self.img_shadow=pygame.transform.scale(self.img_shadow, (self.width-16, self.height-10))
-                        self.img=pygame.transform.scale(self.img, (self.width-16, self.height-10))
-                        screen.blit(self.img_shadow,(a+8,b+7))
-                        screen.blit(self.img,(a+8,b+6))
+                        self.img=Main.font1.render('+', True, (210,125,44))
+                        self.img_shadow=Main.font1.render('+', True, (68,36,52))
+                        self.img_shadow=pygame.transform.scale(self.img_shadow, (self.img.get_width()/3, self.img.get_height()/3))
+                        self.img=pygame.transform.scale(self.img, (self.img.get_width()/3, self.img.get_height()/3))
+                        self.surface.blit(self.img_shadow,(self.width/2-self.img.get_width()/2,self.height/2-self.img.get_height()/2+2))
+                        self.surface.blit(self.img,(self.width/2-self.img.get_width()/2,self.height/2-self.img.get_height()/2))
 
                         text=Main.font1.render(f'{self.counter}', True, (210,125,44))
                         text_shadow=Main.font1.render(f'{self.counter}', True, (68,36,52))
                         text_shadow=pygame.transform.scale(text_shadow, (16, 16))
                         text=pygame.transform.scale(text, (16, 16))
-                        screen.blit(text_shadow, (self.x+100,self.y+1))
-                        screen.blit(text, (self.x+100,self.y))
+                        self.surface.blit(text_shadow, (self.x+100,self.y+1))
+                        self.surface.blit(text, (self.x+100,self.y))
 
                 elif self.description=='buy':
                         self.img=Main.font1.render('Buy', True, (210,125,44))
                         self.img_shadow=Main.font1.render('Buy', True, (68,36,52))
                         self.img_shadow=pygame.transform.scale(self.img_shadow, (self.width-16, self.height-14))
                         self.img=pygame.transform.scale(self.img, (self.width-16, self.height-14))
-                        screen.blit(self.img_shadow,(a+8,b+8))
-                        screen.blit(self.img,(a+8,b+7))
+                        self.surface.blit(self.img_shadow,(8,8))
+                        self.surface.blit(self.img,(8,7))
 
                 for unit in Main.units_type_INVENTORY:
                     if unit.nome==self.description:
                         self.img=[unit.img[0],unit.img[1],unit.img[2],unit.img[3]]
                         for i in self.img:
                             if i!=None:
-                                screen.blit(i,(a+self.width/2-i.get_width()/2,b+self.height/2-i.get_height()/2))
+                                self.surface.blit(i,(self.width/2-i.get_width()/2,self.height/2-i.get_height()/2))
+                        unit_name=Main.font1.render(f'{unit.nome}', True, (210,125,44))
+                        unit_name_shadow=Main.font1.render(f'{unit.nome}', True, (68,36,52))
+                        unit_name_shadow=pygame.transform.scale(unit_name_shadow, (unit_name.get_width()/3.5, self.height/3))
+                        unit_name=pygame.transform.scale(unit_name, (unit_name.get_width()/3.5, self.height/3))
+                        self.surface.blit(unit_name_shadow,(self.width+10,self.height-unit_name_shadow.get_height()-8))
+                        self.surface.blit(unit_name,(self.width+10,self.height-unit_name.get_height()-10))
 
-                self.mouseCollisionDraw(Main.menu_buttons_layer)
+                
 
             case 'unitsInventoryMenu_buy':
 
@@ -238,71 +244,94 @@ class Button:
                     self.img_shadow=Main.font1.render('Close', True, (68,36,52))
                     self.img_shadow=pygame.transform.scale(self.img_shadow, (self.width-16, self.height-16))
                     self.img=pygame.transform.scale(self.img, (self.width-16, self.height-16))
-                    screen.blit(self.img_shadow,(a+8,b+9))
-                    screen.blit(self.img,(a+8,b+8))
+                    self.surface.blit(self.img_shadow,(8,9))
+                    self.surface.blit(self.img,(8,8))
 
-                elif self.img_bg!=None:
-                    increment=20
+                else:
+                   
                     for equipgroups in equipment.all.values():
                         for equip in equipgroups.keys():
                             if self.description == equip:
 
-                                #pygame.draw.rect(screen,(117,113,97),self.rect,border_radius=10)
-                                #pygame.draw.rect(screen,(68,36,52),self.rect,3)
+                                #pygame.draw.rect(self.surface,(117,113,97),self.rect,border_radius=10)
+                                #pygame.draw.rect(self.surface,(68,36,52),self.rect,3)
                                 substring_to_remove=self.relatedObject.relatedObject.race
 
                                 string=copy.deepcopy(self.description)
                                 string=string.replace(substring_to_remove,'')
-                                text1=Main.font1.render(string, True, (210,125,44))
+                                equip_name=Main.font1.render(string, True, (210,125,44))
+                                equip_name_shadow=Main.font1.render(string, True, (68,36,52))
+                                equip_name_shadow=pygame.transform.scale(equip_name_shadow, (equip_name.get_width()/4, self.rect.height- 26))
+                                equip_name=pygame.transform.scale(equip_name, (equip_name.get_width()/4, self.rect.height- 26))
 
-                                text1=pygame.transform.scale(text1, (self.rect.width - 20, self.rect.height- 28))
+                                
 
-                                screen.blit(text1,(self.x+10,self.y+14))
+                                """ self.surface.blit(equip_name_shadow,(10,16)) """
+                                self.surface.blit(equip_name,(10,14))
                                 if equipgroups[equip][6]!=None:
-
-                                    self.img =pygame.transform.scale(equipgroups[equip][6],(128,128))
-                                    screen.blit(self.img,(a+self.width/2-self.img.get_width()/2+130,b+self.height/2-self.img.get_height()/2))
-                                increment+=text1.get_height()
-
-
-                self.mouseCollisionDraw(Main.overlay_menu_buttons_layer)
+                                    
+                                    self.img =equipgroups[equip][6]
+                                    self.surface.blit(self.img,(self.width/3 ,self.height/2-self.img.get_height()/2))
 
 
+                                equip_cost=Main.font1.render(f'points cost: {equipgroups[equip][5]}', True, (210,125,44))
+                                equip_cost_shadow=Main.font1.render(f'points cost: {equipgroups[equip][5]}', True, (68,36,52))
+                                equip_cost_shadow=pygame.transform.scale(equip_cost_shadow, (equip_cost.get_width()/4, equip_cost.get_height()/4))
+                                equip_cost=pygame.transform.scale(equip_cost, (equip_cost.get_width()/4, equip_cost.get_height()/4))
+                                
+                                """ self.surface.blit(equip_cost_shadow,(self.width/3+self.img.get_width(),8)) """
+                                self.surface.blit(equip_cost,(self.width/3+self.img.get_width(),6))
+
+                                equip_stats=Main.font1.render(f'hp : +{equipgroups[equip][0]}  atk : +{equipgroups[equip][1]}  range : +{equipgroups[equip][4]}', True, (210,125,44))
+                                equip_stats_shadow=Main.font1.render(f'hp : +{equipgroups[equip][0]}  atk : +{equipgroups[equip][1]}  range : +{equipgroups[equip][4]}', True, (68,36,52))
+                                equip_stats_shadow=pygame.transform.scale(equip_stats_shadow, (equip_stats.get_width()/4, equip_stats.get_height()/4))
+                                equip_stats=pygame.transform.scale(equip_stats, (equip_stats.get_width()/4, equip_stats.get_height()/4))
+
+                                """ self.surface.blit(equip_stats_shadow,(self.width/3+self.img.get_width(),self.height-18)) """
+                                self.surface.blit(equip_stats,(self.width/3+self.img.get_width(),self.height-20))
 
             #unit placing interface buttons
             case 'upi':
 
-
-                
-
-                if self.relatedObject!=None:
+                """ if self.relatedObject!=None:
                     self.img=[self.relatedObject.img[0],self.relatedObject.img[1],self.relatedObject.img[2],self.relatedObject.img[3]]
                     for i in self.img:
                         if i!=None:
-                            screen.blit(i,(a+self.width/2-i.get_width()/2,b+self.height/2-i.get_height()/2))
+                            self.surface.blit(i,(self.width/2-i.get_width()/2,self.height/2-i.get_height()/2)) """
 
-                elif self.description =='start' and self.relatedObject==None:
+                if self.description =='start' and self.relatedObject==None:
                     self.img=Main.font1.render('Start', True, (210,125,44))
                     self.img_shadow=Main.font1.render('Start', True, (68,36,52))
                     self.img_shadow=pygame.transform.scale(self.img_shadow, (self.width-10, self.height-10))
                     self.img=pygame.transform.scale(self.img, (self.width-10, self.height-10))
-                    screen.blit(self.img_shadow,(a+5 ,b+6))
-                    screen.blit(self.img,(a+5 ,b+5))
+                    self.surface.blit(self.img_shadow,(5 ,6))
+                    self.surface.blit(self.img,(5 ,5))
 
-                self.mouseCollisionDraw(Main.menu_buttons_layer)
+                
 
             #end turn button
             case 'endTurn':
-                 
-
                 self.img=Main.font1.render('End Turn', True, (210,125,44))
                 self.img_shadow=Main.font1.render('End Turn', True, (68,36,52))
                 self.img=pygame.transform.scale(self.img, (self.width-10, self.height-10))
                 self.img_shadow=pygame.transform.scale(self.img_shadow, (self.width-10, self.height-10))
-                screen.blit(self.img_shadow,(a+5 ,b+6))
-                screen.blit(self.img,(a+5 ,b+5))
+                self.surface.blit(self.img_shadow,(5 ,6))
+                self.surface.blit(self.img,(5 ,5))
+                                
+                                
 
-                self.mouseCollisionDraw(Main.menu_buttons_layer)
+    def draw(self,screen):
+        screen.blit(self.surface,(self.x,self.y))
+        if self.visible==True:
+           
+            if self.type=='upi':
+                if self.relatedObject!=None:
+                    self.img=[self.relatedObject.img[0],self.relatedObject.img[1],self.relatedObject.img[2],self.relatedObject.img[3]]
+                    for i in self.img:
+                        if i!=None:
+                            screen.blit(i,(self.x+self.width/2-i.get_width()/2,self.y+self.height/2-i.get_height()/2))  
+            self.mouseCollisionDraw(screen)
+        
 
     def otherEvents(self):
         match self.type:
@@ -313,20 +342,21 @@ class Button:
                     for scrollbar in Main.scrollbars:
                         if scrollbar.scroller.dragging==True:
                             difference=scrollbar.scroller.rect.y-scrollbar.scroller.startingy
+                            self.getRectt()
                             self.y=scrollbar.scroller.startingy-difference+self.distanceFromFirstBrotherButton
-                        if self.y>Main.shop_overlay_menu.y+Main.shop_overlay_menu.height-60 or self.y<Main.shop_overlay_menu.y+40:
-                            self.img=None
-                            self.img_bg=None
-                            self.img_shadow=None
+                        if self.y>Main.shop_overlay_menu.y+Main.shop_overlay_menu.height-120 or self.y<Main.shop_overlay_menu.y+40:
+                            self.surface.fill((0,0,0,0))
+                            self.visible=False
 
                         else:   
-                            self.img_bg=equipment.button_bg
+                            self.surface=self.originalSurface.copy()
+                            self.visible=True
 
 
     #input sul pulsante
     def input(self):
             
-            if self.checkMousecollision()==self:
+            if self.checkMousecollision()==self and self.visible==True:
 
                 for event in pygame.event.get():
                     if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
@@ -338,8 +368,10 @@ class Button:
                                 match self.description:
 
                                     case "play":
+                                        
                                         Main.room.roomNumber=3
                                     case "options":
+                                        
                                         Main.room.roomNumber=4
                                     case "quit":
                                         Main.running=False
@@ -363,7 +395,6 @@ class Button:
                                     #case "800x600":
                                         #Main.screen=pygame.display.set_mode((800,600),pygame.RESIZABLE)
 
-
                             case 'skirmish':
                                 
                                 for player in Main.players:
@@ -381,15 +412,22 @@ class Button:
 
                                 Main.room.roomNumber=1
 
+                              
+
                             case 'unitsInventoryMenu':  #pulsanti nel selezionatore unita
 
                                         if self.description=='next':
 
-                                            if self.description=='next':
-                                                Main.room.roomNumber=2
+                                            
+                                            Main.room.roomNumber=2
+
+                                            
+                                            
 
                                         elif self.description=='add':
-
+                                            Main.all_races=[[],[],[],[]]
+                                            Main.menus[2].buttons=Main.menus[2].startingButtons.copy()
+                                            Main.menus[1].buttons=Main.menus[1].startingButtons.copy()
                                             if Main.players[0].points-5>=0:
                                                 a=self.relatedObject.relatedObject
 
@@ -401,38 +439,41 @@ class Button:
                                                                 i=j
                                                 Main.players[0].units_inventory.append(new_unit) #e poi la assegno all' inventario del giocatore
                                                 Main.players[0].points-=5
+                                                
 
                                                 self.counter+=1
 
-                                            increment=0
-                                            all_races=[]
-                                            orcs=[]
-                                            goblins=[]
-                                            humans=[]
-                                            dwarves=[]
-                                            all_races.append(orcs)
-                                            all_races.append(goblins)
-                                            all_races.append(humans)
-                                            all_races.append(dwarves)
-
+                                            increment=20
                                             for unit in Main.players[0].units_inventory:
                                                 if unit.race=='orc':
-                                                    all_races[0].append(unit)
+                                                    Main.all_races[0].append(unit)
                                                 elif unit.race=='goblin':
-                                                    all_races[1].append(unit)
+                                                    Main.all_races[1].append(unit)
                                                 elif unit.race=='human':
-                                                    all_races[2].append(unit)
+                                                    Main.all_races[2].append(unit)
                                                 elif unit.race=='dwarf':
-                                                    all_races[3].append(unit)
+                                                    Main.all_races[3].append(unit)
+                                                menu=Main.menus[2] #upi
+                                                menu.buttons.append(Button(menu.x+increment,menu.y+40,unit.img[1].get_width()+10,unit.img[1].get_height()+10,'upi',unit.nome,unit))
+                                                increment+=unit.img[1].get_width()+20
+                                                    
+                                            
+
 
                                             incrementy=0
-                                            for race in all_races:
+                                            for race in Main.all_races:
                                                 incrementx=170
                                                 for unit in race:
+                                                    
                                                     unit.x=self.x+incrementx
                                                     unit.y=Main.screen.get_height()/3+incrementy+3
                                                     unit.getCenter(unit.x,unit.y)
                                                     incrementx+=unit.img[1].get_height()
+                                                    menu=Main.menus[1] #unitsInventoryMenu
+                                                            
+                                                    buy_button=Button(unit.center[0]+10,unit.center[1]+50,40,25,'unitsInventoryMenu','buy',unit)
+                                                    menu.buttons.append(buy_button)
+                                                        
                                                 incrementy+=unit.img[1].get_height()+25
 
 
@@ -456,38 +497,40 @@ class Button:
 
 
 
+
                                 #assegno all' unità il pezzo di equipaggiamento richiesto e rimuovo i punti dal giocatore
                                 #inoltre avvio l'applyfyEquipmentModifiers sull'unità in questione
                                 else:
-                                    unit=self.relatedObject.relatedObject
+    
+                                        unit=self.relatedObject.relatedObject
 
-                                    for part in unit.inventory.keys():
-                                        for groups in equipment.all.values():
+                                        for part in unit.inventory.keys():
+                                            for groups in equipment.all.values():
 
-                                            for equip in groups.keys():
+                                                for equip in groups.keys():
 
-                                                if self.description==equip:
+                                                    if self.description==equip:
 
-                                                    for a in equipment.all.keys():
-                                                        if a==part:
+                                                        for a in equipment.all.keys():
+                                                            if a==part:
 
 
-                                                            if equip in equipment.all[a].keys() and Main.players[0].points-equipment.all[a][equip][5]>=0:
-                                                                #se l'unita ha un arma a due mani nella lhand passo
-                                                                if part=='rhand' and unit.animation[0]!=None and unit.animation[0][-4]==True:
-                                                                    pass
-                                                                #se l'unita ha un arma a due mani nella rhand passo
-                                                                elif part=='lhand' and unit.animation[3]!=None and unit.animation[3][-4]==True:
-                                                                    pass
-                                                                elif part=='lhand' and unit.inventory['rhand']!="" and equipment.all[a][self.description][7][-1]==True:
-                                                                    pass
-                                                                elif part=='rhand' and unit.inventory['lhand']!="" and equipment.all[a][self.description][7][-1]==True:
-                                                                    pass
+                                                                if equip in equipment.all[a].keys() and Main.players[0].points-equipment.all[a][equip][5]>=0:
+                                                                    #se l'unita ha un arma a due mani nella lhand passo
+                                                                    if part=='rhand' and unit.animation[0]!=None and unit.animation[0][-4]==True:
+                                                                        pass
+                                                                    #se l'unita ha un arma a due mani nella rhand passo
+                                                                    elif part=='lhand' and unit.animation[3]!=None and unit.animation[3][-4]==True:
+                                                                        pass
+                                                                    elif part=='lhand' and unit.inventory['rhand']!="" and equipment.all[a][self.description][7][-1]==True:
+                                                                        pass
+                                                                    elif part=='rhand' and unit.inventory['lhand']!="" and equipment.all[a][self.description][7][-1]==True:
+                                                                        pass
 
-                                                                else:
-                                                                    Main.players[0].points-=equipment.all[a][equip][5]
-                                                                    unit.inventory[part]=self.description
-                                                                    unit.applyEquipmentModifiers()
+                                                                    else:
+                                                                        Main.players[0].points-=equipment.all[a][equip][5]
+                                                                        unit.inventory[part]=self.description
+                                                                        unit.applyEquipmentModifiers()
 
 
                             case 'upi': #pulsanti nel selezionatore unita
@@ -495,47 +538,20 @@ class Button:
                                         if self.description=='start':
                                             Main.controller.controlGameFases()
                                         else:
-
-                                            mouse_pos = pygame.mouse.get_pos()
-                                            self.fakeboy=UnitFake(mouse_pos[0],mouse_pos[1],self.img,self)
+                                            if self.relatedObject!=None:
+                                               
+                                                mouse_pos = pygame.mouse.get_pos()
+                                                self.fakeboy=UnitFake(mouse_pos[0],mouse_pos[1],self.img,self)
+                                                self.surface.fill((0,0,0,0))
+                                                
+                                                self.img=[]
+                                                self.calculateImgDraw(self.surface)
 
 
                             case 'endTurn': #pulsante di fine turno
 
                                 Main.controller.turnEnd()
 
-
-
-    """ def mouseCollisionDraw(self,screen):
-         if self.checkMousecollision()==self:
-            if self.size == 'Small':
-                for img in self.img_bg:
-                    pixel_array=pygame.surfarray.array3d(img)
-                    color_to_replace=(210,125,44)
-                    color_to_replace2=(68,36,52)
-                    locked_pixels=[]
-                    # Iterate over pixels
-                    for y in range(pixel_array.shape[0]):
-                        for x in range(pixel_array.shape[1]):
-                            pixel = pixel_array[y, x]
-
-                            # Check if the pixel matches color_to_replace2
-                            if (pixel == color_to_replace2).all():
-                                locked_pixels.append((x, y))  # Store the position of the pixel
-
-                            # Check if the pixel matches color_to_replace
-                            elif (pixel == color_to_replace).all():
-                                pixel_array[y, x] = color_to_replace2
-
-                    # Modify the locked pixels to color_to_replace
-                    for x, y in locked_pixels:
-                        pixel_array[y, x] = color_to_replace
-
-            else:
-                pygame.draw.line(screen, (68,36,52), (self.x, self.y), (self.x, self.y + self.height-1), 2)  # Lato sinistro 
-                pygame.draw.line(screen, (210,125,44), (self.x + self.width-2, self.y), (self.x + self.width-2, self.y + self.height-1), 2)  # Lato destro
-                pygame.draw.line(screen, (210,125,44), (self.x, self.y + self.height-2), (self.x + self.width-1, self.y + self.height-2), 2)  # Lato inferiore
-                pygame.draw.line(screen, (68,36,52), (self.x, self.y), (self.x + self.width-1, self.y), 2)  # Lato superiore """
     def mouseCollisionDraw(self, screen):
         if self.checkMousecollision() == self:
             if self.size == 'Small':
@@ -594,7 +610,7 @@ class UnitFake:
         for cell in Main.hex_cells:
             if cell.checkHexMousecollision()==cell and cell.col in range(0,3) and cell.occupied==False:
                 for event in pygame.event.get():
-                    if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                    if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and self.parentButton.relatedObject!=None:
                         a=self.parentButton.relatedObject
                         new_unit=unitt.Unit(a.ai,a.id,a.nome,a.race) #creo una nuova unita uguale alla unita dell'inventario del player
                         #copio l'equipaggiamento dell'unita dell'inventario
@@ -628,3 +644,4 @@ class UnitFake:
                         self.parentButton.relatedObject=None
                         cell.occupied=True
 
+                                            

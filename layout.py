@@ -21,14 +21,19 @@ class Layout:
         self.img_corner3=pygame.image.load('./media/layouts_and_menus/layout_try_corner_up_dx.png')
         self.img_corner4=pygame.image.load('./media/layouts_and_menus/layout_try_corner_down_dx.png')
 
+
         self.rect=pygame.Rect(0,0,Main.screen.get_width(),Main.screen.get_height())
+        self.surface=pygame.Surface((Main.screen.get_width(),Main.screen.get_height()))
+        self.surface.set_colorkey((0,0,0,0))
+        self.blitOnSurface(self.surface)
+        
         
 
-    def draw (self, screen):
+    def draw (self):
         
-        self.calculateImgDraw(Main.layout_layer)
+        Main.layout_layer.blit(self.surface,(0,0))
 
-    def calculateImgDraw(self,screen):
+    def blitOnSurface(self,screen):
         img_height = self.img.get_height()
         img_width = self.img.get_width()
         repetitions_height=self.rect.height//img_height
