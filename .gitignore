@@ -1,4 +1,6 @@
 /_pycache_
 /.vscode
+/build
 Hexomunda.exe
 unitt.spec
+prove.py
