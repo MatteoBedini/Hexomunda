@@ -46,9 +46,21 @@ unit_layer = pygame.Surface((width, height), pygame.SRCALPHA)  # z-index=3
 overlays_layer = pygame.Surface((width, height), pygame.SRCALPHA)  # z-index=4
 menu_box_layer = pygame.Surface((width, height), pygame.SRCALPHA)  #z-index=5
 menu_buttons_layer = pygame.Surface((width, height), pygame.SRCALPHA)  #z-index=6
-overlay_menu_box_layer = pygame.Surface((width, height), pygame.SRCALPHA)  #z-index=7
-overlay_menu_buttons_layer = pygame.Surface((width, height), pygame.SRCALPHA)  #z-index=8
+""" overlay_menu_box_layer = pygame.Surface((width, height), pygame.SRCALPHA)  #z-index=7
+overlay_menu_buttons_layer = pygame.Surface((width, height), pygame.SRCALPHA)  #z-index=8 """
 layout_layer = pygame.Surface((width, height), pygame.SRCALPHA)  #z-index=9
+
+general_changed=False
+screen_changed=False
+cell_layer_changed=False
+cell_layer2_changed=False
+unit_layer_changed=False
+overlays_layer_changed=False
+menu_box_layer_changed=False
+menu_buttons_layer_changed=False
+overlay_menu_box_layer_changed=False
+overlay_menu_buttons_layer_changed=False
+layout_layer_changed=False
 
 vw=screen.get_width()
 vh=screen.get_height()
@@ -65,8 +77,8 @@ layers.append(cell_layer2)
 layers.append(unit_layer)
 layers.append(menu_box_layer)
 layers.append(menu_buttons_layer)
-layers.append(overlay_menu_box_layer)
-layers.append(overlay_menu_buttons_layer)
+""" layers.append(overlay_menu_box_layer)
+layers.append(overlay_menu_buttons_layer) """
 layers.append(overlays_layer)
 layers.append(layout_layer)
 
@@ -271,15 +283,27 @@ inanimated_in_game=[]
 #layout
 layout=Layout()
 
+""" def reset_after_changes():
+    if general_changed:
+        if cell_layer_changed:
+            cell_layer.fill((0, 0, 0, 0))
+def blit_after_screen_changes():
+    if general_changed:
+        if cell_layer_changed:
+            screen.blit(cell_layer,(resizable_layer_x,resizable_layer_y))
+        if cell_layer2_changed:
+            screen.blit(cell_layer2,(resizable_layer_x,resizable_layer_y))
+        if unit_layer_changed:
+            screen.blit(unit_layer,(resizable_layer_x,resizable_layer_y))
+        if menu_box_layer_changed:
+            screen.blit(menu_box_layer,(0,0))
+        if menu_buttons_layer_changed:
+            screen.blit(menu_buttons_layer,(0,0))
+        if overlays_layer_changed:
+            screen.blit(overlays_layer,(0,0))
 
+ """
 
-#init
-
-def change_room():
-
-    screen.fill((16, 26, 38))
-
-change_room()
 # Ciclo di gioco
 # ----------------------------------------------------------------------------------------------------------------------------------------------------
 running = True
@@ -296,12 +320,9 @@ while running:
     unit_layer.fill((0, 0, 0, 0))  
     menu_box_layer.fill((0, 0, 0, 0))  
     menu_buttons_layer.fill((0, 0, 0, 0))  
-    """ overlay_menu_box_layer.fill((0, 0, 0, 0))  
-    overlay_menu_buttons_layer.fill((0, 0, 0, 0))  """ 
-    overlays_layer.fill((0, 0, 0, 0))  
     """ layout_layer.fill((0, 0, 0, 0)) """
 
-    """ layout.draw() """
+    
 
 
     match room.roomNumber:
@@ -492,7 +513,7 @@ while running:
                                         unit.move()
 
 
-    
+    """ layout.draw() """
     
     """ cursor.move(pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1]) """
 
@@ -502,8 +523,6 @@ while running:
     screen.blit(unit_layer,(resizable_layer_x,resizable_layer_y))
     screen.blit(menu_box_layer,(0,0))
     screen.blit(menu_buttons_layer,(0,0))
-    """ screen.blit(overlay_menu_box_layer,(0,0))
-    screen.blit(overlay_menu_buttons_layer,(0,0)) """
     screen.blit(overlays_layer,(0,0))
     """ screen.blit(layout_layer,(0,0)) """
     
@@ -513,8 +532,7 @@ while running:
     # Print FPS to console
     print(f"FPS: {fpss}")
 
-    pygame.display.flip()
-
+    pygame.display.update()
     
 
 

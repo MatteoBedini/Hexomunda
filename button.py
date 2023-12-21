@@ -308,7 +308,6 @@ class Button:
                     self.surface.blit(self.img,(5 ,5))
 
                 
-
             #end turn button
             case 'endTurn':
                 self.img=Main.font1.render('End Turn', True, (210,125,44))
