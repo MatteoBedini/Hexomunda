@@ -320,9 +320,6 @@ while running:
     unit_layer.fill((0, 0, 0, 0))  
     menu_box_layer.fill((0, 0, 0, 0))  
     menu_buttons_layer.fill((0, 0, 0, 0))  
-    """ layout_layer.fill((0, 0, 0, 0)) """
-
-    
 
 
     match room.roomNumber:
@@ -445,7 +442,7 @@ while running:
                 if controller.actingUnit==None:
                     controller.checkOccupiedCells()
                     controller.ai_select_control()
-                controller.drawObjectOverlay(overlays_layer)
+                controller.drawObjectOverlay(menu_buttons_layer)
 
 
                 for objectt in inanimated_in_game:
@@ -453,7 +450,7 @@ while running:
 
 
                 if controller.actingPlayer==0 and controller.actingUnit==None:
-                    end_turn_button.draw(overlays_layer)
+                    end_turn_button.draw(menu_buttons_layer)
                     end_turn_button.input()
 
 
@@ -513,7 +510,7 @@ while running:
                                         unit.move()
 
 
-    """ layout.draw() """
+    layout.draw()
     
     """ cursor.move(pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1]) """
 
@@ -523,8 +520,6 @@ while running:
     screen.blit(unit_layer,(resizable_layer_x,resizable_layer_y))
     screen.blit(menu_box_layer,(0,0))
     screen.blit(menu_buttons_layer,(0,0))
-    screen.blit(overlays_layer,(0,0))
-    """ screen.blit(layout_layer,(0,0)) """
     
     clock.tick(144)
     fpss = clock.get_fps()

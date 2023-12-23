@@ -30,8 +30,7 @@ class Layout:
         
 
     def draw (self):
-        
-        Main.overlays_layer.blit(self.surface,(0,0))
+        Main.menu_buttons_layer.blit(self.surface,(0,0))
 
     def blitOnSurface(self,screen):
         img_height = self.img.get_height()

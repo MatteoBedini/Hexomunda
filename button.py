@@ -487,9 +487,9 @@ class Button:
 
                             case 'unitsInventoryMenu_buy':  #pulsanti nel selezionatore 'buy' unita
                                 if self.description=='close':
-                                    Main.overlay_menu_box_layer.fill((0, 0, 0, 0))
+                                    """ Main.overlay_menu_box_layer.fill((0, 0, 0, 0)) """
                                     Main.shop_overlay_active=False
-                                    Main.screen.blit(Main.overlay_menu_box_layer,(0,0))
+                                    """ Main.screen.blit(Main.overlay_menu_box_layer,(0,0)) """
                                     Main.shop_overlay_menu.buttons=[]
                                     Main.scrollbars=[]
                                     #Main.shop_overlay_buttons=[]
