@@ -94,6 +94,15 @@ ROW_COUNT = random.randrange(7,9)   # Numero di righe
 COL_COUNT = random.randrange(13,15)   # Numero di colonne
 APOTEMA= math.floor(math.sqrt(3) * HEX_RADIUS)/2
 
+
+""" grid_xx = (width - COL_COUNT * 1.5 * HEX_RADIUS) / 2
+grid_yy = (height - ROW_COUNT * math.floor(math.sqrt(3) * HEX_RADIUS)) / 2 """
+""" grid_surface_width = COL_COUNT * 1.5 * HEX_RADIUS #+ grid_xx * 2
+grid_surface_height = ROW_COUNT * math.floor(math.sqrt(3) * HEX_RADIUS) #+ grid_yy * 2
+cell_layer=pygame.transform.scale(cell_layer, (grid_surface_width, grid_surface_height))
+cell_layer2=pygame.transform.scale(cell_layer2, (grid_surface_width, grid_surface_height))
+unit_layer=pygame.transform.scale(unit_layer, (grid_surface_width, grid_surface_height)) """
+
 # Calcola le dimensioni totali della griglia esagonale
 grid_width = 1.5 * HEX_RADIUS * COL_COUNT
 grid_height = (math.sqrt(3) * HEX_RADIUS) * ROW_COUNT
@@ -250,6 +259,8 @@ skirmish_menu=Menu(screen.get_width()/4,screen.get_height()/2,screen.get_width()
 
 options_menu=Menu(screen.get_width()-600,450,300,0+height-700,'options')                       #menu opzioni
 
+pause_menu=Menu(screen.get_width()/4,screen.get_height()/2,screen.get_width()/2-screen.get_width()/8,screen.get_height()/4,'pausemenu')
+
 shop_overlay_active=False
 shop_overlay_menu=Menu(screen.get_width()/3,screen.get_height()/100*70,unitsInventoryMenu.x+unitsInventoryMenu.width,unitsInventoryMenu.y-(screen.get_height()/100*70-unitsInventoryMenu.height)/2,'shop_overlay')
 #shop_overlay_buttons=[]
@@ -333,28 +344,22 @@ while running:
                 if event.type == pygame.QUIT:
                     running = False
 
-
-        case 4:
+        #case 4:
             #OPTIONS MENU
 
 
-            options_menu.draw(menu_box_layer)
-            for button in options_menu.buttons:
-                button.input()
+            #options_menu.draw(menu_box_layer)
+            #for button in options_menu.buttons:
+                #button.input()
 
-            for event in pygame.event.get():
+            #for event in pygame.event.get():
 
-                if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
-                    room.roomNumber=0
+                #if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                   # room.roomNumber=0
 
 
-                if event.type == pygame.QUIT:
-                    running = False
-
-            for event in pygame.event.get():
-                if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
-                    room.roomNumber=2
-
+                #if event.type == pygame.QUIT:
+                    #running = False
         case 3:
             #SKIRMISH preparazione
             skirmish_menu.draw(menu_box_layer)
@@ -364,7 +369,8 @@ while running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
-
+                elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE: #torna al main menu
+                    room.roomNumber=0
 
         case 1:
             #menu scelta unità e occupazione inventario unità
@@ -399,7 +405,8 @@ while running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
-
+                elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE: #torna al main menu
+                    room.roomNumber=0
 
         case 2:
             #muovi camera
@@ -490,7 +497,7 @@ while running:
 
 
                     if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE: #torna al main menu
-                        room.roomNumber=0
+                        room.roomNumber=5
 
                     elif event.type == pygame.KEYDOWN and event.key == pygame.K_TAB:
                         if controller.gameFase==1:
@@ -509,6 +516,17 @@ while running:
                                         unit.select()
                                         unit.move()
 
+        case 5:
+            #MAIN MENU
+            pause_menu.draw(menu_box_layer)
+            for butto in pause_menu.buttons:
+                butto.input()
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    running = False
+                elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE: #torna al main menu
+                        room.roomNumber=2
 
     layout.draw()
     
@@ -525,7 +543,7 @@ while running:
     fpss = clock.get_fps()
 
     # Print FPS to console
-    print(f"FPS: {fpss}")
+    """ print(f"FPS: {fpss}") """
 
     pygame.display.update()
     

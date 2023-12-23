@@ -103,8 +103,8 @@ class Button:
 
                 match self.description:
                     case "play":
-                        self.img=Main.font1.render('Play', True, (210,125,44))
-                        self.img_shadow=Main.font1.render('Play', True, (68,36,52))
+                        self.img=Main.font1.render('New game', True, (210,125,44))
+                        self.img_shadow=Main.font1.render('New game', True, (68,36,52))
                         self.img=pygame.transform.scale(self.img, (self.width-20, self.width-64))
                         self.img_shadow=pygame.transform.scale(self.img_shadow, (self.width-20, self.width-64))
                         self.surface.blit(self.img_shadow,(self.width/2-self.img.get_width()/2,self.height/2-self.img.get_height()/2+3))
@@ -141,11 +141,6 @@ class Button:
 
             #skirmish prepare menu
             case 'skirmish':
-                
-
-
-                 
-                
                 match self.description:
                     case "10":
                         self.img=Main.font1.render('10', True, (210,125,44))
@@ -186,8 +181,6 @@ class Button:
 
             #units inventory menu buttons
             case 'unitsInventoryMenu':
-
-                
 
                 if self.description=='next':
                         self.img=Main.font1.render('Next', True, (210,125,44))
@@ -307,7 +300,21 @@ class Button:
                     self.surface.blit(self.img_shadow,(5 ,6))
                     self.surface.blit(self.img,(5 ,5))
 
-                
+            case 'pausemenu':
+                if self.description == 'Main menu':
+                    self.img=Main.font1.render('Main menu', True, (210,125,44))
+                    self.img_shadow=Main.font1.render('Main menu', True, (68,36,52))
+                    self.img=pygame.transform.scale(self.img, (self.width-10, self.height-10))
+                    self.img_shadow=pygame.transform.scale(self.img_shadow, (self.width-10, self.height-10))
+                    self.surface.blit(self.img_shadow,(5 ,6))
+                    self.surface.blit(self.img,(5 ,5))  
+                if self.description == 'Resume game':
+                    self.img=Main.font1.render('Resume game', True, (210,125,44))
+                    self.img_shadow=Main.font1.render('Resume game', True, (68,36,52))
+                    self.img=pygame.transform.scale(self.img, (self.width-10, self.height-10))
+                    self.img_shadow=pygame.transform.scale(self.img_shadow, (self.width-10, self.height-10))
+                    self.surface.blit(self.img_shadow,(5 ,6))
+                    self.surface.blit(self.img,(5 ,5))  
             #end turn button
             case 'endTurn':
                 self.img=Main.font1.render('End Turn', True, (210,125,44))
@@ -367,6 +374,18 @@ class Button:
                                 match self.description:
 
                                     case "play":
+
+                                        for player in Main.players:
+                                            player.points=0
+                                            player.units_inventory=[]
+                                            player.units=[]
+                                            player.ai_selection_ended=False
+
+                                        Main.controller.gameFase=0  
+                                        Main.unitsInventoryMenu.buttons=[]
+                                        Main.unitsInventoryMenu.addButtons()
+                                        for button in Main.unitsInventoryMenu.buttons:
+                                            print(button.description)
                                         
                                         Main.room.roomNumber=3
                                     case "options":
@@ -415,72 +434,72 @@ class Button:
 
                             case 'unitsInventoryMenu':  #pulsanti nel selezionatore unita
 
-                                        if self.description=='next':
+                                    if self.description=='next':
 
+                                        
+                                        Main.room.roomNumber=2
+
+                                        
+                                        
+
+                                    elif self.description=='add':
+                                        Main.all_races=[[],[],[],[]]
+                                        Main.menus[2].buttons=Main.menus[2].startingButtons.copy()
+                                        Main.menus[1].buttons=Main.menus[1].startingButtons.copy()
+                                        if Main.players[0].points-5>=0:
+                                            a=self.relatedObject.relatedObject
+
+                                            new_unit=unitt.Unit(a.ai,a.id,a.nome,a.race) #creo una nuova unita uguale alla unita dell'inventario nel Main
+                                            for i in new_unit.img:
+                                                for j in a.img:
+                                                    for d in range(3):
+                                                        if new_unit.img[d]==i and a.img[d]==j:
+                                                            i=j
+                                            Main.players[0].units_inventory.append(new_unit) #e poi la assegno all' inventario del giocatore
+                                            Main.players[0].points-=5
                                             
-                                            Main.room.roomNumber=2
 
-                                            
-                                            
+                                            self.counter+=1
 
-                                        elif self.description=='add':
-                                            Main.all_races=[[],[],[],[]]
-                                            Main.menus[2].buttons=Main.menus[2].startingButtons.copy()
-                                            Main.menus[1].buttons=Main.menus[1].startingButtons.copy()
-                                            if Main.players[0].points-5>=0:
-                                                a=self.relatedObject.relatedObject
-
-                                                new_unit=unitt.Unit(a.ai,a.id,a.nome,a.race) #creo una nuova unita uguale alla unita dell'inventario nel Main
-                                                for i in new_unit.img:
-                                                    for j in a.img:
-                                                        for d in range(3):
-                                                            if new_unit.img[d]==i and a.img[d]==j:
-                                                                i=j
-                                                Main.players[0].units_inventory.append(new_unit) #e poi la assegno all' inventario del giocatore
-                                                Main.players[0].points-=5
+                                        increment=20
+                                        for unit in Main.players[0].units_inventory:
+                                            if unit.race=='orc':
+                                                Main.all_races[0].append(unit)
+                                            elif unit.race=='goblin':
+                                                Main.all_races[1].append(unit)
+                                            elif unit.race=='human':
+                                                Main.all_races[2].append(unit)
+                                            elif unit.race=='dwarf':
+                                                Main.all_races[3].append(unit)
+                                            menu=Main.menus[2] #upi
+                                            menu.buttons.append(Button(menu.x+increment,menu.y+40,unit.img[1].get_width()+10,unit.img[1].get_height()+10,'upi',unit.nome,unit))
+                                            increment+=unit.img[1].get_width()+20
                                                 
-
-                                                self.counter+=1
-
-                                            increment=20
-                                            for unit in Main.players[0].units_inventory:
-                                                if unit.race=='orc':
-                                                    Main.all_races[0].append(unit)
-                                                elif unit.race=='goblin':
-                                                    Main.all_races[1].append(unit)
-                                                elif unit.race=='human':
-                                                    Main.all_races[2].append(unit)
-                                                elif unit.race=='dwarf':
-                                                    Main.all_races[3].append(unit)
-                                                menu=Main.menus[2] #upi
-                                                menu.buttons.append(Button(menu.x+increment,menu.y+40,unit.img[1].get_width()+10,unit.img[1].get_height()+10,'upi',unit.nome,unit))
-                                                increment+=unit.img[1].get_width()+20
-                                                    
-                                            
+                                        
 
 
-                                            incrementy=0
-                                            for race in Main.all_races:
-                                                incrementx=170
-                                                for unit in race:
-                                                    
-                                                    unit.x=self.x+incrementx
-                                                    unit.y=Main.screen.get_height()/3+incrementy+3
-                                                    unit.getCenter(unit.x,unit.y)
-                                                    incrementx+=unit.img[1].get_height()
-                                                    menu=Main.menus[1] #unitsInventoryMenu
-                                                            
-                                                    buy_button=Button(unit.center[0]+10,unit.center[1]+50,40,25,'unitsInventoryMenu','buy',unit)
-                                                    menu.buttons.append(buy_button)
+                                        incrementy=0
+                                        for race in Main.all_races:
+                                            incrementx=170
+                                            for unit in race:
+                                                
+                                                unit.x=self.x+incrementx
+                                                unit.y=Main.screen.get_height()/3+incrementy+3
+                                                unit.getCenter(unit.x,unit.y)
+                                                incrementx+=unit.img[1].get_height()
+                                                menu=Main.menus[1] #unitsInventoryMenu
                                                         
-                                                incrementy+=unit.img[1].get_height()+25
+                                                buy_button=Button(unit.center[0]+10,unit.center[1]+50,40,25,'unitsInventoryMenu','buy',unit)
+                                                menu.buttons.append(buy_button)
+                                                    
+                                            incrementy+=unit.img[1].get_height()+25
 
 
 
-                                        elif self.description=='buy':
-                                            Main.shop_overlay_active=True
-                                            Main.shop_overlay_menu.addButtons(relatedObject=self)
-                                            
+                                    elif self.description=='buy':
+                                        Main.shop_overlay_active=True
+                                        Main.shop_overlay_menu.addButtons(relatedObject=self)
+                                        
 
 
 
@@ -546,7 +565,13 @@ class Button:
                                                 self.img=[]
                                                 self.calculateImgDraw(self.surface)
 
+                            case 'pausemenu':
 
+                                if self.description=='Main menu':
+                                    Main.room.roomNumber=0
+                                if self.description=='Resume game':
+                                    Main.room.roomNumber=2
+                        
                             case 'endTurn': #pulsante di fine turno
 
                                 Main.controller.turnEnd()

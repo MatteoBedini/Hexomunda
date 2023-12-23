@@ -127,7 +127,9 @@ class Menu:
                 screen.blit(text_shadow,(10,8))
                 screen.blit(text, (10,7))
                 self.addButtons()
-                
+            
+            case 'pausemenu':
+                self.addButtons()
 
 
     def draw(self,screen):
@@ -244,6 +246,12 @@ class Menu:
                 case 'upi':        #unit placing interface
                     self.buttons.append(button.Button(self.x+self.width-120,self.y+self.height-120,80,40,'upi','start',None))
                     self.startingButtons=self.buttons.copy()
+
+                case 'pausemenu':  #pause menu
+
+                    self.buttons.append(button.Button(self.x+self.width/2-60,self.y+80,120,80,'pausemenu','Main menu',self))    #play
+                    self.buttons.append(button.Button(self.x+self.width/2-60,self.y+self.height/2-45,120,80,'pausemenu','Resume game',self)) #options
+                    self.buttons.append(button.Button(self.x+self.width/2-60,self.y+self.height-80-80,120,80,'mainmenu','quit',self))    #quit
                     
                         
         """ else:
