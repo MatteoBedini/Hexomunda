@@ -786,10 +786,11 @@ class Unit:
         enemies = []
         enemies_dist = []
         for player in Main.players:
-            for unit in player.units:
-                if unit.activated == False:
-                    enemies.append(unit)
-                    enemies_dist.append(Main.dist(unit.x, self.x, unit.y, self.y))
+            if player.units != []:
+                for unit in player.units:
+                    if unit.activated == False:
+                        enemies.append(unit)
+                        enemies_dist.append(Main.dist(unit.x, self.x, unit.y, self.y))
         enemies_dist.sort()
         for en in enemies:
             if Main.dist(en.x, self.x, en.y, self.y) == enemies_dist[0]:

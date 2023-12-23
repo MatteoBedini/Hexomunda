@@ -236,7 +236,17 @@ class Control:
             for x in player.units:
                 if unit == x:
                     player.units.remove(unit)
+            if player.units==[]:
+                Main.room.roomNumber=6
 
+    def matchResultControl(self):
+            if Main.players[1].units==[]:
+                Main.victory_view.draw(Main.menu_box_layer)
+
+            elif Main.players[0].units==[]:
+                Main.defeat_view.draw(Main.menu_box_layer)
+                
+            
     #ai_ posizionamento unità all'inizio della partita
     def ai_pos(self):
 

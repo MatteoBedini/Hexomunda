@@ -382,8 +382,14 @@ class Button:
                                             player.ai_selection_ended=False
 
                                         Main.controller.gameFase=0  
+                                        Main.controller.selectedd = None
+                                        Main.controller.ai_selected=None
+                                        Main.controller.actingUnit = None
+                                        Main.controller.turn = 1
+                                        Main.controller.actingPlayer = 0 
                                         Main.unitsInventoryMenu.buttons=[]
                                         Main.unitsInventoryMenu.addButtons()
+
                                         for button in Main.unitsInventoryMenu.buttons:
                                             print(button.description)
                                         

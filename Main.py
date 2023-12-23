@@ -261,6 +261,9 @@ options_menu=Menu(screen.get_width()-600,450,300,0+height-700,'options')        
 
 pause_menu=Menu(screen.get_width()/4,screen.get_height()/2,screen.get_width()/2-screen.get_width()/8,screen.get_height()/4,'pausemenu')
 
+victory_view=Menu(screen.get_width()/4,screen.get_height()/2,screen.get_width()/2-screen.get_width()/8,screen.get_height()/4,'victory')
+defeat_view=Menu(screen.get_width()/4,screen.get_height()/2,screen.get_width()/2-screen.get_width()/8,screen.get_height()/4,'defeat')
+
 shop_overlay_active=False
 shop_overlay_menu=Menu(screen.get_width()/3,screen.get_height()/100*70,unitsInventoryMenu.x+unitsInventoryMenu.width,unitsInventoryMenu.y-(screen.get_height()/100*70-unitsInventoryMenu.height)/2,'shop_overlay')
 #shop_overlay_buttons=[]
@@ -272,6 +275,7 @@ menus.append(menu1)
 #menus.append(end_turn_button)
 menus.append(skirmish_menu)
 menus.append(options_menu)
+menus.append(pause_menu)
 
 
 #others
@@ -527,6 +531,14 @@ while running:
                     running = False
                 elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE: #torna al main menu
                         room.roomNumber=2
+
+        case 6:
+            controller.matchResultControl()
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    running = False
+                elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE: #torna al main menu
+                        room.roomNumber=0
 
     layout.draw()
     

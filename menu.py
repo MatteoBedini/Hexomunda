@@ -131,6 +131,22 @@ class Menu:
             case 'pausemenu':
                 self.addButtons()
 
+            case 'victory':
+                text=Main.font1.render('VICTORY!', True, (210,125,44))
+                text_shadow=Main.font1.render('VICTORY!', True, (68,36,52))
+                text_shadow=pygame.transform.scale(text_shadow, (self.width-20, 16))
+                text=pygame.transform.scale(text, (self.width-20, 16))
+                screen.blit(text_shadow,(10,9))
+                screen.blit(text, (10,8))
+
+            case 'defeat':
+                text=Main.font1.render('DEFEAT', True, (210,125,44))
+                text_shadow=Main.font1.render('DEFEAT', True, (68,36,52))
+                text_shadow=pygame.transform.scale(text_shadow, (self.width-20, 16))
+                text=pygame.transform.scale(text, (self.width-20, 16))
+                screen.blit(text_shadow,(10,9))
+                screen.blit(text, (10,8))
+
 
     def draw(self,screen):
         
@@ -252,6 +268,8 @@ class Menu:
                     self.buttons.append(button.Button(self.x+self.width/2-60,self.y+80,120,80,'pausemenu','Main menu',self))    #play
                     self.buttons.append(button.Button(self.x+self.width/2-60,self.y+self.height/2-45,120,80,'pausemenu','Resume game',self)) #options
                     self.buttons.append(button.Button(self.x+self.width/2-60,self.y+self.height-80-80,120,80,'mainmenu','quit',self))    #quit
+
+            
                     
                         
         """ else:
