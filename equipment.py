@@ -1,5 +1,6 @@
 import pygame
 import os
+import Main
 
 def load(img):
     return pygame.image.load(img)
@@ -139,4 +140,6 @@ small_button_bg=[pygame.image.load('./media/layouts_and_menus/layout_try_middle.
                     pygame.image.load('./media/layouts_and_menus/layout_try_down_dx_empty_round.png'),
                     pygame.image.load('./media/layouts_and_menus/layout_try_up_sx_empty_round.png'),
                     pygame.image.load('./media/layouts_and_menus/layout_try_down_sx_empty_round.png')]
-        
+
+
+       

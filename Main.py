@@ -231,7 +231,7 @@ units_type_INVENTORY.append(
     )
 )
 
-all_races=[[],[],[],[]]
+all_races=[[],[],[],[]] #array per il menu di selezione unità, un array per ogni razza per i pulsanti
 
 
 
