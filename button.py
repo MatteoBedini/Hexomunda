@@ -323,6 +323,14 @@ class Button:
                 self.img_shadow=pygame.transform.scale(self.img_shadow, (self.width-10, self.height-10))
                 self.surface.blit(self.img_shadow,(5 ,6))
                 self.surface.blit(self.img,(5 ,5))
+
+            case 'victory':
+                self.img=Main.font1.render('Play again', True, (210,125,44))
+                self.img_shadow=Main.font1.render('Play again', True, (68,36,52))
+                self.img=pygame.transform.scale(self.img, (self.width-10, self.height-10))
+                self.img_shadow=pygame.transform.scale(self.img_shadow, (self.width-10, self.height-10))
+                self.surface.blit(self.img_shadow,(5 ,6))
+                self.surface.blit(self.img,(5 ,5))
                                 
                                 
 
@@ -581,6 +589,14 @@ class Button:
                             case 'endTurn': #pulsante di fine turno
 
                                 Main.controller.turnEnd()
+
+                            case 'victory': #pulsante di fine partita
+
+                                Main.room.roomNumber=0
+
+                            case 'defeat': #pulsante di fine partita
+
+                                Main.room.roomNumber=0
 
     def mouseCollisionDraw(self, screen):
         if self.checkMousecollision() == self:

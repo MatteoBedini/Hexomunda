@@ -242,9 +242,14 @@ class Control:
     def matchResultControl(self):
             if Main.players[1].units==[]:
                 Main.victory_view.draw(Main.menu_box_layer)
+                for button in Main.victory_view.buttons:
+                    button.input()
+
 
             elif Main.players[0].units==[]:
                 Main.defeat_view.draw(Main.menu_box_layer)
+                for button in Main.defeat_view.buttons:
+                    button.input()
                 
             
     #ai_ posizionamento unità all'inizio della partita

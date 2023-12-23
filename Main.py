@@ -261,8 +261,8 @@ options_menu=Menu(screen.get_width()-600,450,300,0+height-700,'options')        
 
 pause_menu=Menu(screen.get_width()/4,screen.get_height()/2,screen.get_width()/2-screen.get_width()/8,screen.get_height()/4,'pausemenu')
 
-victory_view=Menu(screen.get_width()/4,screen.get_height()/2,screen.get_width()/2-screen.get_width()/8,screen.get_height()/4,'victory')
-defeat_view=Menu(screen.get_width()/4,screen.get_height()/2,screen.get_width()/2-screen.get_width()/8,screen.get_height()/4,'defeat')
+victory_view=Menu(screen.get_width()/4,screen.get_height()/3,screen.get_width()/2-screen.get_width()/8,screen.get_height()/4,'victory')
+defeat_view=Menu(screen.get_width()/4,screen.get_height()/3,screen.get_width()/2-screen.get_width()/8,screen.get_height()/4,'defeat')
 
 shop_overlay_active=False
 shop_overlay_menu=Menu(screen.get_width()/3,screen.get_height()/100*70,unitsInventoryMenu.x+unitsInventoryMenu.width,unitsInventoryMenu.y-(screen.get_height()/100*70-unitsInventoryMenu.height)/2,'shop_overlay')

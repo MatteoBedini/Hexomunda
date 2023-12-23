@@ -134,18 +134,20 @@ class Menu:
             case 'victory':
                 text=Main.font1.render('VICTORY!', True, (210,125,44))
                 text_shadow=Main.font1.render('VICTORY!', True, (68,36,52))
-                text_shadow=pygame.transform.scale(text_shadow, (self.width-20, 16))
-                text=pygame.transform.scale(text, (self.width-20, 16))
-                screen.blit(text_shadow,(10,9))
-                screen.blit(text, (10,8))
+                text_shadow=pygame.transform.scale(text_shadow, (self.width-90, 64))
+                text=pygame.transform.scale(text, (self.width-90, 64))
+                screen.blit(text_shadow,(self.width/2-text_shadow.get_width()/2,self.height/2-text.get_height()/2+2))
+                screen.blit(text, (self.width/2-text_shadow.get_width()/2,self.height/2-text.get_height()/2))
+                self.addButtons()
 
             case 'defeat':
                 text=Main.font1.render('DEFEAT', True, (210,125,44))
                 text_shadow=Main.font1.render('DEFEAT', True, (68,36,52))
-                text_shadow=pygame.transform.scale(text_shadow, (self.width-20, 16))
-                text=pygame.transform.scale(text, (self.width-20, 16))
-                screen.blit(text_shadow,(10,9))
-                screen.blit(text, (10,8))
+                text_shadow=pygame.transform.scale(text_shadow, (self.width-90, 64))
+                text=pygame.transform.scale(text, (self.width-90, 64))
+                screen.blit(text_shadow,(self.width/2-text_shadow.get_width()/2,self.height/2-text.get_height()/2+2))
+                screen.blit(text, (self.width/2-text_shadow.get_width()/2,self.height/2-text.get_height()/2))
+                self.addButtons()
 
 
     def draw(self,screen):
@@ -269,8 +271,12 @@ class Menu:
                     self.buttons.append(button.Button(self.x+self.width/2-60,self.y+self.height/2-45,120,80,'pausemenu','Resume game',self)) #options
                     self.buttons.append(button.Button(self.x+self.width/2-60,self.y+self.height-80-80,120,80,'mainmenu','quit',self))    #quit
 
-            
-                    
+                case 'victory':
+                    self.buttons.append(button.Button(self.x+self.width/2-50,self.y+self.height-70,100,60,'victory','play again',self))
+
+                case 'defeat':
+                    self.buttons.append(button.Button(self.x+self.width/2-50,self.y+self.height-70,100,60,'victory','play again',self))
+                               
                         
         """ else:
             if self.type=='unitsInventoryMenu':
