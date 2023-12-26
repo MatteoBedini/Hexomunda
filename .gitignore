@@ -4,4 +4,6 @@
 /dist
 Hexomunda.exe
 unitt.spec
-prove.
+prove.py
+save.txt
+/saved_games

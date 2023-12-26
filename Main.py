@@ -11,7 +11,7 @@ from button import Button
 from inanimate import Inanimated
 from layout import Layout
 from polygon import Polygono
-
+import data
 
 
 
@@ -39,7 +39,7 @@ width = 1920
 height = 1080
 layers=[]
 
-screen = pygame.display.set_mode((width, height),pygame.FULLSCREEN,pygame.HWSURFACE | pygame.DOUBLEBUF)  # z-index=0 #sopra non ci va niente,solo lo sfondo
+screen = pygame.display.set_mode((width, height),pygame.RESIZABLE,pygame.HWSURFACE | pygame.DOUBLEBUF)  # z-index=0 #sopra non ci va niente,solo lo sfondo
 cell_layer = pygame.Surface((width, height), pygame.SRCALPHA)  # z-index=1
 cell_layer2=pygame.Surface((width, height), pygame.SRCALPHA)  # z-index=2
 unit_layer = pygame.Surface((width, height), pygame.SRCALPHA)  # z-index=3
@@ -249,6 +249,7 @@ menus=[]                                    #lista di tutti i menu
 
 mainMenu=Menu(screen.get_width()/4,screen.get_height()/2,screen.get_width()/2-screen.get_width()/8,screen.get_height()/4,'mainmenu')                       #menu principale
 
+load_game_menu=Menu(screen.get_width()/4,screen.get_height()/2,screen.get_width()/2-screen.get_width()/8,screen.get_height()/4,'load game') #menu di caricamento
 unitsInventoryMenu=Menu(screen.get_width()/3,screen.get_height()/2,screen.get_width()/2-screen.get_width()/4,screen.get_height()/4,'unitsInventoryMenu')   #menu per l'inventario di unità
 
 menu1=Menu(screen.get_width()-300,130,150,0+height-140,'upi')                                     #menu for unit placing in grid
@@ -506,6 +507,9 @@ while running:
                     elif event.type == pygame.KEYDOWN and event.key == pygame.K_TAB:
                         if controller.gameFase==1:
                             controller.gridAndUnitsZoom()
+                    elif event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                        if controller.gameFase==1:
+                            data.save()
 
                     elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                         if controller.gameFase==1:
@@ -520,8 +524,9 @@ while running:
                                         unit.select()
                                         unit.move()
 
+        #pause menu
         case 5:
-            #MAIN MENU
+           
             pause_menu.draw(menu_box_layer)
             for butto in pause_menu.buttons:
                 butto.input()
@@ -532,6 +537,7 @@ while running:
                 elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE: #torna al main menu
                         room.roomNumber=2
 
+        #end game screen
         case 6:
             controller.matchResultControl()
             for event in pygame.event.get():
@@ -539,6 +545,19 @@ while running:
                     running = False
                 elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE: #torna al main menu
                         room.roomNumber=0
+        
+        #load game
+        case 7:
+            load_game_menu.draw(menu_box_layer)
+            for butto in load_game_menu.buttons:
+                butto.input()
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    running = False
+                elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE: #torna al main menu
+                        room.roomNumber=0
+
 
     layout.draw()
     

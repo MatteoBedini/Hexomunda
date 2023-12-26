@@ -3,6 +3,7 @@ import Main
 import unitt
 import equipment
 import copy
+import data
 class Button:
     def __init__(self,x,y,width,height,type,description,relatedObject,size='Normal'):
 
@@ -109,8 +110,8 @@ class Button:
                         self.img_shadow=pygame.transform.scale(self.img_shadow, (self.width-20, self.width-64))
                         self.surface.blit(self.img_shadow,(self.width/2-self.img.get_width()/2,self.height/2-self.img.get_height()/2+3))
                         self.surface.blit(self.img,(self.width/2-self.img.get_width()/2,self.height/2-self.img.get_height()/2))
-                    case "options":
-                        self.img=Main.font1.render('Options', True, (210,125,44))
+                    case "Load game":
+                        self.img=Main.font1.render('Load game', True, (210,125,44))
                         self.img=pygame.transform.scale(self.img, (self.width-20, self.width-64))
                         self.surface.blit(self.img,(self.width/2-self.img.get_width()/2,self.height/2-self.img.get_height()/2))
                     case "quit":
@@ -308,13 +309,20 @@ class Button:
                     self.img_shadow=pygame.transform.scale(self.img_shadow, (self.width-10, self.height-10))
                     self.surface.blit(self.img_shadow,(5 ,6))
                     self.surface.blit(self.img,(5 ,5))  
-                if self.description == 'Resume game':
+                elif self.description == 'Resume game':
                     self.img=Main.font1.render('Resume game', True, (210,125,44))
                     self.img_shadow=Main.font1.render('Resume game', True, (68,36,52))
                     self.img=pygame.transform.scale(self.img, (self.width-10, self.height-10))
                     self.img_shadow=pygame.transform.scale(self.img_shadow, (self.width-10, self.height-10))
                     self.surface.blit(self.img_shadow,(5 ,6))
-                    self.surface.blit(self.img,(5 ,5))  
+                    self.surface.blit(self.img,(5 ,5))
+                elif self.description == 'Save game':
+                    self.img=Main.font1.render('Save game', True, (210,125,44))
+                    self.img_shadow=Main.font1.render('Save game', True, (68,36,52))
+                    self.img=pygame.transform.scale(self.img, (self.width-10, self.height-10))
+                    self.img_shadow=pygame.transform.scale(self.img_shadow, (self.width-10, self.height-10))
+                    self.surface.blit(self.img_shadow,(5 ,6))
+                    self.surface.blit(self.img,(5 ,5))
             #end turn button
             case 'endTurn':
                 self.img=Main.font1.render('End Turn', True, (210,125,44))
@@ -327,6 +335,17 @@ class Button:
             case 'victory':
                 self.img=Main.font1.render('Play again', True, (210,125,44))
                 self.img_shadow=Main.font1.render('Play again', True, (68,36,52))
+                self.img=pygame.transform.scale(self.img, (self.width-10, self.height-10))
+                self.img_shadow=pygame.transform.scale(self.img_shadow, (self.width-10, self.height-10))
+                self.surface.blit(self.img_shadow,(5 ,6))
+                self.surface.blit(self.img,(5 ,5))
+
+            case 'load game':
+                new_string=str(self.description).replace('.txt','')
+                new_new_string=new_string.replace('_',' ')
+                new_string=new_new_string
+                self.img=Main.font1.render(f'{new_string}', True, (210,125,44))
+                self.img_shadow=Main.font1.render(f'{new_string}', True, (68,36,52))
                 self.img=pygame.transform.scale(self.img, (self.width-10, self.height-10))
                 self.img_shadow=pygame.transform.scale(self.img_shadow, (self.width-10, self.height-10))
                 self.surface.blit(self.img_shadow,(5 ,6))
@@ -402,6 +421,11 @@ class Button:
                                             print(button.description)
                                         
                                         Main.room.roomNumber=3
+
+                                    case "Load game":
+                                        Main.load_game_menu.buttons=[]
+                                        Main.load_game_menu.addButtons()
+                                        Main.room.roomNumber=7
                                     case "options":
                                         
                                         Main.room.roomNumber=4
@@ -581,10 +605,29 @@ class Button:
 
                             case 'pausemenu':
 
-                                if self.description=='Main menu':
+                                if self.description == 'Main menu':
                                     Main.room.roomNumber=0
-                                if self.description=='Resume game':
+                                elif self.description == 'Resume game':
                                     Main.room.roomNumber=2
+                                elif self.description == 'Save game':
+                                    data.save()
+
+                            case 'load game':
+                                for player in Main.players:
+                                        player.points=0
+                                        player.units_inventory=[]
+                                        player.units=[]
+                                        player.ai_selection_ended=False
+
+                                Main.controller.gameFase=0  
+                                Main.controller.selectedd = None
+                                Main.controller.ai_selected=None
+                                Main.controller.actingUnit = None
+                                Main.controller.turn = 1
+                                Main.controller.actingPlayer = 0 
+                                Main.unitsInventoryMenu.buttons=[]
+                                Main.unitsInventoryMenu.addButtons()
+                                data.load(self.description)
                         
                             case 'endTurn': #pulsante di fine turno
 

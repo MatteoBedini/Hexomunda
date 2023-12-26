@@ -625,7 +625,8 @@ class Unit:
             enemy = self.aiCalculateNearestEnemy()
 
             if (
-                enemy.parentcell.dts <= self.atkrange
+                enemy!=None
+                and enemy.parentcell.dts <= self.atkrange
                 and self.atkpts > 0
                 and Main.controller.ai_selected == self
                 and self.selected
@@ -767,6 +768,10 @@ class Unit:
 
     def aiEndTurn(self):
         enemy = self.aiCalculateNearestEnemy()
+        if enemy == None:
+           self.aiFinishedTurn = True
+           Main.room.roomNumber=6
+           return 
         if (
             enemy.parentcell.dts > self.atkrange
             and self.movepts == 0

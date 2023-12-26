@@ -4,6 +4,8 @@ import button
 import control
 import equipment
 from ui_others import *
+import os
+
 
 class Menu:
     def __init__(self,width,height,x,y,type):
@@ -72,6 +74,8 @@ class Menu:
                 self.addButtons()
                 
 
+            case 'load game':                                        #loadmenu
+                self.addButtons()
 
             case 'options':                                          #options menu
                 self.addButtons()
@@ -136,8 +140,8 @@ class Menu:
                 text_shadow=Main.font1.render('VICTORY!', True, (68,36,52))
                 text_shadow=pygame.transform.scale(text_shadow, (self.width-90, 64))
                 text=pygame.transform.scale(text, (self.width-90, 64))
-                screen.blit(text_shadow,(self.width/2-text_shadow.get_width()/2,self.height/2-text.get_height()/2+2))
-                screen.blit(text, (self.width/2-text_shadow.get_width()/2,self.height/2-text.get_height()/2))
+                screen.blit(text_shadow,(self.width/2-text_shadow.get_width()/2,self.height/3-text.get_height()/2+2))
+                screen.blit(text, (self.width/2-text_shadow.get_width()/2,self.height/3-text.get_height()/2))
                 self.addButtons()
 
             case 'defeat':
@@ -145,8 +149,8 @@ class Menu:
                 text_shadow=Main.font1.render('DEFEAT', True, (68,36,52))
                 text_shadow=pygame.transform.scale(text_shadow, (self.width-90, 64))
                 text=pygame.transform.scale(text, (self.width-90, 64))
-                screen.blit(text_shadow,(self.width/2-text_shadow.get_width()/2,self.height/2-text.get_height()/2+2))
-                screen.blit(text, (self.width/2-text_shadow.get_width()/2,self.height/2-text.get_height()/2))
+                screen.blit(text_shadow,(self.width/2-text_shadow.get_width()/2,self.height/3-text.get_height()/2+2))
+                screen.blit(text, (self.width/2-text_shadow.get_width()/2,self.height/3-text.get_height()/2))
                 self.addButtons()
 
 
@@ -162,6 +166,7 @@ class Menu:
             text=pygame.transform.scale(text, (160, 16))
             
             screen.blit(text, (self.x+10,self.y-40+16))
+        
     
     def addButtons(self,relatedObject=None):
 
@@ -172,7 +177,7 @@ class Menu:
 
                     self.buttons.append(button.Button(self.x+self.width/2-60,self.y+80,120,80,'mainmenu','play',self))    #play
 
-                    """ self.buttons.append(button.Button(self.x+self.width/2-60,self.y+self.height/2-45,120,80,'mainmenu','options',self)) #options """
+                    self.buttons.append(button.Button(self.x+self.width/2-60,self.y+self.height/2-45,120,80,'mainmenu','Load game',self)) #load
 
                     self.buttons.append(button.Button(self.x+self.width/2-60,self.y+self.height-80-80,120,80,'mainmenu','quit',self))    #quit
 
@@ -267,9 +272,19 @@ class Menu:
 
                 case 'pausemenu':  #pause menu
 
-                    self.buttons.append(button.Button(self.x+self.width/2-60,self.y+80,120,80,'pausemenu','Main menu',self))    #play
-                    self.buttons.append(button.Button(self.x+self.width/2-60,self.y+self.height/2-45,120,80,'pausemenu','Resume game',self)) #options
-                    self.buttons.append(button.Button(self.x+self.width/2-60,self.y+self.height-80-80,120,80,'mainmenu','quit',self))    #quit
+                    self.buttons.append(button.Button(self.x+self.width/2-60,self.y+self.height/6,120,self.height/8,'pausemenu','Main menu',self))    #main menu
+                    self.buttons.append(button.Button(self.x+self.width/2-60,self.y+self.height/6+self.height/8+20,120,self.height/8,'pausemenu','Resume game',self)) #resume
+                    self.buttons.append(button.Button(self.x+self.width/2-60,self.y+self.height/6+self.height/4+40,120,self.height/8,'pausemenu','Save game',self)) #save game
+                    self.buttons.append(button.Button(self.x+self.width/2-60,self.y+self.height/6+self.height/2+20,120,self.height/8,'mainmenu','quit',self))    #quit
+
+
+                case 'load game':
+                    if os.path.exists('./saved_games'):
+                        files = [f for f in os.listdir('./saved_games') if os.path.isfile(os.path.join('./saved_games', f))]
+                        increment=0
+                        for filee in files:
+                            self.buttons.append(button.Button(self.x+self.width/2-60,self.y+self.height/6+increment,120,self.height/8,'load game',filee,self))
+                            increment+=80
 
                 case 'victory':
                     self.buttons.append(button.Button(self.x+self.width/2-50,self.y+self.height-70,100,60,'victory','play again',self))
