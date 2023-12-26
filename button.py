@@ -41,7 +41,6 @@ class Button:
         new_rect=pygame.Rect(self.x,self.y,self.width,self.height)
         self.rect=new_rect
 
-
     def calculateImgDraw(self,screen):
         if self.img_bg !=None:
             img_height = self.img_bg[0].get_height()
@@ -351,8 +350,6 @@ class Button:
                 self.surface.blit(self.img_shadow,(5 ,6))
                 self.surface.blit(self.img,(5 ,5))
                                 
-                                
-
     def draw(self,screen):
         screen.blit(self.surface,(self.x,self.y))
         if self.visible==True:
@@ -364,7 +361,6 @@ class Button:
                         if i!=None:
                             screen.blit(i,(self.x+self.width/2-i.get_width()/2,self.y+self.height/2-i.get_height()/2))  
             self.mouseCollisionDraw(screen)
-        
 
     def otherEvents(self):
         match self.type:
@@ -385,8 +381,6 @@ class Button:
                             self.surface=self.originalSurface.copy()
                             self.visible=True
 
-
-    #input sul pulsante
     def input(self):
             
             if self.checkMousecollision()==self and self.visible==True:
@@ -657,9 +651,6 @@ class Button:
                 pygame.draw.line(screen, (210, 125, 44), (self.x, self.y + self.height - 2), (self.x + self.width - 1, self.y + self.height - 2), 2)  # Lato inferiore
                 pygame.draw.line(screen, (68, 36, 52), (self.x, self.y), (self.x + self.width - 1, self.y), 2)  # Lato superiore
 
-            
-            
-
     def checkMousecollision(self):
         mouse_pos = pygame.mouse.get_pos()
         if (
@@ -678,6 +669,7 @@ class Button:
 
 
 class UnitFake:
+
     def __init__(self,x,y,img,parentButton):
         self.x=x
         self.y=y
@@ -734,3 +726,11 @@ class UnitFake:
                         cell.occupied=True
 
                                             
+            
+            
+
+    #input sul pulsante
+
+                                
+        
+

@@ -331,7 +331,7 @@ while running:
 
 
     screen.fill((16, 26, 38))
-    cell_layer.fill((0, 0, 0, 0))  # pulisco gli schermi, i layers li faccio trasparenti
+    #cell_layer.fill((0, 0, 0, 0))  # pulisco gli schermi, i layers li faccio trasparenti
     cell_layer2.fill((0, 0, 0, 0))  
     unit_layer.fill((0, 0, 0, 0))  
     menu_box_layer.fill((0, 0, 0, 0))  
@@ -442,7 +442,7 @@ while running:
 
             #disegno le celle fuori dalle game fases
             for cell in hex_cells:
-                cell.draw(cell_layer)
+                cell.draw(screen)
                 cell.checkHexMousecollision()
 
 
@@ -564,7 +564,7 @@ while running:
     """ cursor.move(pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1]) """
 
     #ridisegno gli schermi
-    screen.blit(cell_layer,(resizable_layer_x,resizable_layer_y))
+    #screen.blit(cell_layer,(resizable_layer_x,resizable_layer_y))
     screen.blit(cell_layer2,(resizable_layer_x,resizable_layer_y))
     screen.blit(unit_layer,(resizable_layer_x,resizable_layer_y))
     screen.blit(menu_box_layer,(0,0))

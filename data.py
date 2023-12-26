@@ -90,7 +90,7 @@ def load(savefile):
     data = None
     with open(f'./saved_games/{savefile}', 'r') as outfile:
         data = json.load(outfile)
-    print(data)
+    #print(data)
 
     Main.players[0].points=data['players'][0]['points']
     Main.players[1].points=data['players'][1]['points']
@@ -159,5 +159,5 @@ def load(savefile):
         
         Main.players[1].units.append(new_unit)
 
-    print(Main.players[0].units)
+    #print(Main.players[0].units)
     Main.room.roomNumber=2
