@@ -324,6 +324,7 @@ class Control:
                     new_inanimated.x=randomcell.center[0]
                     new_inanimated.y=randomcell.center[1]
                     new_inanimated.getCenter(new_inanimated.x,new_inanimated.y)
+
                     random_count+=1
                     new_inanimated.createMask()
                     new_inanimated.getParentCell()
@@ -387,7 +388,7 @@ class Control:
         else:
             Main.speed=10
             Main.zoom=1  #THIS IS FOR DTS
-            zoomey=0.5   #THIS IS FOR CHANGING IMAGES SIZE
+            zoomey=0.5  #THIS IS FOR CHANGING IMAGES SIZE
         
 
         

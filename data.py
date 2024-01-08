@@ -5,9 +5,55 @@ from unitt import Unit
 import copy
 
 def update():
+   units1_inventory=[]
+   units2_inventory=[]
    units1=[]
    units2=[]
    for player in Main.players:
+       for unit in player.inventory:
+           un_i=[
+               unit.id, 
+               unit.nome,
+               unit.x,
+               unit.y,
+               unit.col,
+               unit.row,
+               unit.center,
+               unit.animated,
+               unit.flipChecker,
+               unit.hp,
+               unit.maxhp,
+               unit.totmovepts,
+               unit.movepts,
+               unit.atk,
+               unit.atkpts,
+               unit.totatkpts,
+               unit.atkrange,
+               unit.atkOpportunityCheck,
+               unit.ai,
+               unit.inventory,
+               #unit.img,
+               #unit.orig_img,
+               #unit.animation,
+               unit.activated,
+               unit.selected,
+               unit.move_target,
+               unit.moving,
+               unit.moved,
+               unit.attacked_target,
+               unit.middle,
+               unit.start_x,
+               unit.start_y,
+               unit.attacked_target_returning,
+               unit.race,
+               unit.basestats,
+               unit.aiFinishedTurn,
+
+           ]
+           if player.ai==True:
+                units2_inventory.append(un_i)
+           else:
+                units1_inventory.append(un_i)
        for unit in player.units:
            un=[
                unit.id, 
@@ -64,12 +110,14 @@ def update():
             'name':'player',
             'points':Main.players[0].points,
             'units':units1,
+            'units inventory':units1_inventory
 
         },
         {
             'name':'ai_player',
             'points':Main.players[1].points,
             'units':units2,
+            'units inventory':units2_inventory
         }
     ]
 }
@@ -123,6 +171,8 @@ def load(savefile):
         new_unit.getCenter(new_unit.x, new_unit.y)
         #new_unit.getRect(new_unit.x, new_unit.y)
         new_unit.createMask()
+        new_unit.hp=unit[9]
+        
         Main.players[0].units.append(new_unit)
     
     for unit in data['players'][1]['units']:

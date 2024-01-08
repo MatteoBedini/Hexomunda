@@ -24,11 +24,11 @@ class Button:
         self.size=size
         self.relatedObject=relatedObject
         self.fakeboy=None
-        if self.size=='Small':
+        """ if self.size=='Small':
             self.img_bg=equipment.small_button_bg
         else:
-            # self.img=[middle,up,down,left,right,up_dx,down_dx,up_sx,down_sx]
-            self.img_bg=equipment.button_bg
+            # self.img=[middle,up,down,left,right,up_dx,down_dx,up_sx,down_sx] """
+        self.img_bg=equipment.button_bg
         self.surface=pygame.Surface((self.width,self.height))
         self.visible=True
         self.surface.set_colorkey((0,0,0,0))
@@ -48,28 +48,30 @@ class Button:
             repetitions_height=self.rect.height//img_height
             repetitions_width=self.rect.width//img_width
             
-            if self.size is not 'Small':
-                #left, middle and right
-                for i in range(repetitions_height):
-                    screen.blit(self.img_bg[3],(0,(i*img_height)+0))
-                    screen.blit(self.img_bg[4],(0+self.rect.width-img_width,(i*img_height)+0))
-                    for j in range(1,repetitions_width,-1):
-                        screen.blit(self.img_bg[0],(0+(j*img_width),0+(i*img_height)))
-
-                #up and down
+            """ if self.size is not 'Small': """
+            #left, middle and right
+            for i in range(repetitions_height):
                 
-                for i in range(repetitions_width):
-                    screen.blit(self.img_bg[1],(0+(i*img_width),0))
-                    screen.blit(self.img_bg[2],(0+(i*img_width),0+self.rect.height-img_height))
+                for j in range(1,repetitions_width):
+                    screen.blit(self.img_bg[0],(0+(j*img_width),0+(i*img_height)))
+                
+                screen.blit(self.img_bg[3],(0,(i*img_height)+0))
+                screen.blit(self.img_bg[4],(0+self.rect.width-img_width,(i*img_height)+0))
 
-
-                #corners
-                screen.blit(self.img_bg[7],(0,0))
-                screen.blit(self.img_bg[5],(0+self.rect.width-img_width,0))
-                screen.blit(self.img_bg[8],(0,0+self.rect.height-img_height))
-                screen.blit(self.img_bg[6],(0+self.rect.width-img_width,0+self.rect.height-img_height))
+            #up and down
             
-            else:
+            for i in range(repetitions_width):
+                screen.blit(self.img_bg[1],(0+(i*img_width),0))
+                screen.blit(self.img_bg[2],(0+(i*img_width),0+self.rect.height-img_height))
+
+
+            #corners
+            screen.blit(self.img_bg[7],(0,0))
+            screen.blit(self.img_bg[5],(0+self.rect.width-img_width,0))
+            screen.blit(self.img_bg[8],(0,0+self.rect.height-img_height))
+            screen.blit(self.img_bg[6],(0+self.rect.width-img_width,0+self.rect.height-img_height))
+            
+            """ else:
                 #left, middle and right
                 for i in range(1,repetitions_height,-1):
                     screen.blit(self.img_bg[3],(0,(i*img_height)+0))
@@ -88,7 +90,7 @@ class Button:
                 screen.blit(self.img_bg[7],(0,0))
                 screen.blit(self.img_bg[5],(0+self.rect.width-img_width,0))
                 screen.blit(self.img_bg[8],(0,0+self.rect.height-img_height))
-                screen.blit(self.img_bg[6],(0+self.rect.width-img_width,0+self.rect.height-img_height))
+                screen.blit(self.img_bg[6],(0+self.rect.width-img_width,0+self.rect.height-img_height)) """
 
     def blitOnSurface(self):
         self.rect=pygame.Rect(self.x,self.y,self.width,self.height)
@@ -402,6 +404,8 @@ class Button:
                                             player.units=[]
                                             player.ai_selection_ended=False
 
+                                        Main.inanimated_in_game=[]
+                                        Main.deadunits=[]
                                         Main.controller.gameFase=0  
                                         Main.controller.selectedd = None
                                         Main.controller.ai_selected=None
@@ -637,19 +641,19 @@ class Button:
 
     def mouseCollisionDraw(self, screen):
         if self.checkMousecollision() == self:
-            if self.size == 'Small':
+            """ if self.size == 'Small':
                 text=Main.font1.render(self.description, True, (68, 36, 52))
                 
                 
                 text=pygame.transform.scale(text, (self.width-16, self.height-16))
                 screen.blit(text,(self.x+8,self.y+8))
 
-            else:
-                # Draw lines for the larger size
-                pygame.draw.line(screen, (68, 36, 52), (self.x, self.y), (self.x, self.y + self.height - 1), 2)  # Lato sinistro 
-                pygame.draw.line(screen, (210, 125, 44), (self.x + self.width - 2, self.y), (self.x + self.width - 2, self.y + self.height - 1), 2)  # Lato destro
-                pygame.draw.line(screen, (210, 125, 44), (self.x, self.y + self.height - 2), (self.x + self.width - 1, self.y + self.height - 2), 2)  # Lato inferiore
-                pygame.draw.line(screen, (68, 36, 52), (self.x, self.y), (self.x + self.width - 1, self.y), 2)  # Lato superiore
+            else: """
+            # Draw lines for the larger size
+            pygame.draw.line(screen, (68, 36, 52), (self.x, self.y), (self.x, self.y + self.height - 1), 2)  # Lato sinistro 
+            pygame.draw.line(screen, (210, 125, 44), (self.x + self.width - 2, self.y), (self.x + self.width - 2, self.y + self.height - 1), 2)  # Lato destro
+            pygame.draw.line(screen, (210, 125, 44), (self.x, self.y + self.height - 2), (self.x + self.width - 1, self.y + self.height - 2), 2)  # Lato inferiore
+            pygame.draw.line(screen, (68, 36, 52), (self.x, self.y), (self.x + self.width - 1, self.y), 2)  # Lato superiore
 
     def checkMousecollision(self):
         mouse_pos = pygame.mouse.get_pos()

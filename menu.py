@@ -45,18 +45,23 @@ class Menu:
         img_width = self.img[0].get_width()
         repetitions_height=self.rect.height//img_height
         repetitions_width=self.rect.width//img_width
+
+        
         
         #left, middle and right
         for i in range(repetitions_height):
+            
+            for j in range(1,repetitions_width):
+                screen.blit(self.img[0],(0+(j*img_width),0+(i*img_height)))
             screen.blit(self.img[3],(0,(i*img_height)+0))
             screen.blit(self.img[4],(0+self.rect.width-img_width,(i*img_height)+0))
-            for j in range(1,repetitions_width-1):
-                screen.blit(self.img[0],(0+(j*img_width),0+(i*img_height)))
 
         #up and down
         for i in range(repetitions_width):
             screen.blit(self.img[1],(0+(i*img_width),0))
             screen.blit(self.img[2],(0+(i*img_width),0+self.rect.height-img_height))
+
+        
 
         #corners
         screen.blit(self.img[7],(0,0))

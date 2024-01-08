@@ -33,10 +33,13 @@ font1 = pygame.font.Font('freesansbold.ttf', 64)
 #font1 = pygame.font.Font('data/fonts/pricedown/pricedown bl.otf', 128)
 #font1 = pygame.font.Font('data/fonts/game-over/GameOver/game over.ttf', 32)
 
-
+screen_info = pygame.display.Info()
 # Dimensioni della finestra
-width = 1920
-height = 1080
+width = screen_info.current_w
+height = screen_info.current_h
+
+#width=1280
+#height=720
 layers=[]
 
 screen = pygame.display.set_mode((width, height),pygame.RESIZABLE,pygame.HWSURFACE | pygame.DOUBLEBUF)  # z-index=0 #sopra non ci va niente,solo lo sfondo
@@ -169,7 +172,7 @@ cursor = cursorr(250, 250)
 controller = Control()
 
 #immagini celle
-cells_img = [pygame.image.load("./media/cell1.png"), pygame.image.load("./media/cell2.png")]
+cells_img = [pygame.image.load("./media/cell1.png"), pygame.image.load("./media/cell2.png")] #, pygame.image.load("./media/cell3.png")
 # creo la griglia
 hex_cells = []
 def create_grid():
@@ -546,7 +549,7 @@ while running:
                 elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE: #torna al main menu
                         room.roomNumber=0
         
-        #load game
+        #load games view
         case 7:
             load_game_menu.draw(menu_box_layer)
             for butto in load_game_menu.buttons:
