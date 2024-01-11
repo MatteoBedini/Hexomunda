@@ -14,7 +14,6 @@ from polygon import Polygono
 import data
 
 
-
 # Inizializza Pygame
 pygame.init()
 

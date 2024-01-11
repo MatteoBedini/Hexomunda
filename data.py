@@ -10,7 +10,7 @@ def update():
    units1=[]
    units2=[]
    for player in Main.players:
-       for unit in player.inventory:
+       for unit in player.units_inventory:
            un_i=[
                unit.id, 
                unit.nome,
