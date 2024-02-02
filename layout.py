@@ -39,7 +39,7 @@ class Layout:
         counter_h_sx=20
         #draw verticali
         #sx
-        for i in range(repetitions_height-2):
+        for i in range(repetitions_height):
             screen.blit(self.img1,(0,counter_h_sx))
             screen.blit(self.img1,(self.rect.width-img_width,counter_h_sx))
             counter_h_sx+=img_height
@@ -55,7 +55,7 @@ class Layout:
         repetitions_width=self.rect.width//img_width
         #up
         counter_w_up=20
-        for i in range(repetitions_width-2):
+        for i in range(repetitions_width):
             screen.blit(self.img,(counter_w_up,0))
             screen.blit(self.img,(counter_w_up,self.rect.height-img_height))
             counter_w_up+=img_width
