@@ -1,6 +1,5 @@
 import pygame
-import Main
-from shapely.geometry import Point, Polygon
+from shapely.geometry import Polygon
 import copy
 
 

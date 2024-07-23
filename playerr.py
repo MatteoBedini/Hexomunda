@@ -2,7 +2,6 @@ import Main
 import unitt
 import random
 import equipment
-import copy
 
 
 class Player:

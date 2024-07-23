@@ -1,12 +1,3 @@
-""" import pygame
-import math
-
-from hexcell import HexCell
-
-from menu import Menu
-import button
-from room import Room
-from player import Player """
 
 import random
 import Main 

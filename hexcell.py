@@ -3,9 +3,8 @@ import math
 import Main
 import random
 from polygon import Polygono
-from shapely.geometry import Polygon, Point, LineString
-import copy
-from line import Line
+from shapely.geometry import Polygon, LineString
+
 
 
 # classe oggetto cella

@@ -1,15 +1,6 @@
 import Main
 import pygame
-import math
-import random
-from hexcell import HexCell
-from unitt import Unit
-from menu import Menu
-from room import Room
-from playerr import Player
-from control import Control
-from button import Button
-from inanimate import Inanimated
+
 
 class Layout:
     def __init__(self):

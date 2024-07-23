@@ -1,5 +1,4 @@
 import pygame
-import Main
 
 class Scrollbar:
     def __init__(self, x, y, width, height):

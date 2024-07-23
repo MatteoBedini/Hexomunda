@@ -1,7 +1,6 @@
 import pygame
 import Main
 import button
-import control
 import equipment
 from ui_others import *
 import os

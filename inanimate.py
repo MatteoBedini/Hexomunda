@@ -1,7 +1,5 @@
 import pygame
 import Main
-import equipment
-import unitt
 
 class Inanimated:
     def __init__(self,nome):

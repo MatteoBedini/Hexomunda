@@ -10,7 +10,6 @@ from control import Control
 from button import Button
 from inanimate import Inanimated
 from layout import Layout
-from polygon import Polygono
 import data
 
 

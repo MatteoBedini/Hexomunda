@@ -1,6 +1,6 @@
 import pygame
 import os
-import Main
+
 
 def load(img):
     return pygame.image.load(img)

@@ -2,7 +2,7 @@ import json
 import os
 import Main
 from unitt import Unit
-import copy
+
 
 def update():
    units1_inventory=[]
